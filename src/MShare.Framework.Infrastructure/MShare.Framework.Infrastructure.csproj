@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Clients\" />
+    <None Remove="Flurl.Http" />
+    <None Remove="Flurl" />
+    <None Remove="AccessToken\" />
+    <None Remove="Microsoft.Extensions.Caching.Memory" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Clients\" />
+    <Folder Include="AccessToken\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Flurl.Http" Version="3.2.4" />
+    <PackageReference Include="Flurl" Version="3.0.6" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="6.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MShare.Framework.Types\MShare.Framework.Types.csproj" />
+  </ItemGroup>
+</Project>
