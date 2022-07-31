@@ -11,6 +11,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     <PackageReference Include="Flurl" Version="3.0.6" />
     <PackageReference Include="Flurl.Http" Version="3.2.4" />
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,17 +25,26 @@
     <ProjectReference Include="..\MShare.Framework.WebApi\MShare.Framework.WebApi.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+    <ProjectReference Include="..\MShare.Framework\MShare.Framework.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Remove="Flurl" />
     <None Remove="Flurl.Http" />
     <None Remove="Infrastructure\" />
     <None Remove="Helpers\" />
-    <None Remove="Models\" />
+    <None Remove="Infrastructure\Client\" />
+    <None Remove="Infrastructure\Client\Models\" />
+    <None Remove="AutoMapper" />
+    <None Remove="AutoMapper.Extensions.Microsoft.DependencyInjection" />
+    <None Remove="Infrastructure\Client\Models\Mapping\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Infrastructure\" />
     <Folder Include="Helpers\" />
-    <Folder Include="Models\" />
+    <Folder Include="Infrastructure\Client\" />
+    <Folder Include="Infrastructure\Client\Models\" />
+    <Folder Include="Infrastructure\Client\Models\Mapping\" />
   </ItemGroup>
 </Project>

@@ -1,4 +1,7 @@
-﻿using MShare.Framework.Infrastructure.AccessToken;
+﻿using System.Reflection;
+using MShare.Framework.Infrastructure.AccessToken;
+using Proxy.Api;
+using SpotifyProxy.WebService.Infrastructure.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +13,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAccessTokenStore();
 builder.Services.AddMemoryCache();
+builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(Program)));
+builder.Services.AddScoped<IStreamingServiceClient, SpotifyClient>();
 
 var app = builder.Build();
 

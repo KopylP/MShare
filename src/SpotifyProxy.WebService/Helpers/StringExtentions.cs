@@ -1,5 +1,4 @@
-﻿using System;
-namespace SpotifyProxy.WebService.Helpers
+﻿namespace SpotifyProxy.WebService.Helpers
 {
     public static class StringExtentions
     {
