@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using Newtonsoft.Json;
 
 namespace SpotifyProxy.WebService.Infrastructure.Client.Models
@@ -8,10 +7,10 @@ namespace SpotifyProxy.WebService.Infrastructure.Client.Models
     internal class SpotifySearchResponseModel
     {
         [JsonProperty("tracks")]
-        public TrackList Tracks { get; set; }
+        internal TrackList Tracks { get; set; }
 
         [JsonObject]
-        public class TrackList
+        internal class TrackList
         {
             [JsonProperty("items")]
             public SpotifyTrackResponseModel[] Items { get; set; }
