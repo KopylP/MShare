@@ -22,7 +22,7 @@ namespace SpotifyProxy.WebService.Infrastructure.Client.Models
     }
 
     [JsonObject]
-    public class AlbumModel
+    internal class AlbumModel
     {
         [JsonProperty("id")]
         public string Id { get; set; }
@@ -38,7 +38,7 @@ namespace SpotifyProxy.WebService.Infrastructure.Client.Models
     }
 
     [JsonObject]
-    public class ArtistModel
+    internal class ArtistModel
     {
         [JsonProperty("id")]
         public string Id { get; set; }
@@ -52,7 +52,7 @@ namespace SpotifyProxy.WebService.Infrastructure.Client.Models
     }
 
     [JsonObject]
-    public class ExternalUrls
+    internal class ExternalUrls
     {
         [JsonProperty("spotify")]
         public string Spotify { get; set; }

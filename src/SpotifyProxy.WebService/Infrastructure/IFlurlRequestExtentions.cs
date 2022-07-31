@@ -1,5 +1,4 @@
-﻿using System;
-using Flurl.Http;
+﻿using Flurl.Http;
 using MShare.Framework.Infrastructure.AccessToken;
 using MShare.Framework.Infrastructure.Clients;
 using MShare.Framework.Types;
@@ -7,7 +6,7 @@ using MShare.Framework.WebApi.Exceptions;
 
 namespace SpotifyProxy.WebService.Infrastructure
 {
-    public static class IFlurlRequestExtentions
+    internal static class IFlurlRequestExtentions
     {
         public static async Task<T> GetAuthorizedAsync<T>(this Flurl.Url url, IServiceProvider provider)
         {
