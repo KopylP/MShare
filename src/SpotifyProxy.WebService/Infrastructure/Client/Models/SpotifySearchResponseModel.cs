@@ -2,17 +2,13 @@
 using System.Collections;
 using Newtonsoft.Json;
 
-namespace SpotifyProxy.WebService.Models
+namespace SpotifyProxy.WebService.Infrastructure.Client.Models
 {
     [JsonObject]
-    public class SpotifySearchResponseModel : IEnumerable<SpotifyTrackResponseModel>
+    internal class SpotifySearchResponseModel
     {
         [JsonProperty("tracks")]
         public TrackList Tracks { get; set; }
-
-        public IEnumerator<SpotifyTrackResponseModel> GetEnumerator() => Tracks.Items.AsEnumerable().GetEnumerator();
-
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         [JsonObject]
         public class TrackList

@@ -4,7 +4,6 @@ using MShare.Framework.Infrastructure.AccessToken;
 using MShare.Framework.Infrastructure.Clients;
 using MShare.Framework.Types;
 using MShare.Framework.WebApi.Exceptions;
-using Newtonsoft.Json.Linq;
 
 namespace SpotifyProxy.WebService.Infrastructure
 {
@@ -49,7 +48,7 @@ namespace SpotifyProxy.WebService.Infrastructure
 
         private static IFlurlRequest CreateAuthRequest(string authUrl, string authCredentials)
             => authUrl.ToRequest().WithBasicToken(authCredentials);
-        
+
 
         private static async Task<Result<TokenResponse>> InterсeptNewBearerAsync(
             this IFlurlRequest request,

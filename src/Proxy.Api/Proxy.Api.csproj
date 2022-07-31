@@ -11,13 +11,9 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="System.ComponentModel.Annotations" />
-    <None Remove="Validators\" />
     <None Remove="..\.editorconfig" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Validators\" />
   </ItemGroup>
 </Project>
