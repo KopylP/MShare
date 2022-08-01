@@ -26,7 +26,7 @@ internal class AccessTokenStore : IAccessTokenStore
         return Result<string>.Success(token);
     }
 
-    public void Set(string token, int expiresIn)
+    public void Set(string? token, int expiresIn)
     {
         _cache.Set(KEY, token, new MemoryCacheEntryOptions
         {

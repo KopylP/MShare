@@ -1,5 +1,4 @@
-﻿using System;
-namespace MShare.Framework.Types
+﻿namespace MShare.Framework.Types
 {
     public class Result
     {

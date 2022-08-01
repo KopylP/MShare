@@ -31,7 +31,7 @@ public class SongController : ControllerBase
         var response = await _client.FindAsync(model with { AlbumName = string.Empty });
 
         if (response.IsEmpty)
-            response = await _client.FindAsync(model with { ArtistName = string.Empty });
+            response = await _client.FindAsync(model with { ArtistName = string.Empty, SongName = $"{model.SongName} {model.ArtistName}" });
 
         if (response.IsEmpty)
             response = await _client.FindAsync(model with { AlbumName = string.Empty, ArtistName = string.Empty });
