@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  appleproxy:
+    container_name: appleproxy
+    build:
+      context: .
+      dockerfile: AppleProxy.WebService/Dockerfile
+    restart: unless-stopped
+
+  spotifyproxy:
+    build:
+      context: .
+      dockerfile: SpotifyProxy.WebService/Dockerfile
+

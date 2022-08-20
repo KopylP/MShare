@@ -19,8 +19,8 @@ namespace SpotifyProxy.WebService.Infrastructure.Client.Models.Mapping
                 return new SongResponseDto
                 {
                     Song = SongSourceDto.Of(source.Name, source.Id, source.ExternalUrls.Spotify),
-                    Album = AlbumSourceDto.Of(source.Album.Name, source.Album.Images.Last().Url),
-                    Artists = source.Artists.Select(p => ArtistSourceDto.Of(p.Name)).ToArray()
+                    Album = AlbumSourceDto.Of(source.Album.Name, source.Album.Id, source.Album.Images.First().Url, source.Album.Images.Last().Url),
+                    Artists = source.Artists.Select(p => ArtistSourceDto.Of(p.Name, p.Id)).ToArray()
                 };
             }
         }

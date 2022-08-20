@@ -10,7 +10,6 @@ namespace SpotifyProxy.WebService.Infrastructure.Client
 {
     internal class SpotifyClient : IStreamingServiceClient
     {
-        private const int LIMIT = 5;
         private readonly string _publicApiUrl;
         private readonly IServiceProvider _provider;
         private readonly IMapper _mapper;
@@ -22,7 +21,7 @@ namespace SpotifyProxy.WebService.Infrastructure.Client
             _mapper = mapper;
         }
 
-        public async Task<SongsResponseDto> FindAsync(FindSongsRequestDto request)
+        public async Task<SongsResponseDto> FindAsync(FindSongsRequestDto request, int limit = 5)
         {
             var searchParam = new StringBuilder();
             searchParam.Append($"track: {request.SongName} ")
@@ -33,7 +32,7 @@ namespace SpotifyProxy.WebService.Infrastructure.Client
                 .AppendPathSegment("search")
                 .SetQueryParam("type", "track")
                 .SetQueryParam("q", searchParam)
-                .SetQueryParam("limit", GetLimit(request))
+                .SetQueryParam("limit", GetLimit(request, limit))
                 .GetAuthorizedAsync<SpotifySearchResponseModel>(_provider);           
 
             return _mapper.Map<SongsResponseDto>(response);
@@ -49,12 +48,12 @@ namespace SpotifyProxy.WebService.Infrastructure.Client
             return _mapper.Map<SongResponseDto>(response);
         }
 
-        private static int GetLimit(FindSongsRequestDto model)
+        private static int GetLimit(FindSongsRequestDto model, int limit)
         {
             if (!string.IsNullOrWhiteSpace(model.ArtistName))
                 return 1;
 
-            return LIMIT;
+            return limit;
         }
     }
 }
