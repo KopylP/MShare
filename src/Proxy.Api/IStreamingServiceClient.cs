@@ -3,7 +3,7 @@
     public interface IStreamingServiceClient
     {
         Task<SongResponseDto> GetByUrlAsync(GetSongByUrlRequestDto request);
-        Task<SongsResponseDto> FindAsync(FindSongsRequestDto request);
+        Task<SongsResponseDto> FindAsync(FindSongsRequestDto request, int limit = 5);
     }
 }
 

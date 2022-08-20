@@ -12,6 +12,9 @@
     <None Remove="Flurl" />
     <None Remove="AccessToken\" />
     <None Remove="Microsoft.Extensions.Caching.Memory" />
+    <None Remove="Microsoft.Net.Http" />
+    <None Remove="Microsoft.Net.Http.Headers" />
+    <None Remove="Microsoft.AspNetCore.Http" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Clients\" />
@@ -21,8 +24,12 @@
     <PackageReference Include="Flurl.Http" Version="3.2.4" />
     <PackageReference Include="Flurl" Version="3.0.6" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Net.Http" Version="2.2.29" />
+    <PackageReference Include="Microsoft.Net.Http.Headers" Version="2.2.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MShare.Framework.Types\MShare.Framework.Types.csproj" />
+    <ProjectReference Include="..\..\MShare.Framework.Api\MShare.Framework.Api.csproj" />
   </ItemGroup>
 </Project>

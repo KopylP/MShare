@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>b3cca7f4-7eb2-41e0-ba5e-7d667f5dbef7</UserSecretsId>
+    <DockerComposeProjectPath>../docker-compose.dcproj</DockerComposeProjectPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="Flurl.Http" Version="3.2.4" />
+    <PackageReference Include="Flurl" Version="3.0.6" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Unidecode.NET" Version="2.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Controllers\" />
+    <None Remove="Infrastructure\" />
+    <None Remove="Infrastructure\Client\" />
+    <None Remove="Infrastructure\Client\Models\" />
+    <None Remove="AutoMapper" />
+    <None Remove="Flurl.Http" />
+    <None Remove="Flurl" />
+    <None Remove="Helpers\" />
+    <None Remove="Infrastructure\Client\Models\Mapping\" />
+    <None Remove="AutoMapper.Extensions.Microsoft.DependencyInjection" />
+    <None Remove="Unidecode.NET" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="Infrastructure\" />
+    <Folder Include="Infrastructure\Client\" />
+    <Folder Include="Infrastructure\Client\Models\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="Infrastructure\Client\Models\Mapping\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Proxy.Api\Proxy.Api.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\MShare.Framework.WebApi\MShare.Framework.WebApi.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+  </ItemGroup>
+</Project>
