@@ -8,14 +8,13 @@
 
   <ItemGroup>
     <None Remove="Queries\" />
-    <None Remove="Queries\GetSongByUrl\" />
+    <None Remove="Queries\Dtos\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Queries\" />
-    <Folder Include="Queries\GetSongByUrl\" />
+    <Folder Include="Queries\Dtos\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MShare.Framework.Application\MShare.Framework.Application.csproj" />
-    <ProjectReference Include="..\MShare.Songs.Api\MShare.Songs.Api.csproj" />
+    <ProjectReference Include="..\MShare.Framework.Api\MShare.Framework.Api.csproj" />
   </ItemGroup>
 </Project>

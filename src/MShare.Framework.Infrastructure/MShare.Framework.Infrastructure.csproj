@@ -15,10 +15,13 @@
     <None Remove="Microsoft.Net.Http" />
     <None Remove="Microsoft.Net.Http.Headers" />
     <None Remove="Microsoft.AspNetCore.Http" />
+    <None Remove="Processing\" />
+    <None Remove="Microsoft.Extensions.DependencyInjection.Abstractions" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Clients\" />
     <Folder Include="AccessToken\" />
+    <Folder Include="Processing\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Flurl.Http" Version="3.2.4" />
@@ -27,9 +30,12 @@
     <PackageReference Include="Microsoft.Net.Http" Version="2.2.29" />
     <PackageReference Include="Microsoft.Net.Http.Headers" Version="2.2.8" />
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MShare.Framework.Types\MShare.Framework.Types.csproj" />
     <ProjectReference Include="..\..\MShare.Framework.Api\MShare.Framework.Api.csproj" />
+    <ProjectReference Include="..\MShare.Framework.Api\MShare.Framework.Api.csproj" />
+    <ProjectReference Include="..\MShare.Framework.Application\MShare.Framework.Application.csproj" />
   </ItemGroup>
 </Project>
