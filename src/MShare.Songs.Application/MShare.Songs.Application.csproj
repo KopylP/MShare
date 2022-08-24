@@ -17,5 +17,8 @@
   <ItemGroup>
     <ProjectReference Include="..\MShare.Framework.Application\MShare.Framework.Application.csproj" />
     <ProjectReference Include="..\MShare.Songs.Api\MShare.Songs.Api.csproj" />
+    <ProjectReference Include="..\MShare.Framework.Domain\MShare.Framework.Domain.csproj" />
+    <ProjectReference Include="..\MShare.Songs.Domain\MShare.Songs.Domain.csproj" />
+    <ProjectReference Include="..\MShare.Framework.WebApi\MShare.Framework.WebApi.csproj" />
   </ItemGroup>
 </Project>

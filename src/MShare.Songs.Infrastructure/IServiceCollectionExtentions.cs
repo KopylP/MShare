@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using MShare.Framework.Application.Validation;
 using MShare.Framework.Infrastructure.Processing;
 using MShare.Framework.Types.Extentions;
+using MShare.Songs.Domain;
+using MShare.Songs.Infrastructure.Songs;
 
 namespace MShare.Songs.Infrastructure
 {
@@ -19,6 +21,7 @@ namespace MShare.Songs.Infrastructure
                 .RegisterValidators(typeof(ApplicationAssemblyMarker))
                 .AddRequestValidation();
 
+            services.AddScoped<IStreamingServiceTypeRecognizer, StreamingServiceTypeRecognizer>();
 
             return services;
 		}

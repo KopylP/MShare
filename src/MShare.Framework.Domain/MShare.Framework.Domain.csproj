@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Extentions\" />
-    <None Remove="Expressions\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Extentions\" />
-    <Folder Include="Expressions\" />
+    <ProjectReference Include="..\MShare.Framework\MShare.Framework.csproj" />
   </ItemGroup>
 </Project>
