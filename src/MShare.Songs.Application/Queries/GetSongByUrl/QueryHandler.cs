@@ -8,9 +8,6 @@ namespace MShare.Songs.Application.Queries.GetSongByUrl
     {
         public Task<SongByUrlResponseDto> Handle(GetSongByUrlQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
-
-            // TODO Search Song By Url
         }
     }
 }
