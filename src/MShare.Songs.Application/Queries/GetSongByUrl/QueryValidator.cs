@@ -12,7 +12,7 @@ namespace MShare.Songs.Application.Queries.GetSongByUrl
         public void Validate(GetSongByUrlQuery request)
         {
             var isValidUrl = ValidSongUrlSpecification.Instance.IsSatisfiedBy(new Uri(request.SongUrl));
-            BadRequestException.ThrowIf(isValidUrl, "Url is not valid");
+            BadRequestException.ThrowIf(!isValidUrl, "Url is not valid");
         }
     }
 }

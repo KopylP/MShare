@@ -9,10 +9,17 @@
   <ItemGroup>
     <None Remove="Queries\" />
     <None Remove="Queries\GetSongByUrl\" />
+    <None Remove="Factories\" />
+    <None Remove="AutoMapper" />
+    <None Remove="Queries\GetServices\" />
+    <None Remove="Microsoft.Extensions.Configuration.Json" />
+    <None Remove="Microsoft.Extensions.Configuration.Binder" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Queries\" />
     <Folder Include="Queries\GetSongByUrl\" />
+    <Folder Include="Factories\" />
+    <Folder Include="Queries\GetServices\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MShare.Framework.Application\MShare.Framework.Application.csproj" />
@@ -20,5 +27,13 @@
     <ProjectReference Include="..\MShare.Framework.Domain\MShare.Framework.Domain.csproj" />
     <ProjectReference Include="..\MShare.Songs.Domain\MShare.Songs.Domain.csproj" />
     <ProjectReference Include="..\MShare.Framework.WebApi\MShare.Framework.WebApi.csproj" />
+    <ProjectReference Include="..\MShare.Framework.Infrastructure\MShare.Framework.Infrastructure.csproj" />
+    <ProjectReference Include="..\ProxyService.Client\ProxyService.Client.csproj" />
+    <ProjectReference Include="..\MShare.Songs.Abstractions\MShare.Songs.Abstractions.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
   </ItemGroup>
 </Project>

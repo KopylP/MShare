@@ -5,7 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 using MShare.Framework.Application.Validation;
 using MShare.Framework.Infrastructure.Processing;
 using MShare.Framework.Types.Extentions;
+using MShare.Songs.Application.Factories;
 using MShare.Songs.Domain;
+using MShare.Songs.Infrastructure.ProxyService;
 using MShare.Songs.Infrastructure.Songs;
 
 namespace MShare.Songs.Infrastructure
@@ -19,9 +21,11 @@ namespace MShare.Songs.Infrastructure
             services
                 .AddMediatR(typeof(ApplicationAssemblyMarker))
                 .RegisterValidators(typeof(ApplicationAssemblyMarker))
+                .AddHttpClient()
                 .AddRequestValidation();
 
             services.AddScoped<IStreamingServiceTypeRecognizer, StreamingServiceTypeRecognizer>();
+            services.AddScoped<IProxyServiceClientFactory, ProxyServiceClientFactory>();
 
             return services;
 		}

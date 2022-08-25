@@ -16,5 +16,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MShare.Framework.Api\MShare.Framework.Api.csproj" />
+    <ProjectReference Include="..\MShare.Songs.Abstractions\MShare.Songs.Abstractions.csproj" />
   </ItemGroup>
 </Project>
