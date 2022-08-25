@@ -5,7 +5,7 @@ namespace MShare.Songs.Infrastructure.ProxyService
 {
     internal class SpotifyConfiguration : IProxyServiceClientConfiguration
     {
-        public string BaseUrl => "http://spotifyproxy";
+        public string BaseUrl => "http://spotifyproxy:5002";
     }
 }
 

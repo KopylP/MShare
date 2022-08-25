@@ -5,7 +5,7 @@ namespace MShare.Songs.Infrastructure.ProxyService
 {
     internal class AppleConfiguration : IProxyServiceClientConfiguration
     {
-        public string BaseUrl => "http://appleproxy";
+        public string BaseUrl => "http://appleproxy:5001";
     }
 }
 

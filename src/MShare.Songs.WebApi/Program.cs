@@ -3,5 +3,6 @@
 var builder = WebApplication.CreateBuilder(args);
 var bootstrapper = new Bootstrapper(builder);
 
-bootstrapper.InitInfrastructure()
+bootstrapper
+    .InitInfrastructure()
     .Start();

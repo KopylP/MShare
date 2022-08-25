@@ -17,6 +17,12 @@ namespace MShare.Songs.WebApi.Core
             builder.Services.AddSwaggerGen();
         }
 
+        public Bootstrapper InitConfiguration()
+        {
+            _builder.Configuration.AddEnvironmentVariables("MSHARE_SONGS_");
+            return this;
+        }
+
 		public Bootstrapper InitInfrastructure()
 		{
 			_builder.Services.AddInfrastructure();

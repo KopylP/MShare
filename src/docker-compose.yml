@@ -13,3 +13,9 @@ services:
       context: .
       dockerfile: SpotifyProxy.WebService/Dockerfile
 
+
+  mshare.songs.webapi:
+    build:
+      context: .
+      dockerfile: MShare.Songs.WebApi/Dockerfile
+

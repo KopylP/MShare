@@ -20,6 +20,7 @@ namespace MShare.Songs.Infrastructure
 		{
             services
                 .AddMediatR(typeof(ApplicationAssemblyMarker))
+                .AddAutoMapper(typeof(ApplicationAssemblyMarker))
                 .RegisterValidators(typeof(ApplicationAssemblyMarker))
                 .AddHttpClient()
                 .AddRequestValidation();
