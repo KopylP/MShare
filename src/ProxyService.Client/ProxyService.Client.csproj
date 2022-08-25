@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="NSwag.ApiDescription.Client" />
+    <None Remove="Microsoft.Extensions.ApiDescription.Client" />
+    <None Remove="Newtonsoft.Json" />
+    <None Remove="Contracts\swagger.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NSwag.ApiDescription.Client" Version="13.0.5">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="3.0.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <OpenApiReference Include="Contracts\swagger.json" Namespace="ProjectService.Client.Api">
+      <Link>OpenAPIs\swagger.json</Link>
+    </OpenApiReference>
+  </ItemGroup>
+</Project>

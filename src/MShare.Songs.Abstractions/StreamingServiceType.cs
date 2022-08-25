@@ -1,8 +1,8 @@
-﻿namespace MShare.Songs.Domain
+﻿namespace MShare.Songs.Abstractions
 {
 	public enum StreamingServiceType
 	{
-		Apple,
+		AppleMusic,
 		Spotify
 	}
 }

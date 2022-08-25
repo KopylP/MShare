@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MShare.Framework.Types\MShare.Framework.Types.csproj" />
     <ProjectReference Include="..\MShare.Framework.Domain\MShare.Framework.Domain.csproj" />
+    <ProjectReference Include="..\MShare.Songs.Abstractions\MShare.Songs.Abstractions.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Specifications\" />
