@@ -23,4 +23,3 @@ namespace MShare.Songs.WebApi.Controllers.V1
         public async Task<IActionResult> Get([FromQuery] string url) => await ExecuteAsync(GetSongByUrlQuery.Of(url));
     }
 }
-
