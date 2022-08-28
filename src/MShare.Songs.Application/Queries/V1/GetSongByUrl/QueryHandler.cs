@@ -36,7 +36,7 @@ namespace MShare.Songs.Application.Queries.V1.GetSongByUrl
 
             var services = await _mediator.Send(GetServicesQuery.Instance);
 
-            return _mapper.Map<SongByUrlResponseDto>((songResult, services));
+            return _mapper.Map<SongByUrlResponseDto>((songResult, services, recognizerServiceResult.Data));
         }
     }
 }
