@@ -1,6 +1,6 @@
 ﻿using System;
 using MShare.Framework.Api;
-using MShare.Songs.Api.V1.Queries.Dtos;
+using MShare.Songs.Api.Queries.Dtos.V1;
 
 namespace MShare.Songs.Api.V1.Queries
 {
