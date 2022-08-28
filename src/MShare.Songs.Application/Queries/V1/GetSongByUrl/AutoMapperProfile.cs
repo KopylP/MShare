@@ -1,6 +1,6 @@
 ﻿using System;
 using AutoMapper;
-using MShare.Songs.Api.V1.Queries.Dtos;
+using MShare.Songs.Api.Queries.Dtos.V1;
 using ProxyService.Client;
 
 namespace MShare.Songs.Application.Queries.V1.GetSongByUrl

@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MShare.Framework.Api;
 using MShare.Framework.WebApi.Filters;
+using MShare.Songs.Api.Queries.Dtos.V1;
 using MShare.Songs.Api.V1.Queries;
-using MShare.Songs.Api.V1.Queries.Dtos;
 
 namespace MShare.Songs.WebApi.Controllers.V1
 {

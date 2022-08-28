@@ -2,8 +2,8 @@
 using MediatR;
 using MShare.Framework.Application;
 using MShare.Framework.WebApi.Exceptions;
+using MShare.Songs.Api.Queries.Dtos.V1;
 using MShare.Songs.Api.V1.Queries;
-using MShare.Songs.Api.V1.Queries.Dtos;
 using MShare.Songs.Application.Factories;
 using MShare.Songs.Domain;
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using MShare.Songs.Abstractions;
 
-namespace MShare.Songs.Api.V1.Queries.Dtos
+namespace MShare.Songs.Api.Queries.Dtos.V1
 {
 	public class ServicesResponseDto
 	{
