@@ -10,6 +10,7 @@ using MShare.Songs.Api.V1.Queries;
 
 namespace MShare.Songs.WebApi.Controllers.V1
 {
+    [ApiVersion("1.0")]
     public class SongController : ControllerBase
     {
         public static IContextExecutor _executor;
