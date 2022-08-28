@@ -3,6 +3,7 @@ namespace MShare.Songs.Api.V1.Queries.Dtos
 {
 	public class SongByUrlResponseDto
 	{
+		public string SongSourceId { get; set; }
 		public string SongUrl { get; set; }
 		public string SongName { get; set; }
 		public string ArtistName { get; set; }

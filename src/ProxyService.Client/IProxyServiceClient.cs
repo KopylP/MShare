@@ -8,4 +8,3 @@ namespace ProxyService.Client
 		Task<SongsResponseDto> FindAsync(string songName, string artistName, string? albumName);
 	}
 }
-
