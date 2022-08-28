@@ -15,7 +15,7 @@ namespace MShare.Songs.Application.Queries.V1.GetServices
         public QueryHandler(IConfiguration configuration) => _configuration = configuration;
 
         public async Task<ServicesResponseDto> Handle(GetServicesQuery request, CancellationToken cancellationToken)
-            => await Task.FromResult(Of(_configuration.GetSection("Services").Get<ItemDto[]>()));
+            => await Task.FromResult(Of(_configuration.GetSection("Services").Get<ItemDto[]>().OrderBy(p => p.Name).ToArray()));
     }
 }
 

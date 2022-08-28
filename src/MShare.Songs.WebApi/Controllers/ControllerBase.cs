@@ -5,8 +5,9 @@ using MShare.Framework.WebApi.Filters;
 
 namespace MShare.Songs.WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiExceptionFilter]
+    [ApiController]
     public class ControllerBase : Controller
 	{
 		private readonly IContextExecutor _executor;
