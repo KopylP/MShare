@@ -15,16 +15,16 @@ public class SongController : ControllerBase
     public SongController(IStreamingServiceClient client) => _client = client;
 
     [HttpGet("Url")]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(string))]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SongResponseDto))]
     public async Task<IActionResult> GetByUrl([FromQuery] GetSongByUrlRequestDto model)
         => Ok(await _client.GetByUrlAsync(model));
 
     [HttpGet("Find")]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(string))]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SongsResponseDto))]
     public async Task<IActionResult> Find([FromQuery] FindSongsRequestDto model)
     {

@@ -9,8 +9,8 @@ namespace MShare.Songs.Infrastructure.Songs
     {
         public Result<StreamingServiceType> From(Uri uri) => uri.Host.ToLower() switch
         {
-            "itunes.apple.com" => Result<StreamingServiceType>.Success(StreamingServiceType.AppleMusic),
-            "api.spotify.com" => Result<StreamingServiceType>.Success(StreamingServiceType.Spotify),
+            "music.apple.com" => Result<StreamingServiceType>.Success(StreamingServiceType.AppleMusic),
+            "open.spotify.com" => Result<StreamingServiceType>.Success(StreamingServiceType.Spotify),
             _ => Result<StreamingServiceType>.Fail("Streaming service not recognized")
         };
     }

@@ -1,9 +1,9 @@
 ﻿using System;
 using AutoMapper;
-using MShare.Songs.Api.Queries.Dtos;
-using ProjectService.Client.Api;
+using MShare.Songs.Api.V1.Queries.Dtos;
+using ProxyService.Client;
 
-namespace MShare.Songs.Application.Queries.GetSongByUrl
+namespace MShare.Songs.Application.Queries.V1.GetSongByUrl
 {
 	public class AutoMapperProfile : Profile
 	{

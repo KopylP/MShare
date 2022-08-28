@@ -8,18 +8,20 @@
 
   <ItemGroup>
     <None Remove="Queries\" />
-    <None Remove="Queries\GetSongByUrl\" />
     <None Remove="Factories\" />
     <None Remove="AutoMapper" />
-    <None Remove="Queries\GetServices\" />
     <None Remove="Microsoft.Extensions.Configuration.Json" />
     <None Remove="Microsoft.Extensions.Configuration.Binder" />
+    <None Remove="Queries\V1\" />
+    <None Remove="Queries\V1\GetServices\" />
+    <None Remove="Queries\V1\GetSongByUrl\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Queries\" />
-    <Folder Include="Queries\GetSongByUrl\" />
     <Folder Include="Factories\" />
-    <Folder Include="Queries\GetServices\" />
+    <Folder Include="Queries\V1\" />
+    <Folder Include="Queries\V1\GetServices\" />
+    <Folder Include="Queries\V1\GetSongByUrl\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MShare.Framework.Application\MShare.Framework.Application.csproj" />

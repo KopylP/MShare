@@ -1,5 +1,4 @@
 ﻿using System;
-using ProjectService.Client.Api;
 
 namespace ProxyService.Client
 {

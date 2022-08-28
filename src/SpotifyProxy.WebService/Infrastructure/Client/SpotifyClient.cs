@@ -5,6 +5,8 @@ using SpotifyProxy.WebService.Helpers;
 using AutoMapper;
 using System.Text;
 using MShare.Framework.Extentions;
+using Flurl.Http;
+using MShare.Framework.WebApi.Exceptions;
 
 namespace SpotifyProxy.WebService.Infrastructure.Client
 {
@@ -33,7 +35,7 @@ namespace SpotifyProxy.WebService.Infrastructure.Client
                 .SetQueryParam("type", "track")
                 .SetQueryParam("q", searchParam)
                 .SetQueryParam("limit", GetLimit(request, limit))
-                .GetAuthorizedAsync<SpotifySearchResponseModel>(_provider);           
+                .GetAuthorizedAsync<SpotifySearchResponseModel>(_provider);
 
             return _mapper.Map<SongsResponseDto>(response);
         }

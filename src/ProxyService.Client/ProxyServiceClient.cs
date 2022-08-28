@@ -1,5 +1,5 @@
 ﻿using System;
-using ProjectService.Client.Api;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ProxyService.Client
 {
@@ -11,10 +11,28 @@ namespace ProxyService.Client
             => _client = new swaggerClient(configuration.BaseUrl, client);
 
         public async Task<SongsResponseDto> FindAsync(string songName, string artistName, string? albumName)
-            => await _client.FindAsync(songName, artistName, albumName);
+        {
+            try
+            {
+                return await _client.FindAsync(songName, artistName, albumName);
+            }
+            catch (ApiException<ProblemDetails> exception)
+            {
+                throw new MShare.Framework.WebApi.Exceptions.ApiException(exception.StatusCode, exception.Response);
+            }
+        }
 
         public async Task<SongResponseDto> GetSongByUrlAsync(string url)
-            => await _client.UrlAsync(new Uri(url));
+        {
+            try
+            {
+                return await _client.UrlAsync(new Uri(url));
+            }
+            catch (ApiException exception)
+            {
+                throw new MShare.Framework.WebApi.Exceptions.ApiException(exception.StatusCode, exception.Response);
+            }
+        }
     }
 }
 

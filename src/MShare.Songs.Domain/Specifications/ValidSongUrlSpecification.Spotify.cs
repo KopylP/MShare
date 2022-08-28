@@ -11,9 +11,8 @@ namespace MShare.Songs.Domain.Specifications
             public static SpotifyUrlSpecification Instance => new SpotifyUrlSpecification();
 
             public override Expression<Func<Uri, bool>> Criteria
-                => p => p.Host.ToLower() == "api.spotify.com"
-                    && p.PathAndQuery.ToLower().Contains("v1")
-                    && p.PathAndQuery.ToLower().Contains("tracks");
+                => p => p.Host.ToLower() == "open.spotify.com"
+                    && p.PathAndQuery.ToLower().Contains("track");
         }
     }
 }
