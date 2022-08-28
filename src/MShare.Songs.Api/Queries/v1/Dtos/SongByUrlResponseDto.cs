@@ -1,5 +1,5 @@
 ﻿using System;
-namespace MShare.Songs.Api.Queries.Dtos
+namespace MShare.Songs.Api.V1.Queries.Dtos
 {
 	public class SongByUrlResponseDto
 	{

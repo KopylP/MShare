@@ -40,7 +40,7 @@ namespace SpotifyProxy.WebService.Infrastructure
             response = await request.AllowAnyHttpStatus().GetAsync();
 
             if (response.StatusCode != StatusCodes.Status200OK)
-                throw new ApiException(response.StatusCode, response.ResponseMessage.ToString());
+                throw new ApiException(response.StatusCode);
 
             return await response.GetJsonAsync<T>();
         }

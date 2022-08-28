@@ -11,9 +11,9 @@ namespace MShare.Songs.Domain.Specifications
             public static AppleUrlSpecification Instance => new AppleUrlSpecification();
 
             public override Expression<Func<Uri, bool>> Criteria
-                => p => p.Host.ToLower() == "itunes.apple.com"
-                    && p.PathAndQuery.ToLower().Contains("lookup")
-                    && p.PathAndQuery.ToLower().Contains("id");
+                => p => p.Host.ToLower() == "music.apple.com"
+                    && p.PathAndQuery.ToLower().Contains("album")
+                    && p.PathAndQuery.ToLower().Contains("i");
         }
     }
 }

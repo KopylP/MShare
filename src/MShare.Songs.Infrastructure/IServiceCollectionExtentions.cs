@@ -22,8 +22,10 @@ namespace MShare.Songs.Infrastructure
                 .AddMediatR(typeof(ApplicationAssemblyMarker))
                 .AddAutoMapper(typeof(ApplicationAssemblyMarker))
                 .RegisterValidators(typeof(ApplicationAssemblyMarker))
+                .AddHttpContextAccessor()
                 .AddHttpClient()
-                .AddRequestValidation();
+                .AddRequestValidation()
+                .AddExecutionContext();
 
             services.AddScoped<IStreamingServiceTypeRecognizer, StreamingServiceTypeRecognizer>();
             services.AddScoped<IProxyServiceClientFactory, ProxyServiceClientFactory>();

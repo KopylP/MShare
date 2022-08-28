@@ -1,7 +1,7 @@
 ﻿using System;
 using MShare.Framework.Api;
 
-namespace MShare.Framework.Infrastructure
+namespace MShare.Framework.Api
 {
 	public interface IContextExecutor
 	{

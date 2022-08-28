@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.Extensions.Configuration;
 using MShare.Framework.Application;
-using MShare.Songs.Api.Queries;
-using MShare.Songs.Api.Queries.Dtos;
+using MShare.Songs.Api.V1.Queries;
+using MShare.Songs.Api.V1.Queries.Dtos;
 
-namespace MShare.Songs.Application.Queries.GetServices
+namespace MShare.Songs.Application.Queries.V1.GetServices
 {
     using static ServicesResponseDto;
 

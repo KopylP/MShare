@@ -2,12 +2,12 @@
 using MediatR;
 using MShare.Framework.Application;
 using MShare.Framework.WebApi.Exceptions;
-using MShare.Songs.Api.Queries;
-using MShare.Songs.Api.Queries.Dtos;
+using MShare.Songs.Api.V1.Queries;
+using MShare.Songs.Api.V1.Queries.Dtos;
 using MShare.Songs.Application.Factories;
 using MShare.Songs.Domain;
 
-namespace MShare.Songs.Application.Queries.GetSongByUrl
+namespace MShare.Songs.Application.Queries.V1.GetSongByUrl
 {
     internal class QueryHandler : IQueryHandler<GetSongByUrlQuery, SongByUrlResponseDto>
     {
