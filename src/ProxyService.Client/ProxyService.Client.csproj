@@ -11,6 +11,8 @@
     <None Remove="Microsoft.Extensions.ApiDescription.Client" />
     <None Remove="Newtonsoft.Json" />
     <None Remove="Contracts\swagger.json" />
+    <None Remove="Flurl" />
+    <None Remove="Flurl.Http" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="NSwag.ApiDescription.Client" Version="13.0.5">
@@ -22,9 +24,12 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="Flurl" Version="3.0.6" />
+    <PackageReference Include="Flurl.Http" Version="3.2.4" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MShare.Framework.WebApi\MShare.Framework.WebApi.csproj" />
+    <ProjectReference Include="..\MShare.Framework.Infrastructure\MShare.Framework.Infrastructure.csproj" />
   </ItemGroup>
   <ItemGroup>
     <OpenApiReference Include="Contracts\swagger.json" Namespace="ProxyService.Client">

@@ -8,14 +8,10 @@ namespace MShare.Songs.Infrastructure.ProxyService
 {
     internal class ProxyServiceClientFactory : IProxyServiceClientFactory
     {
-        private readonly HttpClient _client;
-
-        public ProxyServiceClientFactory(HttpClient client) => _client = client;
-
         public IProxyServiceClient Create(StreamingServiceType type)
         {
             var configuration = GetConfiguration(type);
-            return new ProxyServiceClient(configuration, _client);
+            return new ProxyServiceClient(configuration);
         }
 
         private IProxyServiceClientConfiguration GetConfiguration(StreamingServiceType type)

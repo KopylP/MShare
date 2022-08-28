@@ -1,36 +1,50 @@
 ﻿using System;
+using Flurl;
+using Flurl.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MShare.Framework.Infrastructure.Clients;
 
 namespace ProxyService.Client
 {
     public class ProxyServiceClient : IProxyServiceClient
     {
-        private readonly swaggerClient _client;
-
-        public ProxyServiceClient(IProxyServiceClientConfiguration configuration, HttpClient client)
-            => _client = new swaggerClient(configuration.BaseUrl, client);
+        private readonly string _baseUrl;
+        public ProxyServiceClient(IProxyServiceClientConfiguration configuration)
+        {
+            _baseUrl = configuration.BaseUrl;
+        }
 
         public async Task<SongsResponseDto> FindAsync(string songName, string artistName, string? albumName)
         {
-            try
-            {
-                return await _client.FindAsync(songName, artistName, albumName);
-            }
-            catch (ApiException<ProblemDetails> exception)
-            {
-                throw new MShare.Framework.WebApi.Exceptions.ApiException(exception.StatusCode, exception.Response);
-            }
+            var url = _baseUrl
+                .AppendPathSegments("api", "Song", "Find")
+                .SetQueryParam("songName", songName)
+                .SetQueryParam("artistName", artistName)
+                .SetQueryParamIf(albumName is not null, "albumName", albumName);
+
+
+            return await Get<SongsResponseDto>(url);
         }
 
         public async Task<SongResponseDto> GetSongByUrlAsync(string url)
         {
+            var uri = _baseUrl
+            .AppendPathSegments("api", "Song", "Url")
+            .SetQueryParam("url", url);
+
+            return await Get<SongResponseDto>(uri);
+        }
+
+        private async Task<TResponse> Get<TResponse>(Url url)
+        {
             try
             {
-                return await _client.UrlAsync(new Uri(url));
+                return await url.GetJsonAsync<TResponse>();
             }
-            catch (ApiException exception)
+            catch (FlurlHttpException ex)
             {
-                throw new MShare.Framework.WebApi.Exceptions.ApiException(exception.StatusCode, exception.Response);
+                throw new MShare.Framework.WebApi.Exceptions.ApiException(ex.StatusCode ?? 500, await ex.GetResponseStringAsync());
             }
         }
     }

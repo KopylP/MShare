@@ -3,7 +3,7 @@
 	public enum StreamingServiceType
 	{
 		AppleMusic,
-		Spotify
-	}
+		Spotify,
+        YoutubeMusic
+    }
 }
-
