@@ -3,6 +3,7 @@ using AppleProxy.WebService.Infrastructure.Client.Models;
 using AutoMapper;
 using Flurl;
 using Flurl.Http;
+using MShare.Framework.Infrastructure.Clients;
 using MShare.Framework.WebApi.Exceptions;
 using Proxy.Api;
 
@@ -21,12 +22,15 @@ namespace AppleProxy.WebService.Infrastructure.Client
 
         public async Task<SongsResponseDto> FindAsync(FindSongsRequestDto request, int limit)
         {
-            var words = request.SongName.Split(" ", StringSplitOptions.RemoveEmptyEntries).AsEnumerable();
+            var words = Enumerable.Empty<string>();
 
             if (!string.IsNullOrWhiteSpace(request.AlbumName))
                 words = words.Union(request.AlbumName.Replace("-", "").Split(" ", StringSplitOptions.RemoveEmptyEntries));
+
             if (!string.IsNullOrWhiteSpace(request.ArtistName))
-                words = words.Union(request.ArtistName.Split(" ", StringSplitOptions.RemoveEmptyEntries));
+                words = words.Union(new string[] { request.ArtistName });
+
+            words = words.Union(new string[] { request.SongName });
 
             var term = string.Join(" + ", words);
 
@@ -34,6 +38,15 @@ namespace AppleProxy.WebService.Infrastructure.Client
                 .AppendPathSegment("search")
                 .SetQueryParam("term", term)
                 .SetQueryParam("limit", GetLimit(request, limit))
+                .SetQueryParam("media", "music")
+                .SetQueryParamIf(!string.IsNullOrWhiteSpace(request.ArtistName), "attribute", "artistTerm")
+                .SetQueryParamIf(!string.IsNullOrWhiteSpace(request.AlbumName), "attribute", "albumTerm")
+                .SetQueryParamIf(
+                    string.IsNullOrWhiteSpace(request.AlbumName)
+                    && string.IsNullOrWhiteSpace(request.ArtistName),
+                    "attribute",
+                    "songTerm")
+                .SetQueryParam("entity", "musicTrack")
                 .GetJsonAsync<AppleTrackListResponseModel>();
 
             return _mapper.Map<SongsResponseDto>(response);

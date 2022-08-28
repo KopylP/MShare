@@ -37,12 +37,14 @@ namespace AppleProxy.WebService.Controllers
             {
                 response = await _client.FindAsync(model with { ArtistName = string.Empty }, limit: 10);
                 FilterItemsByArtistName(response, model);
+                FilterItemsBySongName(response, model);
             }
 
             if (response.IsEmpty)
             {
                 response = await _client.FindAsync(model with { AlbumName = string.Empty, ArtistName = string.Empty }, limit: 10);
                 FilterItemsByArtistName(response, model);
+                FilterItemsBySongName(response, model);
             }
 
             if (response.IsEmpty)
@@ -64,6 +66,22 @@ namespace AppleProxy.WebService.Controllers
                     var artists = item.Artists.First().Name.Split("&").Select(p => p.Unidecode());
                     return artists.Any(artist => artist.Length >= lengthRange.Min && artist.Length <= lengthRange.Max);
                 })
+                .Take(MAX_LIMIT)
+                .ToArray();
+            }
+        }
+
+        private void FilterItemsBySongName(SongsResponseDto response, FindSongsRequestDto request)
+        {
+            if (!string.IsNullOrWhiteSpace(request.SongName) && response is not null)
+            {
+                var lengthRange = (
+                    Min: request.SongName.Length - 1,
+                    Max: request.SongName.Length + 1);
+
+                response.Items = response
+                    .Items
+                    .Where(item => item.Song.Name.Length >= lengthRange.Min && item.Song.Name.Length <= lengthRange.Max)
                 .Take(MAX_LIMIT)
                 .ToArray();
             }
