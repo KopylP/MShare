@@ -9,6 +9,7 @@ namespace MShare.Songs.Api.Queries.Dtos.V1
 		public string ArtistName { get; set; }
 		public string AlbumName { get; set; }
 		public string CoverImageUrl { get; set; }
+		public string ServiceType { get; set; }
 
 		public ServiceDto[] Services { get; set; }
 
