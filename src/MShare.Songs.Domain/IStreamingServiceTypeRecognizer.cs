@@ -9,4 +9,3 @@ namespace MShare.Songs.Domain
 		Result<StreamingServiceType> From(Uri uri);
 	}
 }
-

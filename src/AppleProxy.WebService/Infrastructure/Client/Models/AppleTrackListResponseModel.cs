@@ -2,7 +2,12 @@
 {
 	public class AppleTrackListResponseModel
 	{
-		public AppleTrackResponseModel[] Results { get; set; }
+		public static AppleTrackListResponseModel Empty => new AppleTrackListResponseModel
+		{
+			Results = new AppleTrackResponseModel[0]
+		};
+
+        public AppleTrackResponseModel[] Results { get; set; }
 	}
 }
 

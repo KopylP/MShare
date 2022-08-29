@@ -1,8 +1,9 @@
 ﻿using System;
 using Flurl;
 using Flurl.Http;
+using Polly;
 
-namespace MShare.Framework.Infrastructure.Clients
+namespace Flurl.Http
 {
     public static class IFlurlRequestExtentions
     {
@@ -33,6 +34,18 @@ namespace MShare.Framework.Infrastructure.Clients
 
         public static IFlurlRequest WithBasicToken(this IFlurlRequest request, string? basicToken)
             => request.WithHeader("Authorization", $"Basic {basicToken}");
+
+        public async static Task<TResponse> GetJsonWithRetryAsync<TResponse>(this Url url, int retryCount, int waitInMilliseconds)
+        {
+            var timeSpans = Enumerable.Range(0, retryCount).Select(p => TimeSpan.FromMilliseconds(waitInMilliseconds));
+
+            return await Policy.Handle<FlurlHttpException>()
+                .WaitAndRetryAsync(timeSpans)
+                .ExecuteAsync<TResponse>(async () => await url.GetJsonAsync<TResponse>());
+        }
+
+        public async static Task<TResponse> GetJsonWithRetryAsync<TResponse>(this Url url, (int RetryCount, int WaitInMilliseconds) retryPolicy)
+            => await url.GetJsonWithRetryAsync<TResponse>(retryPolicy.RetryCount, retryPolicy.WaitInMilliseconds);
     }
 }
 

@@ -3,7 +3,6 @@ using Flurl;
 using Flurl.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MShare.Framework.Infrastructure.Clients;
 
 namespace ProxyService.Client
 {
