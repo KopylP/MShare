@@ -11,7 +11,8 @@ namespace AppleProxy.WebService.Controllers
     [ApiExceptionFilter]
     public class SongController : ControllerBase
     {
-        private const int MAX_LIMIT = 5;
+        private const int MAX_LIMIT = 8;
+        private const int MAX_TAKE = 5;
 
         private readonly IStreamingServiceClient _client;
 
@@ -29,26 +30,35 @@ namespace AppleProxy.WebService.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SongsResponseDto))]
-        public async Task<IActionResult> Find([FromQuery] FindSongsRequestDto model)
+        public async Task<IActionResult> Find([FromQuery] FindSongsRequestDto request)
         {
-            var response = await _client.FindAsync(model with { AlbumName = string.Empty });
+            int take = 1;
+
+            var response = await _client.FindAsync(request with { AlbumName = string.Empty }, limit: MAX_LIMIT);
 
             if (response.IsEmpty)
             {
-                response = await _client.FindAsync(model with { ArtistName = string.Empty }, limit: 10);
-                FilterItemsByArtistName(response, model);
-                FilterItemsBySongName(response, model);
+                take = MAX_TAKE;
+                response = await _client.FindAsync(request with { ArtistName = string.Empty }, limit: MAX_LIMIT);
+                FilterItemsByArtistName(response, request);
+                FilterItemsBySongName(response, request);
             }
 
             if (response.IsEmpty)
             {
-                response = await _client.FindAsync(model with { AlbumName = string.Empty, ArtistName = string.Empty }, limit: 10);
-                FilterItemsByArtistName(response, model);
-                FilterItemsBySongName(response, model);
+                take = MAX_TAKE;
+                response = await _client.FindAsync(request with { AlbumName = string.Empty, ArtistName = string.Empty }, limit: MAX_LIMIT);
+                FilterItemsByArtistName(response, request);
+                FilterItemsBySongName(response, request);
             }
 
             if (response.IsEmpty)
                 throw new NotFoundException();
+
+            FilterItemsByArtistName(response, request);
+            FilterItemsBySongName(response, request);
+
+            response.Items = response.Items.Take(take).ToArray();
 
             return Ok(response);
         }
@@ -66,7 +76,6 @@ namespace AppleProxy.WebService.Controllers
                     var artists = item.Artists.First().Name.Split("&").Select(p => p.Unidecode());
                     return artists.Any(artist => artist.Length >= lengthRange.Min && artist.Length <= lengthRange.Max);
                 })
-                .Take(MAX_LIMIT)
                 .ToArray();
             }
         }
@@ -75,14 +84,9 @@ namespace AppleProxy.WebService.Controllers
         {
             if (!string.IsNullOrWhiteSpace(request.SongName) && response is not null)
             {
-                var lengthRange = (
-                    Min: request.SongName.Length - 1,
-                    Max: request.SongName.Length + 1);
-
                 response.Items = response
                     .Items
-                    .Where(item => item.Song.Name.Length >= lengthRange.Min && item.Song.Name.Length <= lengthRange.Max)
-                .Take(MAX_LIMIT)
+                    .Where(item => item.Song.Name.ToLower() == request.SongName.ToLower())
                 .ToArray();
             }
         }

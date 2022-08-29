@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -21,6 +22,6 @@ namespace MShare.Songs.WebApi.Controllers.V1
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SongByUrlResponseDto))]
-        public async Task<IActionResult> Get([FromQuery] string url) => await ExecuteAsync(GetSongByUrlQuery.Of(url));
+        public async Task<IActionResult> Get([FromQuery] [Required] [Url] string url) => await ExecuteAsync(GetSongByUrlQuery.Of(url));
     }
 }

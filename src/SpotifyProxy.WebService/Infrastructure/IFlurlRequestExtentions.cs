@@ -1,6 +1,5 @@
 ﻿using Flurl.Http;
 using MShare.Framework.Infrastructure.AccessToken;
-using MShare.Framework.Infrastructure.Clients;
 using MShare.Framework.Types;
 using MShare.Framework.WebApi.Exceptions;
 
