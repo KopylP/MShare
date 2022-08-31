@@ -1,6 +1,8 @@
 ﻿using System;
 using Flurl;
 using Flurl.Http;
+using MShare.Framework.Types;
+using MShare.Framework.Types.Variations;
 using Polly;
 
 namespace Flurl.Http
@@ -35,17 +37,15 @@ namespace Flurl.Http
         public static IFlurlRequest WithBasicToken(this IFlurlRequest request, string? basicToken)
             => request.WithHeader("Authorization", $"Basic {basicToken}");
 
-        public async static Task<TResponse> GetJsonWithRetryAsync<TResponse>(this Url url, int retryCount, int waitInMilliseconds)
+        public async static Task<TResponse> GetJsonWithRetryAsync<TResponse>(this Url url, (int RetryCount, IntRange WaitRangeInMilliseconds) retryPolicy)
         {
-            var timeSpans = Enumerable.Range(0, retryCount).Select(p => TimeSpan.FromMilliseconds(waitInMilliseconds));
+            var timeSpans = Enumerable.Range(0, retryPolicy.RetryCount)
+                .Select(p => TimeSpan.FromMilliseconds(Number.Random(retryPolicy.WaitRangeInMilliseconds)));
 
             return await Policy.Handle<FlurlHttpException>()
                 .WaitAndRetryAsync(timeSpans)
                 .ExecuteAsync<TResponse>(async () => await url.GetJsonAsync<TResponse>());
         }
-
-        public async static Task<TResponse> GetJsonWithRetryAsync<TResponse>(this Url url, (int RetryCount, int WaitInMilliseconds) retryPolicy)
-            => await url.GetJsonWithRetryAsync<TResponse>(retryPolicy.RetryCount, retryPolicy.WaitInMilliseconds);
     }
 }
 
