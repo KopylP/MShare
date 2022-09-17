@@ -27,7 +27,7 @@ namespace AppleProxy.WebService.Infrastructure.Client
 
         public async Task<AppleTrackListResponseModel> FindByArtistAsync(FindSongsRequestDto request, int limit)
         {
-            var words = new string[] { request.ArtistName, request.SongName };
+            var words = new string[] { request.ArtistName.Trim(), request.SongName.Trim() };
 
             var term = string.Join(" + ", words);
 
@@ -47,7 +47,7 @@ namespace AppleProxy.WebService.Infrastructure.Client
 
         public async Task<AppleTrackListResponseModel> FindByAlbumAsync(FindSongsRequestDto request, int limit)
         {
-            var words = new string[] { request.AlbumName ?? "", request.SongName };
+            var words = new string[] { request.AlbumName?.Trim() ?? "", request.SongName.Trim() };
 
             var term = string.Join(" + ", words);
 
@@ -70,7 +70,7 @@ namespace AppleProxy.WebService.Infrastructure.Client
 
         public async Task<AppleTrackListResponseModel> FindBySongAsync(FindSongsRequestDto request, int limit)
         {
-            var url = GetBaseUrl(request.SongName, request, limit)
+            var url = GetBaseUrl(request.SongName.Trim(), request, limit)
                 .SetQueryParam("attribute", "songTerm");
 
             var response = await url.GetJsonWithRetryAsync<AppleTrackListResponseModel>(_retryPolicy);

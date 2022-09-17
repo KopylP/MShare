@@ -40,16 +40,12 @@ namespace AppleProxy.WebService.Controllers
             {
                 take = MAX_TAKE;
                 response = await _client.FindAsync(request with { ArtistName = string.Empty }, limit: MAX_LIMIT);
-                FilterItemsByArtistName(response, request);
-                FilterItemsBySongName(response, request);
             }
 
             if (response.IsEmpty)
             {
                 take = MAX_TAKE;
                 response = await _client.FindAsync(request with { AlbumName = string.Empty, ArtistName = string.Empty }, limit: MAX_LIMIT);
-                FilterItemsByArtistName(response, request);
-                FilterItemsBySongName(response, request);
             }
 
             if (response.IsEmpty)
@@ -84,10 +80,15 @@ namespace AppleProxy.WebService.Controllers
         {
             if (!string.IsNullOrWhiteSpace(request.SongName) && response is not null)
             {
-                response.Items = response
+                var items = response
                     .Items
                     .Where(item => item.Song.Name.ToLower() == request.SongName.ToLower())
-                .ToArray();
+                    .ToArray();
+
+                if (items.Any())
+                {
+                    response.Items = items;
+                }
             }
         }
     }

@@ -26,9 +26,9 @@ namespace SpotifyProxy.WebService.Infrastructure.Client
         public async Task<SongsResponseDto> FindAsync(FindSongsRequestDto request, int limit = 5)
         {
             var searchParam = new StringBuilder();
-            searchParam.Append($"track: {request.SongName} ")
-                .AppendIf(!string.IsNullOrWhiteSpace(request.AlbumName), $"+album: {request.AlbumName} ")
-                .AppendIf(!string.IsNullOrWhiteSpace(request.ArtistName), $"+artist: {request.ArtistName} ");
+            searchParam.Append($"track: {request.SongName?.PrepareSongName()} ")
+                .AppendIf(!string.IsNullOrWhiteSpace(request.AlbumName), $"+album: {request.AlbumName?.Trim()} ")
+                .AppendIf(!string.IsNullOrWhiteSpace(request.ArtistName), $"+artist: {request.ArtistName?.Trim()} ");
 
             var response = await _publicApiUrl
                 .AppendPathSegment("search")
