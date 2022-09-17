@@ -30,11 +30,13 @@
     <None Remove="MediatR" />
     <None Remove="Controllers\V1\" />
     <None Remove="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" />
+    <None Remove="Filters\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="Core\" />
     <Folder Include="Controllers\V1\" />
+    <Folder Include="Filters\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MShare.Songs.Infrastructure\MShare.Songs.Infrastructure.csproj">
