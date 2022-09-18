@@ -7,7 +7,8 @@
             // Spotify link example
             // https://open.spotify.com/track/56wSomSllGESHGhcfHrvEw
             return url.Replace("//", "/")
-                .Split("/")[3];
+                .Split("/")[3]
+                .RemoveFrom('?');
         }
     }
 }
