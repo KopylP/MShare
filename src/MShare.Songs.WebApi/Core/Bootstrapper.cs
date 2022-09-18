@@ -55,6 +55,7 @@ namespace MShare.Songs.WebApi.Core
 		public Bootstrapper InitInfrastructure()
 		{
 			_builder.Services.AddInfrastructure();
+
 			return this;
 		}
 
@@ -82,6 +83,12 @@ namespace MShare.Songs.WebApi.Core
             //app.UseAuthorization();
 
             app.MapControllers();
+
+            // Handles exceptions and generates a custom response body
+            app.UseExceptionHandler("/api/v1.0/errors/500");
+
+            // Handles non-success status codes with empty body
+            app.UseStatusCodePagesWithReExecute("/api/v1.0/errors/{0}");
 
             app.Run();
         }

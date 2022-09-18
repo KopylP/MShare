@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Net;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using MShare.Framework.WebApi.Exceptions;
 
@@ -12,7 +13,8 @@ namespace MShare.Framework.WebApi.Filters
 
             if (exception is ApiException apiException)
             {
-                context.Result = new ObjectResult(apiException.Message)
+                var parsedCode = (HttpStatusCode)apiException.StatusCode;
+                context.Result = new ObjectResult(new ApiError(apiException.StatusCode, parsedCode.ToString(), exception.Message))
                 {
                     StatusCode = apiException.StatusCode
                 };
