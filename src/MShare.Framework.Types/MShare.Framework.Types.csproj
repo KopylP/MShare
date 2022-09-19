@@ -9,9 +9,14 @@
   <ItemGroup>
     <None Remove="Extentions\" />
     <None Remove="Variations\" />
+    <None Remove="Addresses\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Extentions\" />
     <Folder Include="Variations\" />
+    <Folder Include="Addresses\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MShare.Framework\MShare.Framework.csproj" />
   </ItemGroup>
 </Project>

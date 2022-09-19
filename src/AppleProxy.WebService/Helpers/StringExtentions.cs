@@ -1,4 +1,5 @@
 ﻿using Flurl;
+using Proxy.Api;
 
 namespace AppleProxy.WebService.Helpers
 {
@@ -12,7 +13,19 @@ namespace AppleProxy.WebService.Helpers
 			return queryDictionary?.Get("i") ?? "";
         }
 
-		public static string GetApplePhotoSizeUrl(this string imageUrl, int newSize)
+        public static string GetAppleSongRegion(this string urlStr)
+        {
+            var url = new Uri(urlStr);
+            var region = url.PathAndQuery.RemoveFrom('?').Split("/", StringSplitOptions.RemoveEmptyEntries).First();
+
+            if (region.Length != 2)
+                return Region.Invariant;
+
+            return region;
+        }
+
+
+        public static string GetApplePhotoSizeUrl(this string imageUrl, int newSize)
 			=> imageUrl.RemovePathSegment()
 					.AppendPathSegment($"{newSize}x{newSize}bb.jpg")
 					.ToString();

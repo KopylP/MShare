@@ -12,7 +12,7 @@
     "SpotifyProxy.WebService": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:1363",
+      "applicationUrl": "http://localhost:40355",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

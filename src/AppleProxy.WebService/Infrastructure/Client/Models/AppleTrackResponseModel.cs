@@ -6,6 +6,7 @@
 		public string TrackName { get; set; }
 		public string TrackId { get; set; }
 		public string TrackViewUrl { get; set; }
+		public string Country { get; set; }
 		// album
 		public string CollectionName { get; set; }
 		public string CollectionId { get; set; }

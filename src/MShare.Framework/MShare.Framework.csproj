@@ -9,9 +9,13 @@
   <ItemGroup>
     <None Remove="Extentions\" />
     <None Remove="Expressions\" />
+    <None Remove="Logging\" />
+    <None Remove="Exceptions\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Extentions\" />
     <Folder Include="Expressions\" />
+    <Folder Include="Logging\" />
+    <Folder Include="Exceptions\" />
   </ItemGroup>
 </Project>
