@@ -18,11 +18,13 @@
     <None Remove="Processing\" />
     <None Remove="Microsoft.Extensions.DependencyInjection.Abstractions" />
     <None Remove="Polly" />
+    <None Remove="Logging\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Clients\" />
     <Folder Include="AccessToken\" />
     <Folder Include="Processing\" />
+    <Folder Include="Logging\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Flurl.Http" Version="3.2.4" />
@@ -39,5 +41,6 @@
     <ProjectReference Include="..\..\MShare.Framework.Api\MShare.Framework.Api.csproj" />
     <ProjectReference Include="..\MShare.Framework.Api\MShare.Framework.Api.csproj" />
     <ProjectReference Include="..\MShare.Framework.Application\MShare.Framework.Application.csproj" />
+    <ProjectReference Include="..\MShare.Framework\MShare.Framework.csproj" />
   </ItemGroup>
 </Project>

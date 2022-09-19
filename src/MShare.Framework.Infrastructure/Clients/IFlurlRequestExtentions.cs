@@ -46,6 +46,20 @@ namespace Flurl.Http
                 .WaitAndRetryAsync(timeSpans)
                 .ExecuteAsync<TResponse>(async () => await url.GetJsonAsync<TResponse>());
         }
+
+        public static Url AppendPathSegmentIf(this Url request, bool condition, string value)
+        {
+            if (condition)
+                return request.AppendPathSegment(value);
+
+            return request;
+        }
+
+        public static Url AppendPathSegmentIf(this string request, bool condition, string value)
+        {
+            var url = new Url(request);
+            return url.AppendPathSegmentIf(condition, value);
+        }
     }
 }
 

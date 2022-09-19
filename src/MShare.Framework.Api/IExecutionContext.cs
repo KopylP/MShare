@@ -1,4 +1,6 @@
 ﻿using System;
+using MShare.Framework.Types.Addresses;
+
 namespace MShare.Framework.Api
 {
 	public interface IExecutionContext
@@ -6,6 +8,7 @@ namespace MShare.Framework.Api
 		public string OsVersion { get; }
 		public string Os { get; }
 		public string DeviceId { get; }
-	}
+        public CountryCode2 StoreRegion { get; }
+    }
 }
 

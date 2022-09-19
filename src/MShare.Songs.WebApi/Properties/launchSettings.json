@@ -12,7 +12,7 @@
     "MShare.Songs.WebApi": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:22241",
+      "applicationUrl": "http://localhost:30408",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

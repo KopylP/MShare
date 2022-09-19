@@ -3,6 +3,7 @@ using MShare.Framework.Api;
 using Microsoft.Net.Http.Headers;
 using Microsoft.AspNetCore.Http;
 using MediatR;
+using MShare.Framework.Types.Addresses;
 
 namespace MShare.Framework.Infrastructure
 {
@@ -30,12 +31,14 @@ namespace MShare.Framework.Infrastructure
             var os = _httpContextAccessor.HttpContext.Request.Headers["mshare-os-name"];
             var osVersion = _httpContextAccessor.HttpContext.Request.Headers["mshare-os-version"];
             var deviceId = _httpContextAccessor.HttpContext.Request.Headers["mshare-device-id"];
+            var region = _httpContextAccessor.HttpContext.Request.Headers["mshare-store-region"];
 
             if (_executionContext is ExecutionContext executionContext)
             {
                 executionContext.Os = os;
                 executionContext.OsVersion = osVersion;
                 executionContext.DeviceId = deviceId;
+                executionContext.StoreRegion = CountryCode2.Of(region);
             }
         }
     }

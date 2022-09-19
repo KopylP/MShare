@@ -20,7 +20,7 @@ namespace AppleProxy.WebService.Infrastructure.Client.Models.Mapping
             {
                 return new SongResponseDto
                 {
-                    Song = SongSourceDto.Of(source.TrackName, source.TrackId, source.TrackViewUrl),
+                    Song = SongSourceDto.Of(source.TrackName, source.TrackId, source.TrackViewUrl, source.Country),
                     Album = AlbumSourceDto.Of(
                         source.CollectionName,
                         source.CollectionId,

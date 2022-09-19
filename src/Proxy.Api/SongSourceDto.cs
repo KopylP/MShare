@@ -6,13 +6,15 @@ namespace Proxy.Api
         public string Name { get; init; }
         public string SourceId { get; init; }
         public string SourceUrl { get; init; }
+        public string Country { get; init; }
 
-        public static SongSourceDto Of(string name, string sourceId, string sourceUrl)
+        public static SongSourceDto Of(string name, string sourceId, string sourceUrl, string? country = default)
             => new SongSourceDto
             {
                 Name = name,
                 SourceId = sourceId,
-                SourceUrl = sourceUrl
+                SourceUrl = sourceUrl,
+                Country = country ?? Region.Invariant
             };
     }
 }
