@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace SpotifyProxy.WebService.Infrastructure.Client.Models
 {
     [JsonObject]
-    internal class SpotifySearchResponseModel
+    internal class SpotifySearchTrackResponseModel
     {
         [JsonProperty("tracks")]
         internal TrackList Tracks { get; set; }

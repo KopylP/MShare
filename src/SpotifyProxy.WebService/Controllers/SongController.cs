@@ -18,8 +18,8 @@ public class SongController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
     [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(string))]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SongResponseDto))]
-    public async Task<IActionResult> GetByUrl([FromQuery] GetSongByUrlRequestDto model)
-        => Ok(await _client.GetByUrlAsync(model));
+    public async Task<IActionResult> GetByUrl([FromQuery] GetByUrlRequestDto model)
+        => Ok(await _client.GetSongByUrlAsync(model));
 
     [HttpGet("Find")]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
@@ -28,13 +28,13 @@ public class SongController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SongsResponseDto))]
     public async Task<IActionResult> Find([FromQuery] FindSongsRequestDto model)
     {
-        var response = await _client.FindAsync(model with { AlbumName = string.Empty });
+        var response = await _client.FindSongAsync(model with { AlbumName = string.Empty });
 
         if (response.IsEmpty)
-            response = await _client.FindAsync(model with { ArtistName = string.Empty, SongName = $"{model.SongName} {model.ArtistName}" });
+            response = await _client.FindSongAsync(model with { ArtistName = string.Empty, SongName = $"{model.SongName} {model.ArtistName}" });
 
         if (response.IsEmpty)
-            response = await _client.FindAsync(model with { AlbumName = string.Empty, ArtistName = string.Empty });
+            response = await _client.FindSongAsync(model with { AlbumName = string.Empty, ArtistName = string.Empty });
 
         if (response.IsEmpty)
             throw new NotFoundException();

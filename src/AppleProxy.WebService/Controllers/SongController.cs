@@ -22,8 +22,8 @@ namespace AppleProxy.WebService.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SongResponseDto))]
-        public async Task<IActionResult> GetByUrl([FromQuery] GetSongByUrlRequestDto model)
-            => Ok(await _client.GetByUrlAsync(model));
+        public async Task<IActionResult> GetByUrl([FromQuery] GetByUrlRequestDto model)
+            => Ok(await _client.GetSongByUrlAsync(model));
 
         [HttpGet("Find")]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
@@ -34,18 +34,18 @@ namespace AppleProxy.WebService.Controllers
         {
             int take = 1;
 
-            var response = await _client.FindAsync(request with { AlbumName = string.Empty }, limit: MAX_LIMIT);
+            var response = await _client.FindSongAsync(request with { AlbumName = string.Empty }, limit: MAX_LIMIT);
 
             if (response.IsEmpty)
             {
                 take = MAX_TAKE;
-                response = await _client.FindAsync(request with { ArtistName = string.Empty }, limit: MAX_LIMIT);
+                response = await _client.FindSongAsync(request with { ArtistName = string.Empty }, limit: MAX_LIMIT);
             }
 
             if (response.IsEmpty)
             {
                 take = MAX_TAKE;
-                response = await _client.FindAsync(request with { AlbumName = string.Empty, ArtistName = string.Empty }, limit: MAX_LIMIT);
+                response = await _client.FindSongAsync(request with { AlbumName = string.Empty, ArtistName = string.Empty }, limit: MAX_LIMIT);
             }
 
             if (response.IsEmpty)

@@ -23,7 +23,7 @@ namespace SpotifyProxy.WebService.Infrastructure.Client
             _mapper = mapper;
         }
 
-        public async Task<SongsResponseDto> FindAsync(FindSongsRequestDto request, int limit = 5)
+        public async Task<SongsResponseDto> FindSongAsync(FindSongsRequestDto request, int limit = 5)
         {
             var searchParam = new StringBuilder();
             searchParam.Append($"track: {request.SongName?.PrepareSongName()} ")
@@ -35,16 +35,16 @@ namespace SpotifyProxy.WebService.Infrastructure.Client
                 .SetQueryParam("type", "track")
                 .SetQueryParam("q", searchParam)
                 .SetQueryParam("limit", GetLimit(request, limit))
-                .GetAuthorizedAsync<SpotifySearchResponseModel>(_provider);
+                .GetAuthorizedAsync<SpotifySearchTrackResponseModel>(_provider);
 
             return _mapper.Map<SongsResponseDto>(response);
         }
 
-        public async Task<SongResponseDto> GetByUrlAsync(GetSongByUrlRequestDto request)
+        public async Task<SongResponseDto> GetSongByUrlAsync(GetByUrlRequestDto request)
         {
             var response = await _publicApiUrl
                 .AppendPathSegment("tracks")
-                .AppendPathSegment(request.Url?.GetSpotifySongId())
+                .AppendPathSegment(request.Url?.GetId())
                 .GetAuthorizedAsync<SpotifyTrackResponseModel>(_provider);
 
             return _mapper.Map<SongResponseDto>(response);
@@ -56,6 +56,16 @@ namespace SpotifyProxy.WebService.Infrastructure.Client
                 return 1;
 
             return limit;
+        }
+
+        public async Task<AlbumResponseDto> GetAlbumByUrl(GetByUrlRequestDto request)
+        {
+            var response = await _publicApiUrl
+                .AppendPathSegment("albums")
+                .AppendPathSegment(request.Url?.GetId())
+                .GetAuthorizedAsync<AlbumResponseModel>(_provider);
+
+            return _mapper.Map<AlbumResponseDto>(response);
         }
     }
 }
