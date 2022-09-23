@@ -2,7 +2,7 @@
 
 namespace Proxy.Api
 {
-    public record GetSongByUrlRequestDto
+    public record GetByUrlRequestDto
     {
         [Url]
         [Required]

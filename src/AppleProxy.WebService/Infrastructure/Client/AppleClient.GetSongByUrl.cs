@@ -10,14 +10,14 @@ namespace AppleProxy.WebService.Infrastructure.Client
 {
 	public partial class AppleClient
 	{
-        public async Task<SongResponseDto> GetByUrlAsync(GetSongByUrlRequestDto request)
+        public async Task<SongResponseDto> GetSongByUrlAsync(GetByUrlRequestDto request)
         {
-            var region = request.Url?.GetAppleSongRegion() ?? Region.Invariant;
+            var region = request.Url?.GetAppleRegion() ?? Region.Invariant;
 
             var response = await _publicApiUrl
                 .AppendPathSegmentIf(region != Region.Invariant, region)
                 .AppendPathSegment("lookup")
-                .SetQueryParam("id", request.Url?.GetAppleSongId())
+                .SetQueryParam("id", request.Url?.GetAppleCollectionId())
                 .SetQueryParam("limit", 1)
                 .GetJsonWithRetryAsync<AppleTrackListResponseModel>(_retryPolicy);
 

@@ -9,7 +9,7 @@ namespace AppleProxy.WebService.Infrastructure.Client
 {
 	public partial class AppleClient
 	{
-        public async Task<SongsResponseDto> FindAsync(FindSongsRequestDto request, int limit)
+        public async Task<SongsResponseDto> FindSongAsync(FindSongsRequestDto request, int limit)
         {
             AppleTrackListResponseModel response = AppleTrackListResponseModel.Empty;
 
@@ -25,7 +25,7 @@ namespace AppleProxy.WebService.Infrastructure.Client
             return _mapper.Map<SongsResponseDto>(response);
         }
 
-        public async Task<AppleTrackListResponseModel> FindByArtistAsync(FindSongsRequestDto request, int limit)
+        private async Task<AppleTrackListResponseModel> FindByArtistAsync(FindSongsRequestDto request, int limit)
         {
             var words = new string[] { request.ArtistName.Trim(), request.SongName.Trim() };
 
@@ -36,7 +36,7 @@ namespace AppleProxy.WebService.Infrastructure.Client
 
             var response = await url.GetJsonWithRetryAsync<AppleTrackListResponseModel>(_retryPolicy);
 
-            if (!response.Results?.Any() ?? true)
+            if (!response.IsEmpty)
             {
                 url.SetQueryParam("attribute", "mixTerm");
                 response = await url.GetJsonWithRetryAsync<AppleTrackListResponseModel>(_retryPolicy);
@@ -45,7 +45,7 @@ namespace AppleProxy.WebService.Infrastructure.Client
             return response ?? AppleTrackListResponseModel.Empty;
         }
 
-        public async Task<AppleTrackListResponseModel> FindByAlbumAsync(FindSongsRequestDto request, int limit)
+        private async Task<AppleTrackListResponseModel> FindByAlbumAsync(FindSongsRequestDto request, int limit)
         {
             var words = new string[] { request.AlbumName?.Trim() ?? "", request.SongName.Trim() };
 

@@ -11,8 +11,9 @@
 		public string CollectionName { get; set; }
 		public string CollectionId { get; set; }
 		public string ArtworkUrl100 { get; set; }
-		// artist
-		public string ArtistName { get; set; }
+		public string CollectionViewUrl { get; set; }
+        // artist
+        public string ArtistName { get; set; }
 		public string ArtistId { get; set; }
     }
 }

@@ -8,8 +8,14 @@ namespace SpotifyProxy.WebService.Infrastructure.Client.Models.Mapping
         public AutoMapperProfile()
         {
             CreateMap<SpotifyTrackResponseModel, SongResponseDto>().ConvertUsing<SongResponseConverter>();
-            CreateMap<SpotifySearchResponseModel, SongsResponseDto>()
+            CreateMap<ArtistResponseModel, ArtistSourceDto>()
+                .ConvertUsing<ArtistResponseConverter>();
+            CreateMap<AlbumResponseModel, AlbumSourceDto>()
+                .ConvertUsing<AlbumConverter>();
+            CreateMap<SpotifySearchTrackResponseModel, SongsResponseDto>()
                 .ForMember(p => p.Items, o => o.MapFrom(p => p.Tracks.Items ?? Array.Empty<SpotifyTrackResponseModel>()));
+            CreateMap<AlbumResponseModel, AlbumResponseDto>()
+                .ConvertUsing<AlbumResponseConverter>();
         }
 
         private class SongResponseConverter : ITypeConverter<SpotifyTrackResponseModel, SongResponseDto>
@@ -19,8 +25,44 @@ namespace SpotifyProxy.WebService.Infrastructure.Client.Models.Mapping
                 return new SongResponseDto
                 {
                     Song = SongSourceDto.Of(source.Name, source.Id, source.ExternalUrls.Spotify),
-                    Album = AlbumSourceDto.Of(source.Album.Name, source.Album.Id, source.Album.Images.First().Url, source.Album.Images.Last().Url),
-                    Artists = source.Artists.Select(p => ArtistSourceDto.Of(p.Name, p.Id)).ToArray()
+                    Album = context.Mapper.Map<AlbumSourceDto>(source.Album),
+                    Artists = context.Mapper.Map<ArtistSourceDto[]>(source.Artists)
+                };
+            }
+        }
+
+        private class ArtistResponseConverter : ITypeConverter<ArtistResponseModel, ArtistSourceDto>
+        {
+            public ArtistSourceDto Convert(ArtistResponseModel source, ArtistSourceDto destination, ResolutionContext context)
+            {
+                return ArtistSourceDto.Of(source.Name, source.Id);
+            }
+        }
+
+        private class AlbumConverter : ITypeConverter<AlbumResponseModel, AlbumSourceDto>
+        {
+            public AlbumSourceDto Convert(AlbumResponseModel source, AlbumSourceDto destination, ResolutionContext context)
+            {
+                return new AlbumSourceDto()
+                {
+                    Name = source.Name,
+                    SourceId = source.Id,
+                    SourceUrl = source.ExternalUrls.Spotify,
+                    Country = Region.Invariant,
+                    ImageUrl = source.Images.First().Url,
+                    ImageThumbnailUrl = source.Images.Last().Url,
+                };
+            }
+        }
+
+        private class AlbumResponseConverter : ITypeConverter<AlbumResponseModel, AlbumResponseDto>
+        {
+            public AlbumResponseDto Convert(AlbumResponseModel source, AlbumResponseDto destination, ResolutionContext context)
+            {
+                return new AlbumResponseDto
+                {
+                    Album = context.Mapper.Map<AlbumSourceDto>(source),
+                    Artists = context.Mapper.Map<ArtistSourceDto[]>(source.Artists)
                 };
             }
         }
