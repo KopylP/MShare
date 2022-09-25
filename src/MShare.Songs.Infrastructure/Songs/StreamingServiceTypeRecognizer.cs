@@ -11,7 +11,8 @@ namespace MShare.Songs.Infrastructure.Songs
         {
             "music.apple.com" => Result<StreamingServiceType>.Success(StreamingServiceType.AppleMusic),
             "open.spotify.com" => Result<StreamingServiceType>.Success(StreamingServiceType.Spotify),
-            _ => Result<StreamingServiceType>.Fail("Streaming service not recognized")
+            "music.youtube.com" => Result<StreamingServiceType>.Success(StreamingServiceType.YoutubeMusic),
+            _ => Result<StreamingServiceType>.Fail("Streaming service is not recognized or not supported yet.")
         };
     }
 }
