@@ -1,11 +1,11 @@
 ﻿using System;
 namespace MShare.Songs.Abstractions
 {
-	public class MediaType
+	public enum MediaType
 	{
-		public MediaType()
-		{
-		}
+		Song,
+		Album,
+		Artist
 	}
 }
 

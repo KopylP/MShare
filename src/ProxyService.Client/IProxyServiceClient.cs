@@ -4,7 +4,11 @@ namespace ProxyService.Client
 {
 	public interface IProxyServiceClient
 	{
+		// Song
 		Task<SongResponseDto> GetSongByUrlAsync(string url);
-		Task<SongsResponseDto> FindAsync(string songName, string artistName, string? albumName);
-	}
+		Task<SongsResponseDto> FindSongAsync(string songName, string artistName, string? albumName);
+
+		// Album
+        Task<AlbumResponseDto> GetAlbumByUrlAsync(string url);
+    }
 }

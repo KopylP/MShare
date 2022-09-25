@@ -17,7 +17,7 @@ namespace AppleProxy.WebService.Infrastructure.Client
             var response = await _publicApiUrl
                 .AppendPathSegmentIf(region != Region.Invariant, region)
                 .AppendPathSegment("lookup")
-                .SetQueryParam("id", request.Url?.GetAppleCollectionId())
+                .SetQueryParam("id", request.Url?.GetAppleSongId())
                 .SetQueryParam("limit", 1)
                 .GetJsonWithRetryAsync<AppleTrackListResponseModel>(_retryPolicy);
 

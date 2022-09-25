@@ -28,6 +28,7 @@ namespace MShare.Songs.Infrastructure
                 .AddExecutionContext();
 
             services.AddScoped<IStreamingServiceTypeRecognizer, StreamingServiceTypeRecognizer>();
+            services.AddScoped<IMediaTypeRecognizer, MediaTypeRecognizer>();
             services.AddScoped<IProxyServiceClientFactory, ProxyServiceClientFactory>();
 
             return services;

@@ -1,6 +1,10 @@
 version: '3.3'
 
 services:
+  mshare.songs.webapi:
+    build:
+      context: .
+      dockerfile: MShare.Songs.WebApi/Dockerfile
   appleproxy:
     container_name: appleproxy
     build:
@@ -13,9 +17,4 @@ services:
       context: .
       dockerfile: SpotifyProxy.WebService/Dockerfile
 
-
-  mshare.songs.webapi:
-    build:
-      context: .
-      dockerfile: MShare.Songs.WebApi/Dockerfile
 

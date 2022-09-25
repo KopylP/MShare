@@ -9,4 +9,3 @@ namespace AppleProxy.WebService.Infrastructure.Client.Models
         };
     }
 }
-

@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace MShare.Framework.WebApi
 {
@@ -9,7 +9,7 @@ namespace MShare.Framework.WebApi
 
         public string StatusDescription { get; private set; }
 
-        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Message { get; private set; }
 
         public ApiError(int statusCode, string statusDescription)

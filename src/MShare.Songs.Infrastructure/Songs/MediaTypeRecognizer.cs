@@ -8,19 +8,19 @@ using MShare.Songs.Domain;
 
 namespace MShare.Songs.Infrastructure.Songs
 {
-    public class MediaMetadataRecognizer : IMediaMetadataRecognizer
+    public class MediaTypeRecognizer : IMediaTypeRecognizer
     {
         private readonly IStreamingServiceTypeRecognizer _streamingServiceTypeRecognizer;
 
-        public MediaMetadataRecognizer(IStreamingServiceTypeRecognizer streamingServiceTypeRecognizer)
+        public MediaTypeRecognizer(IStreamingServiceTypeRecognizer streamingServiceTypeRecognizer)
             => _streamingServiceTypeRecognizer = streamingServiceTypeRecognizer;
 
-        public Result<(StreamingServiceType ServiceType, MediaType MediaType)> From(Uri uri)
+        public Result<MediaType> From(Uri uri)
         {
             var serviceTypeResult = _streamingServiceTypeRecognizer.From(uri);
 
             if (serviceTypeResult.IsFail)
-                return Result<(StreamingServiceType ServiceType, MediaType MediaType)>.Fail(serviceTypeResult.FailMessage);
+                return Result<MediaType>.Fail(serviceTypeResult.FailMessage);
 
             var mediaTypeResult = serviceTypeResult.Data switch
             {
@@ -31,10 +31,10 @@ namespace MShare.Songs.Infrastructure.Songs
             };
 
             if (mediaTypeResult.IsFail)
-                return Result<(StreamingServiceType ServiceType, MediaType MediaType)>.Fail(mediaTypeResult.FailMessage);
+                return Result<MediaType>.Fail(mediaTypeResult.FailMessage);
 
-            return Result<(StreamingServiceType ServiceType, MediaType MediaType)>
-                .Success((serviceTypeResult.Data, mediaTypeResult.Data));
+            return Result<MediaType>
+                .Success(mediaTypeResult.Data);
         }
 
         private Result<MediaType> GetMediaTypeFromSpotify(Uri uri)
@@ -68,7 +68,7 @@ namespace MShare.Songs.Infrastructure.Songs
                 && (pathAndQuery.Contains("&i=")
                 || pathAndQuery.Contains("?i=")))
             {
-                return Result<MediaType>.Success(MediaType.Album);
+                return Result<MediaType>.Success(MediaType.Song);
             }
 
             if (pathAndQuery.RemoveFrom('?').Contains("artist"))

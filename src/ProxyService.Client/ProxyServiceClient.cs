@@ -14,7 +14,7 @@ namespace ProxyService.Client
             _baseUrl = configuration.BaseUrl;
         }
 
-        public async Task<SongsResponseDto> FindAsync(string songName, string artistName, string? albumName)
+        public async Task<SongsResponseDto> FindSongAsync(string songName, string artistName, string? albumName)
         {
             var url = _baseUrl
                 .AppendPathSegments("api", "Song", "Find")
@@ -26,11 +26,20 @@ namespace ProxyService.Client
             return await Get<SongsResponseDto>(url);
         }
 
+        public async Task<AlbumResponseDto> GetAlbumByUrlAsync(string url)
+        {
+            var uri = _baseUrl
+               .AppendPathSegments("api", "Album", "Url")
+               .SetQueryParam("url", url);
+
+            return await Get<AlbumResponseDto>(uri);
+        }
+
         public async Task<SongResponseDto> GetSongByUrlAsync(string url)
         {
             var uri = _baseUrl
-            .AppendPathSegments("api", "Song", "Url")
-            .SetQueryParam("url", url);
+                .AppendPathSegments("api", "Song", "Url")
+                .SetQueryParam("url", url);
 
             return await Get<SongResponseDto>(uri);
         }
