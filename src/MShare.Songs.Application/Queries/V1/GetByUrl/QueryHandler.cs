@@ -27,22 +27,41 @@ namespace MShare.Songs.Application.Queries.V1.GetByUrl
         {
             var mediaTypeResult = _recognizer.From(new Uri(request.Url));
             BadRequestException.ThrowIf(mediaTypeResult.IsFail, mediaTypeResult.FailMessage);
-            BadRequestException.ThrowIf(mediaTypeResult.Data == MediaType.Artist, "Share artist profile does not supported yet.");
+            BadRequestException.ThrowIf(mediaTypeResult.Data == MediaType.Artist, "Artist profile sharing does not supported yet.");
 
             var response = new GetByUrlResponseDto()
             {
                 MediaType = mediaTypeResult.Data.ToString()
             };
 
+            string serviceType = "";
+
             if (mediaTypeResult.Data == MediaType.Album)
+            {
                 response.Album = await _mediator.Send(GetAlbumByUrlQuery.Of(request.Url));
+                serviceType = response.Album.ServiceType;
+            }
 
             if (mediaTypeResult.Data == MediaType.Song)
+            {
                 response.Song = await _mediator.Send(GetSongByUrlQuery.Of(request.Url));
+                serviceType = response.Song.ServiceType;
+            }
 
-            response.Services = (await _mediator.Send(GetServicesQuery.Instance)).Items;
+            response.Services = await GetServices(serviceType);
 
             return response;
+        }
+
+        private async Task<ServicesResponseDto.ItemDto[]> GetServices(string mainServiceType)
+        {
+            var servicesResponse = await _mediator.Send(GetServicesQuery.Instance);
+
+            return servicesResponse.Items
+                .OrderBy(p => p.Name)
+                .OrderByDescending(p => p.IsAvailable)
+                .ThenBy(p => p.Type.ToLower() == mainServiceType.ToLower())
+                .ToArray();
         }
     }
 }
