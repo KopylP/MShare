@@ -14,7 +14,7 @@ namespace MShare.Framework.Types.Addresses
 				countryCode2 is null || countryCode2.Length != 2,
 				$"{nameof(countryCode2)} is not valid");
 
-			Code = countryCode2?.ToUpperInvariant() ?? "US";
+			Code = countryCode2.ToUpperInvariant();
         }
 
 		public static CountryCode2 Of(string code) => new(code);

@@ -7,7 +7,7 @@ using MShare.Songs.Domain.Specifications;
 
 namespace MShare.Songs.Application.Queries.V1.GetSongByUrl
 {
-    public class QueryValidator : IRequestValidator<GetSongByUrlQuery, SongByUrlResponseDto>
+    public class QueryValidator : IRequestValidator<GetSongByUrlQuery, SongResponseDto>
     {
         public void Validate(GetSongByUrlQuery request)
         {

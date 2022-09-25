@@ -15,6 +15,8 @@
     <None Remove="Queries\V1\" />
     <None Remove="Queries\V1\GetServices\" />
     <None Remove="Queries\V1\GetSongByUrl\" />
+    <None Remove="Queries\V1\GetAlbumByUrl\" />
+    <None Remove="Queries\V1\GetByUrl\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Queries\" />
@@ -22,6 +24,8 @@
     <Folder Include="Queries\V1\" />
     <Folder Include="Queries\V1\GetServices\" />
     <Folder Include="Queries\V1\GetSongByUrl\" />
+    <Folder Include="Queries\V1\GetAlbumByUrl\" />
+    <Folder Include="Queries\V1\GetByUrl\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MShare.Framework.Application\MShare.Framework.Application.csproj" />

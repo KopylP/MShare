@@ -1,7 +1,7 @@
 ﻿using System;
 namespace MShare.Songs.Api.Queries.Dtos.V1
 {
-	public class SongByUrlResponseDto
+	public class SongResponseDto
 	{
 		public string SongSourceId { get; set; }
 		public string SongUrl { get; set; }
@@ -10,15 +10,6 @@ namespace MShare.Songs.Api.Queries.Dtos.V1
 		public string AlbumName { get; set; }
 		public string CoverImageUrl { get; set; }
 		public string ServiceType { get; set; }
-
-		public ServiceDto[] Services { get; set; }
-
-		public class ServiceDto
-		{
-			public string Name { get; set; }
-			public string Type { get; set; }
-			public bool IsAvailable { get; set; }
-		}
 	}
 }
 

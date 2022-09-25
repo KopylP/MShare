@@ -9,7 +9,7 @@ namespace MShare.Songs.Api.Queries.Dtos.V1
 
 		public class ItemDto
 		{
-			public StreamingServiceType Type { get; set; }
+			public string Type { get; set; }
 			public string Name { get; set; }
 			public bool IsAvailable { get; set; }
         }
@@ -21,4 +21,3 @@ namespace MShare.Songs.Api.Queries.Dtos.V1
 			};
 	}
 }
-

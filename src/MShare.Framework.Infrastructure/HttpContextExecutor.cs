@@ -38,7 +38,7 @@ namespace MShare.Framework.Infrastructure
                 executionContext.Os = os;
                 executionContext.OsVersion = osVersion;
                 executionContext.DeviceId = deviceId;
-                executionContext.StoreRegion = CountryCode2.Of(region);
+                executionContext.StoreRegion = CountryCode2.Of(string.IsNullOrEmpty(region.ToString())? "US": region);
             }
         }
     }

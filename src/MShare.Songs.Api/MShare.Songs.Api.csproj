@@ -10,6 +10,7 @@
     <None Remove="Queries\" />
     <None Remove="Queries\v1\" />
     <None Remove="Queries\v1\Dtos\" />
+    <None Remove="System.Text.Json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Queries\" />
@@ -19,5 +20,8 @@
   <ItemGroup>
     <ProjectReference Include="..\MShare.Framework.Api\MShare.Framework.Api.csproj" />
     <ProjectReference Include="..\MShare.Songs.Abstractions\MShare.Songs.Abstractions.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="6.0.6" />
   </ItemGroup>
 </Project>
