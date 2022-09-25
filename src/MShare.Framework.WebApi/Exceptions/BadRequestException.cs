@@ -9,10 +9,12 @@ namespace MShare.Framework.WebApi.Exceptions
         {
         }
 
+        public static void Throw(string? message = default) => throw new BadRequestException(message);
+
         public static void ThrowIf(bool condition, string? message = default)
         {
             if (condition)
-                throw new BadRequestException(message);
+                Throw(message);
         }
     }
 }
