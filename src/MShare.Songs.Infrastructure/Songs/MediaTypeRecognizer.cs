@@ -1,19 +1,24 @@
 ﻿using System;
 using System.IO;
+using Microsoft.Extensions.Localization;
 using MShare.Framework.Exceptions;
 using MShare.Framework.Types;
 using MShare.Framework.WebApi.Exceptions;
 using MShare.Songs.Abstractions;
 using MShare.Songs.Domain;
+using MShare.Songs.Resources;
+using MShare.Songs.Resources.SharedResource;
 
 namespace MShare.Songs.Infrastructure.Songs
 {
     public class MediaTypeRecognizer : IMediaTypeRecognizer
     {
         private readonly IStreamingServiceTypeRecognizer _streamingServiceTypeRecognizer;
+        private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
 
-        public MediaTypeRecognizer(IStreamingServiceTypeRecognizer streamingServiceTypeRecognizer)
-            => _streamingServiceTypeRecognizer = streamingServiceTypeRecognizer;
+        public MediaTypeRecognizer(IStreamingServiceTypeRecognizer streamingServiceTypeRecognizer,
+            IStringLocalizer<SharedResource> sharedLocalizer)
+            => (_streamingServiceTypeRecognizer, _sharedLocalizer) = (streamingServiceTypeRecognizer, sharedLocalizer);
 
         public Result<MediaType> From(Uri uri)
         {
@@ -26,7 +31,7 @@ namespace MShare.Songs.Infrastructure.Songs
             {
                 StreamingServiceType.Spotify => GetMediaTypeFromSpotify(uri),
                 StreamingServiceType.AppleMusic => GetMediaTypeFromApplyMusic(uri),
-                StreamingServiceType.YoutubeMusic => Result<MediaType>.Fail("YouTube Music not supported yet."),
+                StreamingServiceType.YoutubeMusic => Result<MediaType>.Fail(_sharedLocalizer[SharedResource.YouTubeMusicNotSupported]),
                 _ => throw new NotSupportedException()
             };
 
@@ -64,7 +69,7 @@ namespace MShare.Songs.Infrastructure.Songs
                 return Result<MediaType>.Success(MediaType.Album);
             }
 
-            if(pathAndQuery.RemoveFrom('?').Contains("album")
+            if (pathAndQuery.RemoveFrom('?').Contains("album")
                 && (pathAndQuery.Contains("&i=")
                 || pathAndQuery.Contains("?i=")))
             {

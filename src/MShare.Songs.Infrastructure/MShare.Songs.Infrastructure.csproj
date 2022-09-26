@@ -14,6 +14,13 @@
     <None Remove="ProxyService\" />
     <None Remove="Microsoft.Extensions.Http" />
     <None Remove="AutoMapper.Extensions.Microsoft.DependencyInjection" />
+    <None Remove="Microsoft.Extensions.Localization.Abstractions" />
+    <None Remove="Microsoft.Extensions.Localization" />
+    <None Remove="Microsoft.AspNetCore" />
+    <None Remove="Microsoft.AspNetCore.Http.Abstractions" />
+    <None Remove="Microsoft.AspNetCore.Components" />
+    <None Remove="Microsoft.AspNetCore.Localization" />
+    <None Remove="Resourses\SharedResourse.en-US" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
@@ -21,6 +28,12 @@
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="6.0.9" />
+    <PackageReference Include="Microsoft.Extensions.Localization" Version="6.0.9" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Localization" Version="2.2.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MShare.Songs.Application\MShare.Songs.Application.csproj" />
@@ -29,6 +42,8 @@
     <ProjectReference Include="..\MShare.Framework.Infrastructure\MShare.Framework.Infrastructure.csproj" />
     <ProjectReference Include="..\MShare.Songs.Domain\MShare.Songs.Domain.csproj" />
     <ProjectReference Include="..\ProxyService.Client\ProxyService.Client.csproj" />
+    <ProjectReference Include="..\MShare.Framework.System\MShare.Framework.System.csproj" />
+    <ProjectReference Include="..\MShare.Songs.Resources\MShare.Songs.Resources.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Songs\" />

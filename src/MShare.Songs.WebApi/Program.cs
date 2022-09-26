@@ -8,4 +8,5 @@ bootstrapper
     .InitConfiguration()
     .InitInfrastructure()
     .InitApiVersioning(new ApiVersion(1, 0))
+    .InitLocalization()
     .Start();

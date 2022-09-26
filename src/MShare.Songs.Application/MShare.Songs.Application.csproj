@@ -17,6 +17,7 @@
     <None Remove="Queries\V1\GetSongByUrl\" />
     <None Remove="Queries\V1\GetAlbumByUrl\" />
     <None Remove="Queries\V1\GetByUrl\" />
+    <None Remove="Microsoft.Extensions.Localization.Abstractions" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Queries\" />
@@ -41,5 +42,6 @@
     <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="6.0.9" />
   </ItemGroup>
 </Project>
