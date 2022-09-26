@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Options;
+using MShare.Framework.System.Localization;
 using MShare.Songs.Infrastructure;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -12,14 +13,15 @@ namespace MShare.Songs.WebApi.Core
 	public class Bootstrapper
 	{
 		private readonly WebApplicationBuilder _builder;
+        private bool _useLocalization = false;
 
 		public Bootstrapper(WebApplicationBuilder builder)
 		{
 			_builder = builder;
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
+
         }
 
         public Bootstrapper InitApiVersioning(ApiVersion version)
@@ -42,6 +44,14 @@ namespace MShare.Songs.WebApi.Core
 
             _builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, SwaggerConfigureOptions>();
             _builder.Services.AddSwaggerGen();
+
+            return this;
+        }
+
+        public Bootstrapper InitLocalization()
+        {
+            _useLocalization = true;
+            _builder.Services.AddSystemLocalization();
 
             return this;
         }
@@ -83,6 +93,9 @@ namespace MShare.Songs.WebApi.Core
             //app.UseAuthorization();
 
             app.MapControllers();
+
+            if (_useLocalization)
+                app.UseSystemLocalization();
 
             // Handles exceptions and generates a custom response body
             app.UseExceptionHandler("/api/v1.0/errors/500");
