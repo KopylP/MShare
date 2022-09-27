@@ -6,6 +6,6 @@ var bootstrapper = new Bootstrapper(builder);
 
 bootstrapper
     .InitConfiguration()
-    .InitModule()
+    .InitService()
     .InitApiVersioning(new ApiVersion(1, 0))
     .Start();
