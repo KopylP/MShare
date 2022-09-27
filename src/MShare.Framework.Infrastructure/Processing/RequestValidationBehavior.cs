@@ -22,14 +22,5 @@ namespace MShare.Framework.Infrastructure.Processing
             return await next();
         }
     }
-
-    public static class IServiceCollectionExtentions
-    {
-        public static IServiceCollection AddRequestValidation(this IServiceCollection services)
-        {
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
-            return services;
-        }
-    }
 }
 

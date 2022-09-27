@@ -2,16 +2,17 @@
 using MShare.Framework.Application.Validation;
 using MShare.Framework.WebApi.Exceptions;
 using MShare.Songs.Api.Queries.Dtos.V1;
+using MShare.Songs.Api.Queries.V1;
 using MShare.Songs.Api.V1.Queries;
 using MShare.Songs.Domain.Specifications;
 
-namespace MShare.Songs.Application.Queries.V1.GetSongByUrl
+namespace MShare.Songs.Application.Queries.V1.GetByUrl
 {
-    public class QueryValidator : IRequestValidator<GetSongByUrlQuery, SongResponseDto>
+    public class QueryValidator : IRequestValidator<GetByUrlQuery, GetByUrlResponseDto>
     {
-        public void Validate(GetSongByUrlQuery request)
+        public void Validate(GetByUrlQuery request)
         {
-            var isValidUrl = ValidSongUrlSpecification.Instance.IsSatisfiedBy(new Uri(request.SongUrl));
+            var isValidUrl = ValidUrlSpecification.Instance.IsSatisfiedBy(new Uri(request.Url));
             BadRequestException.ThrowIf(!isValidUrl, "Url is not valid");
         }
     }
