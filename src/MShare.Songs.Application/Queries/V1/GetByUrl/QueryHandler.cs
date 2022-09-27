@@ -21,7 +21,7 @@ namespace MShare.Songs.Application.Queries.V1.GetByUrl
         public QueryHandler(IRequestContext<GetByUrlQuery, GetByUrlResponseDto> context, IMediator mediator)
         {
             _mediator = mediator;
-            _context = context as QueryContext;
+            _context = (QueryContext)context;
         }
 
         public async Task<GetByUrlResponseDto> Handle(GetByUrlQuery request, CancellationToken cancellationToken)
@@ -32,14 +32,10 @@ namespace MShare.Songs.Application.Queries.V1.GetByUrl
             };
 
             if (_context.MediaType == MediaType.Album)
-            {
                 response.Album = await _mediator.Send(GetAlbumByUrlQuery.Of(request.Url));
-            }
 
             if (_context.MediaType == MediaType.Song)
-            {
                 response.Song = await _mediator.Send(GetSongByUrlQuery.Of(request.Url));
-            }
 
             response.Services = await GetServices(_context.ServiceType.ToString());
 

@@ -25,7 +25,7 @@ namespace MShare.Songs.Application.Queries.V1.GetByUrl
         {
             _mediaTypeRecognizer = mediaTypeRecognizer;
             _streamingServiceTypeRecognizer = streamingServiceTypeRecognizer;
-            _queryContext = context as QueryContext;
+            _queryContext = (QueryContext)context;
             _sharedLocalizer = sharedLocalizer;
         }
 
