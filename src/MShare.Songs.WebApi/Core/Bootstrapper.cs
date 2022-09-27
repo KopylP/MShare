@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Options;
-using MShare.Framework.System.Localization;
+using MShare.Framework.Infrastructure.Localization;
 using MShare.Songs.Infrastructure;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -13,7 +13,6 @@ namespace MShare.Songs.WebApi.Core
 	public class Bootstrapper
 	{
 		private readonly WebApplicationBuilder _builder;
-        private bool _useLocalization = false;
 
 		public Bootstrapper(WebApplicationBuilder builder)
 		{
@@ -48,24 +47,15 @@ namespace MShare.Songs.WebApi.Core
             return this;
         }
 
-        public Bootstrapper InitLocalization()
-        {
-            _useLocalization = true;
-            _builder.Services.AddSystemLocalization();
-
-            return this;
-        }
-
         public Bootstrapper InitConfiguration()
         {
             _builder.Configuration.AddEnvironmentVariables("MSHARE_SONGS_");
             return this;
         }
 
-		public Bootstrapper InitInfrastructure()
+		public Bootstrapper InitModule()
 		{
-			_builder.Services.AddInfrastructure();
-
+            SongsModule.Service.Register(_builder.Configuration, _builder.Services);
 			return this;
 		}
 
@@ -94,8 +84,7 @@ namespace MShare.Songs.WebApi.Core
 
             app.MapControllers();
 
-            if (_useLocalization)
-                app.UseSystemLocalization();
+            app.UseSystemLocalization();
 
             // Handles exceptions and generates a custom response body
             app.UseExceptionHandler("/api/v1.0/errors/500");

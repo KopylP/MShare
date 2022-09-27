@@ -1,7 +1,8 @@
 ﻿using System;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace Microsoft.Extensions.DependencyInjection
+namespace MShare.Framework.Infrastructure.Localization
 {
 	public static class IServiceCollectionExtentions
 	{
