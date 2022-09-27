@@ -53,7 +53,7 @@ namespace MShare.Songs.WebApi.Core
             return this;
         }
 
-		public Bootstrapper InitModule()
+		public Bootstrapper InitService()
 		{
             SongsModule.Service.Register(_builder.Configuration, _builder.Services);
 			return this;
