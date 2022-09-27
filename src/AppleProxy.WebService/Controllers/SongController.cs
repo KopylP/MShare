@@ -51,45 +51,12 @@ namespace AppleProxy.WebService.Controllers
             if (response.IsEmpty)
                 throw new NotFoundException();
 
-            FilterItemsByArtistName(response, request);
-            FilterItemsBySongName(response, request);
+            response.FilterItemsByArtistName(request.ArtistName);
+            response.FilterItemsBySongName(request.SongName);
 
             response.Items = response.Items.Take(take).ToArray();
 
             return Ok(response);
-        }
-
-        private void FilterItemsByArtistName(SongsResponseDto response, FindSongsRequestDto request)
-        {
-            if (!string.IsNullOrWhiteSpace(request.ArtistName) && response is not null)
-            {
-                var lengthRange = (
-                    Min: request.ArtistName.Unidecode().Length - 1,
-                    Max: request.ArtistName.Unidecode().Length + 1);
-
-                response.Items = response.Items.Where(item =>
-                {
-                    var artists = item.Artists.First().Name.Split("&").Select(p => p.Unidecode());
-                    return artists.Any(artist => artist.Length >= lengthRange.Min && artist.Length <= lengthRange.Max);
-                })
-                .ToArray();
-            }
-        }
-
-        private void FilterItemsBySongName(SongsResponseDto response, FindSongsRequestDto request)
-        {
-            if (!string.IsNullOrWhiteSpace(request.SongName) && response is not null)
-            {
-                var items = response
-                    .Items
-                    .Where(item => item.Song.Name.ToLower() == request.SongName.ToLower())
-                    .ToArray();
-
-                if (items.Any())
-                {
-                    response.Items = items;
-                }
-            }
         }
     }
 }

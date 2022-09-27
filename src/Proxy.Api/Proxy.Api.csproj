@@ -13,9 +13,11 @@
     <None Remove="System.ComponentModel.Annotations" />
     <None Remove="..\.editorconfig" />
     <None Remove="Utils\" />
+    <None Remove="Unidecode.NET" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <PackageReference Include="Unidecode.NET" Version="2.1.0" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Utils\" />
