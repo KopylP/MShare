@@ -14,4 +14,3 @@ namespace MShare.Framework.Application.Validation
 		}
     }
 }
-
