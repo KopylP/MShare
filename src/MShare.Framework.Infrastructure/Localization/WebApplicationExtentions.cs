@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Localization;
 
-namespace MShare.Framework.System.Localization
+namespace MShare.Framework.Infrastructure.Localization
 {
 	public static class WebApplicationExtentions
 	{

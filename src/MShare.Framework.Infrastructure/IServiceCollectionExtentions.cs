@@ -9,9 +9,9 @@ namespace Microsoft.Extensions.DependencyInjection
 		public static IServiceCollection AddExecutionContext(this IServiceCollection services)
 		{
 			services.AddTransient<IExecutionContext, MShare.Framework.Infrastructure.ExecutionContext>();
-			services.AddTransient<IContextExecutor, HttpContextExecutor>();
+            services.AddTransient<IContextExecutor, HttpContextExecutor>();
 
-			return services;
+            return services;
 		}
 	}
 }
