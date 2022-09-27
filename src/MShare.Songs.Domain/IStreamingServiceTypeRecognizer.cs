@@ -8,4 +8,12 @@ namespace MShare.Songs.Domain
 	{
 		Result<StreamingServiceType> From(Uri uri);
 	}
+
+	public static class IStreamingServiceTypeRecognizerExtentions
+	{
+		public static Result<StreamingServiceType> From(this IStreamingServiceTypeRecognizer recognizer, string uri)
+		{
+			return recognizer.From(new Uri(uri));
+		}
+    }
 }

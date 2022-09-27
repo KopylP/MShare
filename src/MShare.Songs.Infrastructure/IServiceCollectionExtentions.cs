@@ -2,6 +2,8 @@
 using System.Reflection;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using MShare.Framework.Application.Actions;
+using MShare.Framework.Application.Context;
 using MShare.Framework.Application.Validation;
 using MShare.Framework.Infrastructure.Processing;
 using MShare.Framework.Types.Extentions;
@@ -22,9 +24,12 @@ namespace MShare.Songs.Infrastructure
                 .AddMediatR(typeof(ApplicationAssemblyMarker))
                 .AddAutoMapper(typeof(ApplicationAssemblyMarker))
                 .RegisterValidators(typeof(ApplicationAssemblyMarker))
+                .RegisterActionHandlers(typeof(ApplicationAssemblyMarker))
+                .RegisterRequestContexts(typeof(ApplicationAssemblyMarker))
                 .AddHttpContextAccessor()
                 .AddHttpClient()
                 .AddRequestValidation()
+                .AddActionHandlers()
                 .AddExecutionContext();
 
             services.AddScoped<IStreamingServiceTypeRecognizer, StreamingServiceTypeRecognizer>();

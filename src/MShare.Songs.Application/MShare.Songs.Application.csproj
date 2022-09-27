@@ -37,6 +37,7 @@
     <ProjectReference Include="..\MShare.Framework.Infrastructure\MShare.Framework.Infrastructure.csproj" />
     <ProjectReference Include="..\ProxyService.Client\ProxyService.Client.csproj" />
     <ProjectReference Include="..\MShare.Songs.Abstractions\MShare.Songs.Abstractions.csproj" />
+    <ProjectReference Include="..\MShare.Songs.Resources\MShare.Songs.Resources.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.1" />

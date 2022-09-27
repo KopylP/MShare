@@ -27,19 +27,12 @@ namespace MShare.Songs.Infrastructure.Songs
             if (serviceTypeResult.IsFail)
                 return Result<MediaType>.Fail(serviceTypeResult.FailMessage);
 
-            var mediaTypeResult = serviceTypeResult.Data switch
+            return serviceTypeResult.Data switch
             {
                 StreamingServiceType.Spotify => GetMediaTypeFromSpotify(uri),
                 StreamingServiceType.AppleMusic => GetMediaTypeFromApplyMusic(uri),
-                StreamingServiceType.YoutubeMusic => Result<MediaType>.Fail(_sharedLocalizer[SharedResource.YouTubeMusicNotSupported]),
                 _ => throw new NotSupportedException()
             };
-
-            if (mediaTypeResult.IsFail)
-                return Result<MediaType>.Fail(mediaTypeResult.FailMessage);
-
-            return Result<MediaType>
-                .Success(mediaTypeResult.Data);
         }
 
         private Result<MediaType> GetMediaTypeFromSpotify(Uri uri)
@@ -55,7 +48,7 @@ namespace MShare.Songs.Infrastructure.Songs
             if (path.Contains("artist"))
                 return Result<MediaType>.Success(MediaType.Artist);
 
-            return Result<MediaType>.Fail("Media type is not recognized");
+            return Result<MediaType>.Fail();
         }
 
         private Result<MediaType> GetMediaTypeFromApplyMusic(Uri uri)
@@ -81,7 +74,7 @@ namespace MShare.Songs.Infrastructure.Songs
                 return Result<MediaType>.Success(MediaType.Artist);
             }
 
-            return Result<MediaType>.Fail("Media type is not recognized");
+            return Result<MediaType>.Fail();
         }
     }
 }
