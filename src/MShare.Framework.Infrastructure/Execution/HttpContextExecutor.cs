@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Http;
 using MediatR;
 using MShare.Framework.Types.Addresses;
 
-namespace MShare.Framework.Infrastructure
+namespace MShare.Framework.Infrastructure.Execution
 {
-	public class HttpContextExecutor : IContextExecutor
+	public class HttpContextExecutor : IHttpContextExecutor
 	{
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IExecutionContext _executionContext;

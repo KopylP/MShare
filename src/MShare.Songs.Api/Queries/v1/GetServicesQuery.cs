@@ -4,7 +4,7 @@ using MShare.Songs.Api.Queries.Dtos.V1;
 
 namespace MShare.Songs.Api.V1.Queries
 {
-	public class GetServicesQuery : IQuery<ServicesResponseDto>
+	public record GetServicesQuery : IQuery<ServicesResponseDto>
 	{
         public static GetServicesQuery Instance = new GetServicesQuery();
     }

@@ -8,13 +8,10 @@ namespace MShare.Framework.Infrastructure.Processing
     {
         public static IServiceCollection AddActionHandlers(this IServiceCollection services)
         {
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(BeforeActionBehavior<,>));
-            return services;
-        }
-
-        public static IServiceCollection AddRequestValidation(this IServiceCollection services)
-        {
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(BeforeActionBehavior<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AfterActionBehavior<,>));
+
             return services;
         }
     }

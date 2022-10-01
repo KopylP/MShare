@@ -3,7 +3,7 @@ using MShare.Songs.Api.Queries.Dtos.V1;
 
 namespace MShare.Songs.Api.V1.Queries
 {
-	public class GetAlbumByUrlQuery : IQuery<AlbumResponseDto>
+	public record GetAlbumByUrlQuery : IQuery<AlbumResponseDto>
 	{
         public string AlbumUrl { get; set; }
 

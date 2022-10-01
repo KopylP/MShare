@@ -4,7 +4,7 @@ using MShare.Songs.Api.Queries.Dtos.V1;
 
 namespace MShare.Songs.Api.V1.Queries
 {
-	public class GetSongByUrlQuery : IQuery<SongResponseDto>
+	public record GetSongByUrlQuery : IQuery<SongResponseDto>
 	{
 		public string SongUrl { get; set; }
 

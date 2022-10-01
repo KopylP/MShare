@@ -1,7 +1,7 @@
 ﻿using System;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using MShare.Framework.Application.Validation;
+using MShare.Framework.Application.Actions;
 
 namespace MShare.Framework.Infrastructure.Processing
 {
@@ -17,7 +17,7 @@ namespace MShare.Framework.Infrastructure.Processing
 
             if (validators?.Any() ?? false)
                 foreach (var validator in validators)
-                    validator.Validate(request);
+                    await validator.Validate(request);
 
             return await next();
         }

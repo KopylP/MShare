@@ -18,6 +18,9 @@
     <None Remove="Queries\V1\GetAlbumByUrl\" />
     <None Remove="Queries\V1\GetByUrl\" />
     <None Remove="Microsoft.Extensions.Localization.Abstractions" />
+    <None Remove="Consumers\" />
+    <None Remove="Consumers\Messages\" />
+    <None Remove="Consumers\Messages\SaveSong\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Queries\" />
@@ -27,6 +30,9 @@
     <Folder Include="Queries\V1\GetSongByUrl\" />
     <Folder Include="Queries\V1\GetAlbumByUrl\" />
     <Folder Include="Queries\V1\GetByUrl\" />
+    <Folder Include="Consumers\" />
+    <Folder Include="Consumers\Messages\" />
+    <Folder Include="Consumers\Messages\SaveSong\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MShare.Framework.Application\MShare.Framework.Application.csproj" />

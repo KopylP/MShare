@@ -27,6 +27,12 @@
     <None Remove="Microsoft.Extensions.Localization.Abstractions" />
     <None Remove="Microsoft.Extensions.Localization" />
     <None Remove="Microsoft.AspNetCore.Localization" />
+    <None Remove="MassTransit" />
+    <None Remove="MassTransit.RabbitMQ" />
+    <None Remove="MassTransit.Extensions.DependencyInjection" />
+    <None Remove="Communication\" />
+    <None Remove="Messaging\" />
+    <None Remove="MassTransit.AspNetCore" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Clients\" />
@@ -35,6 +41,8 @@
     <Folder Include="Logging\" />
     <Folder Include="Service\" />
     <Folder Include="Localization\" />
+    <Folder Include="Communication\" />
+    <Folder Include="Messaging\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Flurl.Http" Version="3.2.4" />
@@ -51,6 +59,7 @@
     <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="6.0.9" />
     <PackageReference Include="Microsoft.Extensions.Localization" Version="6.0.9" />
     <PackageReference Include="Microsoft.AspNetCore.Localization" Version="2.2.0" />
+    <PackageReference Include="MassTransit" Version="8.0.6" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MShare.Framework.Types\MShare.Framework.Types.csproj" />

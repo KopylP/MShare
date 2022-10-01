@@ -1,7 +1,7 @@
 ﻿using System;
 namespace MShare.Songs.Api.Queries.Dtos.V1
 {
-	public class AlbumResponseDto
+	public record AlbumResponseDto
 	{
         public string AlbumSourceId { get; set; }
         public string AlbumUrl { get; set; }

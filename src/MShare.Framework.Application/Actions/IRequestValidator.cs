@@ -1,11 +1,11 @@
 ﻿using System;
 using MediatR;
 
-namespace MShare.Framework.Application.Validation
+namespace MShare.Framework.Application.Actions
 {
 	public interface IRequestValidator<TRequest, TResonse> where TRequest : IRequest<TResonse>
 	{
-        void Validate(TRequest request);
+        Task Validate(TRequest request);
     }
 }
 

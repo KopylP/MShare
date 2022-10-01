@@ -11,19 +11,19 @@
     <ProjectReference Include="..\MShare.Framework.Types\MShare.Framework.Types.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Validation\" />
     <None Remove="Microsoft.Extensions.DependencyInjection.Abstractions" />
     <None Remove="Microsoft.Extensions.DependencyInjection" />
     <None Remove="Actions\" />
     <None Remove="Context\" />
+    <None Remove="MassTransit" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Validation\" />
     <Folder Include="Actions\" />
     <Folder Include="Context\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="MassTransit" Version="8.0.6" />
   </ItemGroup>
 </Project>
