@@ -5,8 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MShare.Framework.Application.Actions;
 using MShare.Framework.Application.Context;
-using MShare.Framework.Application.Validation;
 using MShare.Framework.Infrastructure.Localization;
+using MShare.Framework.Infrastructure.Messaging;
 using MShare.Framework.Infrastructure.Processing;
 
 namespace MShare.Framework.Infrastructure.Service
@@ -42,9 +42,7 @@ namespace MShare.Framework.Infrastructure.Service
         {
             _actions.Add((_, services) =>
             {
-                services.RegisterValidators(assemblyMarkers);
                 services.RegisterActionHandlers(assemblyMarkers);
-                services.AddRequestValidation();
                 services.AddActionHandlers();
             });
             return this;
@@ -73,9 +71,20 @@ namespace MShare.Framework.Infrastructure.Service
             return this;
         }
 
+        public ServiceModuleMessagingBuilder AddMessaging(Action<MessageOptions> action, params Type[] assemblies)
+        {
+            return new ServiceModuleMessagingBuilder(this, action, assemblies);
+        }
+
         public ServiceModule Build()
         {
             return new ServiceModule(_actions);
+        }
+
+        internal ServiceModuleBuilder AddAction(Action<IConfiguration, IServiceCollection> action)
+        {
+            _actions.Add(action);
+            return this;
         }
     }
 }

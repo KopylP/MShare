@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MShare.Framework.Infrastructure.Service;
+using MShare.Songs.Api.Messages;
 using MShare.Songs.Application.Factories;
 using MShare.Songs.Domain;
 using MShare.Songs.Infrastructure.ProxyService;
@@ -21,6 +22,10 @@ namespace MShare.Songs.Infrastructure
             .RegisterRequestContexts(typeof(ApplicationAssemblyMarker))
             .AddExecutionContext()
             .AddLocalization()
+            .AddMessaging(opt => opt.SelfUri = "songs", typeof(ApplicationAssemblyMarker), typeof(SongRequestedEvent))
+                .AddIntegrationBus()
+                .AddExecutionContext()
+                .ServiceModuleBuilder
 			.Build();
 
 		public static void Initialize(IConfiguration configuration, IServiceCollection services)

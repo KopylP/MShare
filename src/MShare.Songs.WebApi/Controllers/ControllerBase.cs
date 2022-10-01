@@ -10,9 +10,9 @@ namespace MShare.Songs.WebApi.Controllers
     [ApiController]
     public class ControllerBase : Controller
 	{
-		private readonly IContextExecutor _executor;
+		private readonly IHttpContextExecutor _executor;
 
-		public ControllerBase(IContextExecutor executor) => _executor = executor;
+		public ControllerBase(IHttpContextExecutor executor) => _executor = executor;
 
         protected async Task<IActionResult> ExecuteAsync<T>(IQuery<T> query) => Ok(await _executor.ExecuteAsync(query));
 

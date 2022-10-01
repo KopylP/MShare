@@ -3,7 +3,7 @@ using MShare.Songs.Abstractions;
 
 namespace MShare.Songs.Api.Queries.Dtos.V1
 {
-	public class ServicesResponseDto
+	public record ServicesResponseDto
 	{
 		public ItemDto[] Items { get; set; }
 

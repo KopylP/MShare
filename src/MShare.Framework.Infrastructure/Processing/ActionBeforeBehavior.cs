@@ -2,7 +2,6 @@
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using MShare.Framework.Application.Actions;
-using MShare.Framework.Application.Validation;
 
 namespace MShare.Framework.Infrastructure.Processing
 {
@@ -18,7 +17,7 @@ namespace MShare.Framework.Infrastructure.Processing
 
             if (beforeActions?.Any() ?? false)
                 foreach (var beforeAction in beforeActions)
-                    beforeAction.Handle(request);
+                    await beforeAction.Handle(request);
 
             return await next();
         }

@@ -9,6 +9,8 @@ namespace MShare.Framework.Application.Actions
         public static IServiceCollection RegisterActionHandlers(this IServiceCollection services, params Type[] assembliesTypes)
         {
             services.RegisterGenericForAssemblies(typeof(IBeforeActionHandler<,>), assembliesTypes);
+            services.RegisterGenericForAssemblies(typeof(IRequestValidator<,>), assembliesTypes);
+            services.RegisterGenericForAssemblies(typeof(IAfterActionHandler<,>), assembliesTypes);
 
             return services;
         }

@@ -29,7 +29,7 @@ namespace MShare.Songs.Application.Queries.V1.GetByUrl
             _sharedLocalizer = sharedLocalizer;
         }
 
-        public void Handle(GetByUrlQuery request)
+        public async Task Handle(GetByUrlQuery request)
         {
             var streamingServiceResult = _streamingServiceTypeRecognizer.From(request.Url);
             BadRequestException.ThrowIf(streamingServiceResult.IsFail, "Streaming service is not recognized or not supported yet.");
@@ -41,6 +41,8 @@ namespace MShare.Songs.Application.Queries.V1.GetByUrl
 
             _queryContext.MediaType = mediaTypeResult.Data;
             _queryContext.ServiceType = streamingServiceResult.Data;
+
+            await Task.CompletedTask;
         }
     }
 }

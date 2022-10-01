@@ -16,9 +16,9 @@ namespace MShare.Songs.WebApi.Controllers.V1
     [ApiVersion("1.0")]
     public class SongController : ControllerBase
     {
-        public static IContextExecutor _executor;
+        public static IHttpContextExecutor _executor;
 
-        public SongController(IContextExecutor executor): base(executor) { }
+        public SongController(IHttpContextExecutor executor): base(executor) { }
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ApiError))]

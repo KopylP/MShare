@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace MShare.Songs.Api.Queries.Dtos.V1
 {
-	public class GetByUrlResponseDto
+	public record GetByUrlResponseDto
 	{
 		public string MediaType { get; set; }
 
