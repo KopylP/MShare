@@ -11,7 +11,7 @@ namespace Microsoft.Extensions.DependencyInjection
 	{
 		public static IServiceCollection AddExecutionContext(this IServiceCollection services)
 		{
-			services.AddTransient<IExecutionContext, ExecutionContext>();
+			services.AddScoped<IExecutionContext, ExecutionContext>();
             services.AddTransient<IHttpContextExecutor, HttpContextExecutor>();
 			services.AddTransient<IExecutionContextUpdater, ContextUpdater>();
 
