@@ -5,7 +5,10 @@ namespace MShare.Framework.Types.Addresses
 {
 	public record CountryCode2
 	{
-		public string Code { get; init; }
+		public static CountryCode2 Invariant = CountryCode2.Of("Invariant");
+		public static CountryCode2 Us = CountryCode2.Of("US");
+
+        public string Code { get; init; }
 
 		// TODO Add list of valid country codes
 		private CountryCode2(string countryCode2)
