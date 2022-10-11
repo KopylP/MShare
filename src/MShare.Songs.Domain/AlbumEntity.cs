@@ -28,7 +28,7 @@ namespace MShare.Songs.Domain
             Thrower.ThrowIf<ArgumentException>(string.IsNullOrEmpty(sourceId), "Source Id is null");
             Thrower.ThrowIf<ArgumentException>(country is null, "Country is null");
 
-            SourceId = sourceId.ToLowerInvariant().Trim();
+            SourceId = sourceId;
             ServiceType = serviceType;
             Country = country;
         }
