@@ -21,6 +21,9 @@
     <None Remove="Microsoft.AspNetCore.Components" />
     <None Remove="Microsoft.AspNetCore.Localization" />
     <None Remove="Resourses\SharedResourse.en-US" />
+    <None Remove="Persistence\" />
+    <None Remove="Microsoft.EntityFrameworkCore.Tools" />
+    <None Remove="Persistence\Repositories\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
@@ -34,6 +37,10 @@
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.9" />
     <PackageReference Include="Microsoft.AspNetCore.Localization" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.9">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MShare.Songs.Application\MShare.Songs.Application.csproj" />
@@ -48,5 +55,7 @@
   <ItemGroup>
     <Folder Include="Songs\" />
     <Folder Include="ProxyService\" />
+    <Folder Include="Persistence\" />
+    <Folder Include="Persistence\Repositories\" />
   </ItemGroup>
 </Project>

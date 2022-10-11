@@ -4,7 +4,7 @@ using MShare.Framework.Expressions;
 
 namespace MShare.Framework.Domain
 {
-    public abstract class BaseSpecification<T> : ISpecification<T>
+    public abstract class SpecificationBase<T> : ISpecification<T>
     {
         public static ISpecification<T> All => new AllSpecification<T>();
 
@@ -35,17 +35,17 @@ namespace MShare.Framework.Domain
         }
     }
 
-    class AllSpecification<T> : BaseSpecification<T>
+    class AllSpecification<T> : SpecificationBase<T>
     {
         public override Expression<Func<T, bool>> Criteria => p => true;
     }
 
-    class NothingSpecification<T> : BaseSpecification<T>
+    class NothingSpecification<T> : SpecificationBase<T>
     {
         public override Expression<Func<T, bool>> Criteria => p => false;
     }
 
-    public abstract class BaseCompositeSpecification<T> : BaseSpecification<T>
+    public abstract class BaseCompositeSpecification<T> : SpecificationBase<T>
     {
         protected readonly ISpecification<T> _firstSpecification;
         protected readonly ISpecification<T> _secondSpecification;

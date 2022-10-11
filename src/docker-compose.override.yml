@@ -25,6 +25,18 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - MSHARE_SONGS_URLS=http://+:5003
+      - MSHARE_SONGS_ConnectionStrings__DefaultConnection=Host=mshare.database;Port=5432;Database=mshare_songs;Username=root;Password=76G34dZgLmbhVuCYCXz7
     ports:
       - "80:5003"
+
+  mshare.database:
+    environment:
+      - POSTGRES_PASSWORD=76G34dZgLmbhVuCYCXz7
+      - POSTGRES_USER=root
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_DB=mshare_songs
+    ports:
+      - "5433:5432"
+    volumes:
+      - ~/Volumes/mshare.database:/var/lib/postgresql/data
 

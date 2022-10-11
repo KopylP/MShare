@@ -12,7 +12,7 @@
     "AppleProxy.WebService": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:61842",
+      "applicationUrl": "http://localhost:21238",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

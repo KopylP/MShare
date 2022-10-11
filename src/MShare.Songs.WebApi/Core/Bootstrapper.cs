@@ -3,9 +3,12 @@ using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Versioning;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using MShare.Framework.Infrastructure.Localization;
 using MShare.Songs.Infrastructure;
+using MShare.Songs.Infrastructure.Persistence;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace MShare.Songs.WebApi.Core
@@ -92,7 +95,21 @@ namespace MShare.Songs.WebApi.Core
             // Handles non-success status codes with empty body
             app.UseStatusCodePagesWithReExecute("/api/v1.0/errors/{0}");
 
+            MigrateDatabase(app);
+
             app.Run();
+        }
+
+        private void MigrateDatabase(WebApplication app)
+        {
+            if (app.Configuration.GetValue<bool>("DatabaseAutoMigrationsEnabled", false))
+            {
+                using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+                {
+                    var context = serviceScope.ServiceProvider.GetService<DbContext>();
+                    context?.Database.Migrate();
+                }
+            }
         }
 	}
 }

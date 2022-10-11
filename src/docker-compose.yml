@@ -11,10 +11,16 @@ services:
       context: .
       dockerfile: AppleProxy.WebService/Dockerfile
     restart: unless-stopped
+    depends_on:
+      - mshare.database
 
   spotifyproxy:
     build:
       context: .
       dockerfile: SpotifyProxy.WebService/Dockerfile
+
+  mshare.database:
+    image: postgres:14.5
+    restart: always
 
 

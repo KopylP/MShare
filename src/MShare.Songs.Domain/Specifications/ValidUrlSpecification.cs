@@ -4,7 +4,7 @@ using MShare.Framework.Domain;
 
 namespace MShare.Songs.Domain.Specifications
 {
-    public class ValidUrlSpecification  : BaseSpecification<Uri>
+    public class ValidUrlSpecification  : SpecificationBase<Uri>
     {
         private string[] _allowedHosts = new string[]
         {
