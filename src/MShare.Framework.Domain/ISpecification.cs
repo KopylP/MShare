@@ -10,5 +10,6 @@ namespace MShare.Framework.Domain
         List<string> IncludeStrings { get; }
         ISpecification<T> And(ISpecification<T> another);
         ISpecification<T> Or(ISpecification<T> another);
+        public bool IsSatisfiedBy(T obj);
     }
 }

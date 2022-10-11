@@ -16,10 +16,12 @@
     <None Remove="Actions\" />
     <None Remove="Context\" />
     <None Remove="MassTransit" />
+    <None Remove="SqlClient\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Actions\" />
     <Folder Include="Context\" />
+    <Folder Include="SqlClient\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />

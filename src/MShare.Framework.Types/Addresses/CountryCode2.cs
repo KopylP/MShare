@@ -5,8 +5,8 @@ namespace MShare.Framework.Types.Addresses
 {
 	public record CountryCode2
 	{
-		public static CountryCode2 Invariant = CountryCode2.Of("Invariant");
-		public static CountryCode2 Us = CountryCode2.Of("US");
+		public static CountryCode2 Invariant => CountryCode2.Of("Invariant");
+		public static CountryCode2 Us => CountryCode2.Of("US");
 
         public string Code { get; init; }
 
@@ -14,7 +14,7 @@ namespace MShare.Framework.Types.Addresses
 		private CountryCode2(string countryCode2)
 		{
 			Thrower.ThrowIf<ArgumentException>(
-				countryCode2 is null || countryCode2.Length != 2,
+				countryCode2 is null || (countryCode2.Length != 2 && countryCode2.ToLowerInvariant() != "invariant"),
 				$"{nameof(countryCode2)} is not valid");
 
 			Code = countryCode2.ToUpperInvariant();

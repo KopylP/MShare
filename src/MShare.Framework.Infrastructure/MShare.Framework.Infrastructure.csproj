@@ -33,6 +33,16 @@
     <None Remove="Communication\" />
     <None Remove="Messaging\" />
     <None Remove="MassTransit.AspNetCore" />
+    <None Remove="Persistance\" />
+    <None Remove="Microsoft.EntityFrameworkCore" />
+    <None Remove="Microsoft.EntityFrameworkCore.Abstractions" />
+    <None Remove="Npgsql.EntityFrameworkCore.PostgreSQL" />
+    <None Remove="Persistance\EntityFramework\Postgres\" />
+    <None Remove="SqlClient\" />
+    <None Remove="Dapper" />
+    <None Remove="Dapper.SqlBuilder" />
+    <None Remove="System.Data.SqlClient" />
+    <None Remove="Npgsql" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Clients\" />
@@ -43,6 +53,9 @@
     <Folder Include="Localization\" />
     <Folder Include="Communication\" />
     <Folder Include="Messaging\" />
+    <Folder Include="Persistance\" />
+    <Folder Include="Persistance\EntityFrameworkCore\Postgres\" />
+    <Folder Include="SqlClient\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Flurl.Http" Version="3.2.4" />
@@ -60,6 +73,13 @@
     <PackageReference Include="Microsoft.Extensions.Localization" Version="6.0.9" />
     <PackageReference Include="Microsoft.AspNetCore.Localization" Version="2.2.0" />
     <PackageReference Include="MassTransit" Version="8.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="6.0.9" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.7" />
+    <PackageReference Include="Dapper" Version="2.0.123" />
+    <PackageReference Include="Dapper.SqlBuilder" Version="2.0.78" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+    <PackageReference Include="Npgsql" Version="6.0.7" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MShare.Framework.Types\MShare.Framework.Types.csproj" />
@@ -67,5 +87,6 @@
     <ProjectReference Include="..\MShare.Framework.Api\MShare.Framework.Api.csproj" />
     <ProjectReference Include="..\MShare.Framework.Application\MShare.Framework.Application.csproj" />
     <ProjectReference Include="..\MShare.Framework\MShare.Framework.csproj" />
+    <ProjectReference Include="..\MShare.Framework.Domain\MShare.Framework.Domain.csproj" />
   </ItemGroup>
 </Project>

@@ -1,7 +1,6 @@
 ﻿using Flurl;
 using Proxy.Api;
 using SpotifyProxy.WebService.Infrastructure.Client.Models;
-using SpotifyProxy.WebService.Helpers;
 using AutoMapper;
 using System.Text;
 using MShare.Framework.Extentions;
@@ -44,7 +43,7 @@ namespace SpotifyProxy.WebService.Infrastructure.Client
         {
             var response = await _publicApiUrl
                 .AppendPathSegment("tracks")
-                .AppendPathSegment(request.Url?.GetId())
+                .AppendPathSegment(request.Url?.GetSpotifyId())
                 .GetAuthorizedAsync<SpotifyTrackResponseModel>(_provider);
 
             return _mapper.Map<SongResponseDto>(response);
@@ -62,7 +61,7 @@ namespace SpotifyProxy.WebService.Infrastructure.Client
         {
             var response = await _publicApiUrl
                 .AppendPathSegment("albums")
-                .AppendPathSegment(request.Url?.GetId())
+                .AppendPathSegment(request.Url?.GetSpotifyId())
                 .GetAuthorizedAsync<AlbumResponseModel>(_provider);
 
             return _mapper.Map<AlbumResponseDto>(response);

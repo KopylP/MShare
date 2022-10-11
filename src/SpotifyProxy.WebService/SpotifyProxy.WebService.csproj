@@ -34,7 +34,6 @@
     <None Remove="Flurl" />
     <None Remove="Flurl.Http" />
     <None Remove="Infrastructure\" />
-    <None Remove="Helpers\" />
     <None Remove="Infrastructure\Client\" />
     <None Remove="Infrastructure\Client\Models\" />
     <None Remove="AutoMapper" />
@@ -43,7 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Infrastructure\" />
-    <Folder Include="Helpers\" />
     <Folder Include="Infrastructure\Client\" />
     <Folder Include="Infrastructure\Client\Models\" />
     <Folder Include="Infrastructure\Client\Models\Mapping\" />
