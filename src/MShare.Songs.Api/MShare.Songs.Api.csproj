@@ -11,11 +11,15 @@
     <None Remove="Queries\v1\" />
     <None Remove="Queries\v1\Dtos\" />
     <None Remove="System.Text.Json" />
+    <None Remove="Commands\" />
+    <None Remove="Commands\V1\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Queries\" />
     <Folder Include="Queries\v1\" />
     <Folder Include="Queries\v1\Dtos\" />
+    <Folder Include="Commands\" />
+    <Folder Include="Commands\V1\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MShare.Framework.Api\MShare.Framework.Api.csproj" />

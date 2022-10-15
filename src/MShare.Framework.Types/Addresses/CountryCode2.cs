@@ -10,6 +10,10 @@ namespace MShare.Framework.Types.Addresses
 
         public string Code { get; init; }
 
+		protected CountryCode2()
+		{
+		}
+
 		// TODO Add list of valid country codes
 		private CountryCode2(string countryCode2)
 		{

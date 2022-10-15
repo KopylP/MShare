@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using MShare.Framework.Domain;
 using MShare.Songs.Abstractions;
 
@@ -21,8 +20,6 @@ namespace MShare.Songs.Domain.Specifications
 
         public static AlbumByIdSpecification Of(string sourceId, StreamingServiceType serviceType)
 			=> new AlbumByIdSpecification(sourceId, serviceType);
-
-
     }
 }
 

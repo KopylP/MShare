@@ -47,7 +47,7 @@ namespace MShare.Songs.Infrastructure
         private static void RegisterRepositories(IServiceCollection services)
         {
             services.AddScoped<IAlbumRepository, AlbumRepository>();
+            services.AddScoped<ISongRepository, SongRepository>();
         }
     }
 }
-

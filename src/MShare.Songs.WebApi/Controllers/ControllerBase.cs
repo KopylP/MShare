@@ -16,7 +16,7 @@ namespace MShare.Songs.WebApi.Controllers
 
         protected async Task<IActionResult> ExecuteAsync<T>(IQuery<T> query) => Ok(await _executor.ExecuteAsync(query));
 
-        protected async Task<IActionResult> ExecuteAsync<T>(ICommand<T> command) => Ok(await _executor.ExecuteAsync(command));
+        protected async Task<IActionResult> ExecuteAsync(ICommand command) => Ok(await _executor.ExecuteAsync(command));
     }
 }
 

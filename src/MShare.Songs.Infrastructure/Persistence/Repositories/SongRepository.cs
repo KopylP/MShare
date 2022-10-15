@@ -5,9 +5,9 @@ using MShare.Songs.Domain;
 
 namespace MShare.Songs.Infrastructure.Persistence.Repositories
 {
-    public class AlbumRepository : RepositoryBase<AlbumEntity>, IAlbumRepository
+	public class SongRepository : RepositoryBase<SongEntity>, ISongRepository
     {
-        public AlbumRepository(DbContext context) : base(context)
+        public SongRepository(DbContext context) : base(context)
         {
         }
     }

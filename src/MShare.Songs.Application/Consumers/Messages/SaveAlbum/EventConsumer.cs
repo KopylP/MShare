@@ -7,45 +7,25 @@ using MShare.Framework.Domain;
 using MShare.Songs.Domain;
 using MShare.Songs.Domain.Specifications;
 using MShare.Framework.Types.Addresses;
+using AutoMapper;
+using MShare.Songs.Api.Commands.V1;
 
 namespace MShare.Songs.Application.Consumers.Messages.SaveAlbum
 {
 	public class EventConsumer : IIntegrationEventConsumer<UnsavedAlbumRequestedEvent>, IConsumer<UnsavedAlbumRequestedEvent>
     {
         private readonly IConsumerContextExecutor _executor;
-        private readonly IUnitOfWorkProvider _provider;
-        private readonly IAlbumRepository _albumRepository;
+        private readonly IMapper _mapper;
 
-        public EventConsumer(IConsumerContextExecutor executor, IUnitOfWorkProvider provider, IAlbumRepository albumRepository)
+        public EventConsumer(IConsumerContextExecutor executor, IMapper mapper)
         {
             _executor = executor;
-            _provider = provider;
-            _albumRepository = albumRepository;
+            _mapper = mapper;
         }
 
         public async Task Consume(ConsumeContext<UnsavedAlbumRequestedEvent> context)
         {
-            using var uow = _provider.Create();
-
-            var @event = context.Message;
-
-            var album = await _albumRepository.FirstOrDefaultAsync(AlbumByIdSpecification.Of(@event.SourceId, @event.ServiceType));
-
-            if (album is null)
-            {
-                album = new AlbumEntity(@event.SourceId, @event.ServiceType, CountryCode3.Of(@event.Country))
-                {
-                    Name = @event.Name,
-                    ArtistName = @event.ArtistName,
-                    SourceUrl = @event.SourceUrl,
-                    ImageThumbnailUrl = @event.ImageThumbnailUrl,
-                    ImageUrl = @event.ImageUrl
-                };
-
-                await _albumRepository.SaveAsync(album);
-
-                await uow.CommitAsync();
-            }
+            await _executor.ExecuteAsync(_mapper.Map<SaveAlbumCommand>(context.Message), context);
         }
     }
 }
