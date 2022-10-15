@@ -3,7 +3,7 @@ using MShare.Framework.Domain;
 
 namespace MShare.Framework.Infrastructure.Persistance.EntityFramework
 {
-    public abstract class RepositoryBase<TEntity, TContext> : IRepository<TEntity>
+    public abstract class RepositoryBase<TEntity> : IRepository<TEntity>
         where TEntity : class, IEntity
     {
         private readonly DbContext _context;

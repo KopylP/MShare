@@ -22,7 +22,7 @@ namespace MShare.Framework.Infrastructure.Messaging
             return await Execute(query, context);
         }
 
-        public async Task<T> ExecuteAsync<T>(ICommand<T> command, ConsumeContext? context = null)
+        public async Task<Unit> ExecuteAsync(ICommand command, ConsumeContext? context = null)
         {
             return await Execute(command, context);
         }

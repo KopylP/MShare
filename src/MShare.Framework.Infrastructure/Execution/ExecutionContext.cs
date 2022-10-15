@@ -9,7 +9,7 @@ namespace MShare.Framework.Infrastructure.Execution
         public string OsVersion { get; set; }
         public string Os { get; set; }
         public string DeviceId { get; set; }
-        public CountryCode2 StoreRegion { get; set; }
+        public string StoreRegion { get; set; }
 
         public void UpdateFrom(IExecutionContext context)
         {

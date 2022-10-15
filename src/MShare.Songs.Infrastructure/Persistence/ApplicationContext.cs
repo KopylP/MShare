@@ -7,6 +7,7 @@ namespace MShare.Songs.Infrastructure.Persistence
 	public class ApplicationContext : DbContext
 	{
         public DbSet<AlbumEntity> Albums { get; set; }
+        public DbSet<SongEntity> Songs { get; set; }
 
         public ApplicationContext(DbContextOptions options) : base(options) { }
 
@@ -18,4 +19,3 @@ namespace MShare.Songs.Infrastructure.Persistence
         }
     }
 }
-

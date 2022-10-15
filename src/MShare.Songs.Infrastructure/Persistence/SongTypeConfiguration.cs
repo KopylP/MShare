@@ -5,19 +5,18 @@ using MShare.Songs.Domain;
 
 namespace MShare.Songs.Infrastructure.Persistence
 {
-	public class AlbumTypeConfiguration : IEntityTypeConfiguration<AlbumEntity>
-	{
-        public void Configure(EntityTypeBuilder<AlbumEntity> builder)
+	public class SongTypeConfiguration : IEntityTypeConfiguration<SongEntity>
+    {
+        public void Configure(EntityTypeBuilder<SongEntity> builder)
         {
-            builder.ToTable("album");
+            builder.ToTable("song");
 
-            //builder.HasKey(p => new { p.SourceId, p.ServiceType, p.Country.Code })
             builder.HasKey(p => new
             {
                 p.SourceId,
                 p.ServiceType
             })
-            .HasName("PK_Album");
+            .HasName("PK_Song");
 
             builder
                 .Property(p => p.ServiceType)
@@ -26,7 +25,7 @@ namespace MShare.Songs.Infrastructure.Persistence
                 .IsRequired()
                 .HasColumnType("varchar(100)");
 
-            builder.Property(p => p.ArtistName) 
+            builder.Property(p => p.ArtistName)
                 .IsRequired()
                 .HasColumnType("varchar(1000)")
                 .HasColumnName("artist_name");
@@ -61,6 +60,16 @@ namespace MShare.Songs.Infrastructure.Persistence
                 .HasColumnType("varchar(300)")
                 .HasColumnName("image_thumbnail_url");
 
+            builder.Property(p => p.AlbumName)
+                .IsRequired()
+                .HasColumnType("varchar(500)")
+                .HasColumnName("album_name");
+
+            builder.Property(p => p.AlbumSourceId)
+                .IsRequired()
+                .HasColumnType("varchar(100)")
+                .HasColumnName("album_source_id");
+
             builder.Property(p => p.CreationDate)
                 .IsRequired()
                 .HasColumnName("timestamp")
@@ -69,4 +78,3 @@ namespace MShare.Songs.Infrastructure.Persistence
         }
     }
 }
-

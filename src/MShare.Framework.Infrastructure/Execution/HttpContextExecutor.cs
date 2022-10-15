@@ -18,7 +18,7 @@ namespace MShare.Framework.Infrastructure.Execution
 
         public Task<T> ExecuteAsync<T>(IQuery<T> query) => ExecuteAsync((IRequest<T>)query);
 
-        public Task<T> ExecuteAsync<T>(ICommand<T> command) => ExecuteAsync((IRequest<T>)command);
+        public Task<Unit> ExecuteAsync(ICommand command) => ExecuteAsync((IRequest<Unit>)command);
 
         private async Task<T> ExecuteAsync<T>(IRequest<T> request)
         {
@@ -39,8 +39,8 @@ namespace MShare.Framework.Infrastructure.Execution
                 executionContext.OsVersion = osVersion;
                 executionContext.DeviceId = deviceId;
                 executionContext.StoreRegion = !string.IsNullOrEmpty(region.ToString())
-                    ? CountryCode2.Of(region)
-                    : CountryCode2.Invariant;
+                    ? region
+                    : CountryCode2.Invariant.ToString();
             }
         }
     }

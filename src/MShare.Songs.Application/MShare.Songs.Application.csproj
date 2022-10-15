@@ -20,6 +20,10 @@
     <None Remove="Microsoft.Extensions.Localization.Abstractions" />
     <None Remove="Consumers\" />
     <None Remove="Consumers\Messages\" />
+    <None Remove="Consumers\Messages\SaveSong\" />
+    <None Remove="Commands\" />
+    <None Remove="Commands\SaveAlbum\" />
+    <None Remove="Commands\SaveSong\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Queries\" />
@@ -31,6 +35,10 @@
     <Folder Include="Queries\V1\GetByUrl\" />
     <Folder Include="Consumers\" />
     <Folder Include="Consumers\Messages\" />
+    <Folder Include="Consumers\Messages\SaveSong\" />
+    <Folder Include="Commands\" />
+    <Folder Include="Commands\SaveAlbum\" />
+    <Folder Include="Commands\SaveSong\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MShare.Framework.Application\MShare.Framework.Application.csproj" />

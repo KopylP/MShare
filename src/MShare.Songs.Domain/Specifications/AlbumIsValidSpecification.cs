@@ -15,7 +15,8 @@ namespace MShare.Songs.Domain.Specifications
             && !string.IsNullOrEmpty(album.ArtistName)
             && !string.IsNullOrEmpty(album.SourceUrl)
             && !string.IsNullOrEmpty(album.ImageUrl)
-            && !string.IsNullOrEmpty(album.ImageThumbnailUrl);
+            && !string.IsNullOrEmpty(album.ImageThumbnailUrl)
+            && album.ServiceType != Abstractions.StreamingServiceType.None;
     }
 }
 
