@@ -21,4 +21,3 @@ namespace MShare.Songs.Domain.Specifications
             && song.ServiceType != Abstractions.StreamingServiceType.None;
     }
 }
-
