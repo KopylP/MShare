@@ -17,6 +17,8 @@ namespace MShare.Framework.Types
 
 		public static IntRange Of(int from, int to) => new IntRange(from, to);
 		public static IntRange Of(int to) => new IntRange(0, to);
+
+		public static implicit operator IntRange((int From, int To) range) => Of(range.From, range.To);
     }
 }
 

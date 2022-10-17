@@ -10,54 +10,54 @@ namespace AppleProxy.WebService.Infrastructure.Client.Models.Mapping
 		{
             CreateMap<AppleTrackListResponseModel, SongsResponseDto>()
                 .ForMember(p => p.Items, o => o.MapFrom(p => p.Results));
-			CreateMap<AppleTrackResponseModel, SongResponseDto>()
+			CreateMap<(AppleTrackResponseModel, string), SongResponseDto>()
 				.ConvertUsing<SongResponseConverter>();
-            CreateMap<AppleAlbumResponseModel, AlbumResponseDto>()
+            CreateMap<(AppleAlbumResponseModel, string), AlbumResponseDto>()
                 .ConvertUsing<AlbumResponseConverter>();
         }
 
-        private class SongResponseConverter : ITypeConverter<AppleTrackResponseModel, SongResponseDto>
+        private class SongResponseConverter : ITypeConverter<(AppleTrackResponseModel Track, string Region), SongResponseDto>
         {
-            public SongResponseDto Convert(AppleTrackResponseModel source, SongResponseDto destination, ResolutionContext context)
+            public SongResponseDto Convert((AppleTrackResponseModel Track, string Region) source, SongResponseDto destination, ResolutionContext context)
             {
                 return new SongResponseDto
                 {
-                    Song = SongSourceDto.Of(source.TrackName, source.TrackId, source.TrackViewUrl, source.Country),
+                    Song = SongSourceDto.Of(source.Track.TrackName, source.Track.TrackId, source.Track.TrackViewUrl, null, source.Region),
                     Album = new()
                     {
-                        Name = source.CollectionName,
-                        SourceId = source.CollectionId,
-                        SourceUrl = source.CollectionViewUrl.RemoveFrom('?'),
-                        Country = source.Country,
-                        ImageThumbnailUrl = source.ArtworkUrl100.GetApplePhotoSizeUrl(64),
-                        ImageUrl = source.ArtworkUrl100.GetApplePhotoSizeUrl(640)
+                        Name = source.Track.CollectionName,
+                        SourceId = source.Track.CollectionId,
+                        SourceUrl = source.Track.CollectionViewUrl.RemoveFrom('?'),
+                        Region = source.Region,
+                        ImageThumbnailUrl = source.Track.ArtworkUrl100.GetApplePhotoSizeUrl(64),
+                        ImageUrl = source.Track.ArtworkUrl100.GetApplePhotoSizeUrl(640)
                     },
                     Artists = new ArtistSourceDto[]
                     {
-                        ArtistSourceDto.Of(source.ArtistName, source.CollectionId)
+                        ArtistSourceDto.Of(source.Track.ArtistName, source.Track.CollectionId)
                     },
                 };
             }
         }
 
-        private class AlbumResponseConverter : ITypeConverter<AppleAlbumResponseModel, AlbumResponseDto>
+        private class AlbumResponseConverter : ITypeConverter<(AppleAlbumResponseModel Album, string Region), AlbumResponseDto>
         {
-            public AlbumResponseDto Convert(AppleAlbumResponseModel source, AlbumResponseDto destination, ResolutionContext context)
+            public AlbumResponseDto Convert((AppleAlbumResponseModel Album, string Region) source, AlbumResponseDto destination, ResolutionContext context)
             {
                 return new AlbumResponseDto
                 {
                     Album = new()
                     {
-                        Name = source.CollectionName,
-                        SourceId = source.CollectionId,
-                        SourceUrl = source.CollectionViewUrl.RemoveFrom('?'),
-                        Country = source.Country,
-                        ImageThumbnailUrl = source.ArtworkUrl100.GetApplePhotoSizeUrl(64),
-                        ImageUrl = source.ArtworkUrl100.GetApplePhotoSizeUrl(640)
+                        Name = source.Album.CollectionName,
+                        SourceId = source.Album.CollectionId,
+                        SourceUrl = source.Album.CollectionViewUrl.RemoveFrom('?'),
+                        Region = source.Region,
+                        ImageThumbnailUrl = source.Album.ArtworkUrl100.GetApplePhotoSizeUrl(64),
+                        ImageUrl = source.Album.ArtworkUrl100.GetApplePhotoSizeUrl(640)
                     },
                     Artists = new ArtistSourceDto[]
                     {
-                        ArtistSourceDto.Of(source.ArtistName, source.CollectionId)
+                        ArtistSourceDto.Of(source.Album.ArtistName, source.Album.CollectionId)
                     },
                 };
             }

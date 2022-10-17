@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "SpotifyProxy.WebService",
+    "title": "AppleProxy.WebService",
     "version": "1.0"
   },
   "paths": {
@@ -321,7 +321,11 @@
             "type": "string",
             "nullable": true
           },
-          "country": {
+          "region": {
+            "type": "string",
+            "nullable": true
+          },
+          "upc": {
             "type": "string",
             "nullable": true
           }
@@ -376,7 +380,11 @@
             "type": "string",
             "nullable": true
           },
-          "country": {
+          "region": {
+            "type": "string",
+            "nullable": true
+          },
+          "isrc": {
             "type": "string",
             "nullable": true
           }

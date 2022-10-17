@@ -14,6 +14,7 @@ namespace MShare.Songs.Api.Messages
         public string ImageThumbnailUrl { get; set; }
         public string SourceId { get; set; }
         public string SourceUrl { get; set; }
-        public string Country { get; set; }
+        public string Region { get; set; }
+        public string Upc { get; set; }
     }
 }

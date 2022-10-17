@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace SpotifyProxy.WebService.Infrastructure.Client.Models
 {
     [JsonObject]
-    internal class AlbumResponseModel
+    internal class SpotifyAlbumResponseModel
     {
         [JsonProperty("id")]
         public string Id { get; set; }
@@ -19,7 +19,10 @@ namespace SpotifyProxy.WebService.Infrastructure.Client.Models
         public ImageResponseModel[] Images { get; set; }
 
         [JsonProperty("artists")]
-        public ArtistResponseModel[] Artists { get; set; }
+        public SpotifyArtistResponseModel[] Artists { get; set; }
+
+        [JsonProperty("external_ids")]
+        public ExternalIdsResponseModel ExternalIds { get; set; }
     }
 }
 

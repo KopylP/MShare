@@ -30,10 +30,10 @@ namespace MShare.Songs.Infrastructure.Persistence
                 .HasColumnType("varchar(1000)")
                 .HasColumnName("artist_name");
 
-            builder.OwnsOne(p => p.Country)
+            builder.OwnsOne(p => p.Region)
                 .Property(p => p.Code)
                 .HasColumnType("varchar(10)")
-                .HasColumnName("country");
+                .HasColumnName("region");
 
             builder.Property(p => p.Name)
                 .IsRequired()
@@ -75,6 +75,18 @@ namespace MShare.Songs.Infrastructure.Persistence
                 .HasColumnName("timestamp")
                 .HasColumnName("creation_date")
                 .HasDefaultValueSql("NOW()");
+
+            builder.OwnsOne(p => p.Isrc)
+                .Property(p => p.Value)
+                .IsRequired()
+                .HasColumnName("char(12)")
+                .HasColumnName("isrc");
+
+            builder
+                .OwnsOne(p => p.Isrc)
+                .HasIndex(p => p.Value)
+                .HasDatabaseName("IDX_Isrc_Unique")
+                .IsUnique();
         }
     }
 }

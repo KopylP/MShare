@@ -3,6 +3,7 @@ using System;
 using MShare.Songs.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MShare.Songs.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20221017152641_Add_Isrc_And_Upc_Codes")]
+    partial class Add_Isrc_And_Upc_Codes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -143,10 +145,6 @@ namespace MShare.Songs.Infrastructure.Persistence.Migrations
 
                             b1.HasKey("AlbumEntitySourceId", "AlbumEntityServiceType");
 
-                            b1.HasIndex("Value")
-                                .IsUnique()
-                                .HasDatabaseName("IDX_Upc_Unique");
-
                             b1.ToTable("album");
 
                             b1.WithOwner()
@@ -197,10 +195,6 @@ namespace MShare.Songs.Infrastructure.Persistence.Migrations
                                 .HasColumnName("isrc");
 
                             b1.HasKey("SongEntitySourceId", "SongEntityServiceType");
-
-                            b1.HasIndex("Value")
-                                .IsUnique()
-                                .HasDatabaseName("IDX_Isrc_Unique");
 
                             b1.ToTable("song");
 

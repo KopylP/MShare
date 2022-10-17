@@ -7,7 +7,8 @@
         public string ImageThumbnailUrl { get; init; }
         public string SourceId { get; init; }
         public string SourceUrl { get; init; }
-        public string Country { get; init; }
+        public string Region { get; init; }
+        public string Upc { get; init; }
     }
 }
 

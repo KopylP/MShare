@@ -1,5 +1,6 @@
 ﻿using MShare.Framework.Domain;
 using MShare.Framework.Exceptions;
+using MShare.Framework.Types;
 using MShare.Framework.Types.Addresses;
 using MShare.Songs.Abstractions;
 using MShare.Songs.Domain.Specifications;
@@ -18,21 +19,23 @@ namespace MShare.Songs.Domain
         public string ImageThumbnailUrl { get; init; }
         public string SourceId { get; protected set; }
         public string SourceUrl { get; init; }
-        public CountryCode3 Country { get; protected set; }
+        public CountryCode2 Region { get; protected set; }
+        public Isrc Isrc { get; init; }
 
         protected SongEntity()
 		{
 		}
 
-        public SongEntity(string sourceId, StreamingServiceType serviceType, CountryCode3 country)
+        public SongEntity(string sourceId, StreamingServiceType serviceType, CountryCode2 region, Isrc isrc)
         {
             Thrower.ThrowIf<ArgumentException>(string.IsNullOrEmpty(sourceId), "Source Id is null");
-            Thrower.ThrowIf<ArgumentException>(country is null, "Country is null");
+            Thrower.ThrowIf<ArgumentException>(region is null, "Country is null");
 
             SourceId = sourceId;
             ServiceType = serviceType;
-            Country = country;
+            Region = region;
             CreationDate = DateTime.UtcNow;
+            Isrc = isrc;
         }
 
         protected override void OnSaving()

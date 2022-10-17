@@ -3,13 +3,9 @@ namespace MShare.Framework.Exceptions
 {
 	public static class Thrower
 	{
-		public static void Throw<T>(string? message = default) where T: Exception, new()
+		public static void Throw<T>(string? message = default) where T: Exception
 		{
-			var exception = new T();
-			var propertyInfo = typeof(T).GetProperty("Message");
-			propertyInfo?.SetValue(exception, message);
-
-			throw exception;
+			throw (Exception)Activator.CreateInstance(typeof(T), message);
 		}
 
 		public static void ThrowIf<T>(bool condition, string? message = default) where T: Exception, new()
