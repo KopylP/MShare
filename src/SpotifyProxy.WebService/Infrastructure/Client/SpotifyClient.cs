@@ -41,12 +41,36 @@ namespace SpotifyProxy.WebService.Infrastructure.Client
 
         public async Task<SongResponseDto> GetSongByUrlAsync(GetByUrlRequestDto request)
         {
-            var response = await _publicApiUrl
-                .AppendPathSegment("tracks")
-                .AppendPathSegment(request.Url?.GetSpotifyId())
-                .GetAuthorizedAsync<SpotifyTrackResponseModel>(_provider);
+            var song = await GetTrackAsync(request.Url?.GetSpotifyId());
+            var album = await GetAlbumAsync(song.Album.Id);
 
-            return _mapper.Map<SongResponseDto>(response);
+            return _mapper.Map<SongResponseDto>((song, album));
+        }
+
+        public async Task<AlbumResponseDto> GetAlbumByUrl(GetByUrlRequestDto request)
+        {
+            var response = await _publicApiUrl
+                .AppendPathSegment("albums")
+                .AppendPathSegment(request.Url?.GetSpotifyId())
+                .GetAuthorizedAsync<SpotifyAlbumResponseModel>(_provider);
+
+            return _mapper.Map<AlbumResponseDto>(response);
+        }
+
+        private async Task<SpotifyTrackResponseModel> GetTrackAsync(string? id)
+        {
+            return await _publicApiUrl
+                .AppendPathSegment("tracks")
+                .AppendPathSegment(id)
+                .GetAuthorizedAsync<SpotifyTrackResponseModel>(_provider);
+        }
+
+        private async Task<SpotifyAlbumResponseModel> GetAlbumAsync(string? id)
+        {
+            return await _publicApiUrl
+                .AppendPathSegment("albums")
+                .AppendPathSegment(id)
+                .GetAuthorizedAsync<SpotifyAlbumResponseModel>(_provider);
         }
 
         private static int GetLimit(FindSongsRequestDto model, int limit)
@@ -55,16 +79,6 @@ namespace SpotifyProxy.WebService.Infrastructure.Client
                 return 1;
 
             return limit;
-        }
-
-        public async Task<AlbumResponseDto> GetAlbumByUrl(GetByUrlRequestDto request)
-        {
-            var response = await _publicApiUrl
-                .AppendPathSegment("albums")
-                .AppendPathSegment(request.Url?.GetSpotifyId())
-                .GetAuthorizedAsync<AlbumResponseModel>(_provider);
-
-            return _mapper.Map<AlbumResponseDto>(response);
         }
     }
 }

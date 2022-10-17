@@ -15,10 +15,13 @@ namespace SpotifyProxy.WebService.Infrastructure.Client.Models
         public ExternalUrlsResponseModel ExternalUrls { get; set; }
 
         [JsonProperty("album")]
-        public AlbumResponseModel Album { get; set; }
+        public SpotifyAlbumResponseModel Album { get; set; }
 
         [JsonProperty("artists")]
-        public ArtistResponseModel[] Artists { get; set; }
+        public SpotifyArtistResponseModel[] Artists { get; set; }
+
+        [JsonProperty("external_ids")]
+        public ExternalIdsResponseModel ExternalIds { get; set; }
     }
 }
 

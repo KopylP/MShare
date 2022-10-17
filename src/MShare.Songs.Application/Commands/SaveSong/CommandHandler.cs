@@ -3,6 +3,7 @@ using MediatR;
 using MShare.Framework.Application;
 using MShare.Framework.Domain;
 using MShare.Framework.Types.Addresses;
+using MShare.Framework.Types.Variations;
 using MShare.Songs.Api.Commands.V1;
 using MShare.Songs.Domain;
 using MShare.Songs.Domain.Specifications;
@@ -24,11 +25,11 @@ namespace MShare.Songs.Application.Commands.SaveSong
         {
             using var uow = _provider.Create();
 
-            var song = await _songRepository.FirstOrDefaultAsync(SongByIdSpecification.Of(request.SourceId, request.ServiceType));
+            var song = await _songRepository.FirstOrDefaultAsync(SongByIdSpecification.Of(request.SourceId, request.ServiceType, request.Region));
 
             if (song is null)
             {
-                song = new SongEntity(request.SourceId, request.ServiceType, CountryCode3.Of(request.Country))
+                song = new SongEntity(request.SourceId, request.ServiceType, request.Region, request.Isrc ?? "111111111" + Number.Random((100, 999))) // TODO Remove mock data 
                 {
                     Name = request.Name,
                     ArtistName = request.ArtistName,

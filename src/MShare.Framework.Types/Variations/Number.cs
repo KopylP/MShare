@@ -11,6 +11,8 @@ namespace MShare.Framework.Types.Variations
 
         public static implicit operator int(Number number) => number.Value;
 
+        public override string ToString() => Value.ToString();
+
         private record DefaultNumber : Number
         {
             private readonly int _value;
@@ -18,6 +20,8 @@ namespace MShare.Framework.Types.Variations
             public override int Value => _value;
 
             public DefaultNumber(int number) => _value = number;
+
+            public override string ToString() => Value.ToString();
         }
 
         private record RandomNumber : Number
@@ -27,6 +31,8 @@ namespace MShare.Framework.Types.Variations
             public RandomNumber(IntRange? range = default) => _value = GetRandomValue(range);
 
             public override int Value => _value;
+
+            public override string ToString() => Value.ToString();
 
             private int GetRandomValue(IntRange? range)
             {

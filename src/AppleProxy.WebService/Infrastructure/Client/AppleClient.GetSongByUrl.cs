@@ -24,7 +24,7 @@ namespace AppleProxy.WebService.Infrastructure.Client
             if (!response.Results.Any())
                 throw new NotFoundException();
 
-            return _mapper.Map<SongResponseDto>(response.Results.First());
+            return _mapper.Map<SongResponseDto>((response.Results.First(), region));
         }
     }
 }

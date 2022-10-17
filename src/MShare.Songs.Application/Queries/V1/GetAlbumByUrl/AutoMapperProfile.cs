@@ -27,7 +27,8 @@ namespace MShare.Songs.Application.Queries.V1.GetAlbumByUrl
                 .ForMember(p => p.ServiceType, o => o.MapFrom(p => p.ServiceType))
                 .ForMember(p => p.SourceId, o => o.MapFrom(p => p.ServiceProxyResponse.Album.SourceId))
                 .ForMember(p => p.SourceUrl, o => o.MapFrom(p => p.ServiceProxyResponse.Album.SourceUrl))
-                .ForMember(p => p.Country, o => o.MapFrom(p => p.ServiceProxyResponse.Album.Country));
+                .ForMember(p => p.Region, o => o.MapFrom(p => p.ServiceProxyResponse.Album.Region))
+                .ForMember(p => p.Upc, o => o.MapFrom(p => p.ServiceProxyResponse.Album.Upc));
         }
 	}
 }

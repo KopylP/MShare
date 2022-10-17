@@ -3,6 +3,7 @@ using MediatR;
 using MShare.Framework.Application;
 using MShare.Framework.Domain;
 using MShare.Framework.Types.Addresses;
+using MShare.Framework.Types.Variations;
 using MShare.Songs.Api.Commands.V1;
 using MShare.Songs.Domain;
 using MShare.Songs.Domain.Specifications;
@@ -25,11 +26,11 @@ namespace MShare.Songs.Application.Commands.SaveAlbum
         {
             using var uow = _provider.Create();
 
-            var album = await _albumRepository.FirstOrDefaultAsync(AlbumByIdSpecification.Of(request.SourceId, request.ServiceType));
+            var album = await _albumRepository.FirstOrDefaultAsync(AlbumByIdSpecification.Of(request.SourceId, request.ServiceType, request.Region));
 
             if (album is null)
             {
-                album = new AlbumEntity(request.SourceId, request.ServiceType, CountryCode3.Of(request.Country))
+                album = new AlbumEntity(request.SourceId, request.ServiceType, request.Region, request.Upc ?? "111111111" + Number.Random((100, 999))) // TODO remove mock data
                 {
                     Name = request.Name,
                     ArtistName = request.ArtistName,

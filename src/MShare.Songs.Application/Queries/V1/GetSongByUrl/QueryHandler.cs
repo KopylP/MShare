@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
+using MShare.Framework.Api;
 using MShare.Framework.Application;
 using MShare.Framework.Application.Context;
 using MShare.Framework.Application.SqlClient;
+using MShare.Framework.Types.Addresses;
 using MShare.Framework.WebApi.Exceptions;
 using MShare.Songs.Abstractions;
 using MShare.Songs.Api.Queries.Dtos.V1;
@@ -20,6 +22,7 @@ namespace MShare.Songs.Application.Queries.V1.GetSongByUrl
         private readonly QueryContext _context;
         private readonly ISqlQueryExecutor _sqlQueryExecutor;
         private readonly IIdExtractor _idExtractor;
+        private readonly IExecutionContext _executionContext;
 
         public QueryHandler(
             IRequestContext<GetSongByUrlQuery, SongResponseDto> context,
@@ -27,7 +30,8 @@ namespace MShare.Songs.Application.Queries.V1.GetSongByUrl
             IProxyServiceClientFactory clientFactory,
             IMapper mapper,
             ISqlQueryExecutor sqlQueryExecutor,
-            IIdExtractor idExtractor)
+            IIdExtractor idExtractor,
+            IExecutionContext executionContext)
         {
             _recognizer = recognizer;
             _clientFactory = clientFactory;
@@ -35,6 +39,7 @@ namespace MShare.Songs.Application.Queries.V1.GetSongByUrl
             _context = (QueryContext)context;
             _sqlQueryExecutor = sqlQueryExecutor;
             _idExtractor = idExtractor;
+            _executionContext = executionContext;
         }
 
         public async Task<SongResponseDto> Handle(GetSongByUrlQuery request, CancellationToken cancellationToken)
@@ -73,9 +78,11 @@ namespace MShare.Songs.Application.Queries.V1.GetSongByUrl
                         $"image_url CoverImageUrl, source_url SongUrl, " +
                         $"artist_name ArtistName, album_name AlbumName," +
                         $"name SongName " +
-                    $"FROM song WHERE service_type = '{streamingService}' AND source_id='{idResult.Data}'";
+                    $"FROM song " +
+                        $"WHERE service_type = '{streamingService}' " +
+                        $"AND source_id='{idResult.Data}'";
 
-                return await _sqlQueryExecutor.QueryFirstOrDefaultAsync<SongResponseDto>(sql);
+                var songs = await _sqlQueryExecutor.QueryAsync<SongResponseDto>(sql);
             }
 
             return null;
