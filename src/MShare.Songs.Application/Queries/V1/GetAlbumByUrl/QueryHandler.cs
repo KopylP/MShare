@@ -1,7 +1,4 @@
-﻿using System;
-using AutoMapper;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
 using MShare.Framework.Application;
 using MShare.Framework.Application.Context;
 using MShare.Framework.Application.SqlClient;
@@ -75,7 +72,7 @@ namespace MShare.Songs.Application.Queries.V1.GetAlbumByUrl
                         $"image_url CoverImageUrl, source_url AlbumUrl, " +
                         $"artist_name ArtistName, name AlbumName " +
                     $"FROM album " +
-                        $"WHERE service_type = '{streamingService}' " +
+                    $"WHERE service_type = '{streamingService}' " +
                         $"AND source_id='{idResult.Data}' " +
                         $"AND region='{regionResult.Data}'";
 

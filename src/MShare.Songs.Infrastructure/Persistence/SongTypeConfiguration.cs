@@ -80,12 +80,6 @@ namespace MShare.Songs.Infrastructure.Persistence
                 .IsRequired()
                 .HasColumnName("char(12)")
                 .HasColumnName("isrc");
-
-            builder
-                .OwnsOne(p => p.Isrc)
-                .HasIndex(p => p.Value)
-                .HasDatabaseName("IDX_Isrc_Unique")
-                .IsUnique();
         }
     }
 }

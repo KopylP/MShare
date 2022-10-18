@@ -70,11 +70,6 @@ namespace MShare.Songs.Infrastructure.Persistence
                 .IsRequired()
                 .HasColumnName("varchar(15)")
                 .HasColumnName("upc");
-
-            builder.OwnsOne(x => x.Upc)
-                .HasIndex(x => x.Value)
-                .HasDatabaseName("IDX_Upc_Unique")
-                .IsUnique();
         }
     }
 }
