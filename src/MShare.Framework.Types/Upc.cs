@@ -14,12 +14,9 @@ namespace MShare.Framework.Types
 		private Upc(string? upc)
 		{
             Thrower.ThrowIf<ArgumentException>(string.IsNullOrWhiteSpace(upc), "Upc is null or empty");
+			Thrower.ThrowIf<ArgumentException>(upc.Length > 20, "Upc code has incorrect length");
 
-            var value = long.Parse(upc).ToString();
-
-			Thrower.ThrowIf<ArgumentException>(value.Length > 13, "Upc code has incorrect length");
-
-            Value = value;
+            Value = upc;
         }
 
 		public static Upc Of(string? upc) => new Upc(upc);

@@ -68,7 +68,7 @@ namespace MShare.Songs.Infrastructure.Persistence
             builder.OwnsOne(p => p.Upc)
                 .Property(p => p.Value)
                 .IsRequired()
-                .HasColumnName("varchar(15)")
+                .HasColumnName("varchar(20)")
                 .HasColumnName("upc");
         }
     }
