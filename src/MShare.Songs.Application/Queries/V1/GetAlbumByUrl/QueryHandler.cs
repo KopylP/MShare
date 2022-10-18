@@ -21,7 +21,7 @@ namespace MShare.Songs.Application.Queries.V1.GetAlbumByUrl
         private readonly IMapper _mapper;
         private readonly QueryContext _context;
         private readonly ISqlQueryExecutor _sqlQueryExecutor;
-        private readonly IIdExtractor _idExtractor;
+        private readonly IMetadataExtractor _idExtractor;
 
         public QueryHandler(
             IStreamingServiceTypeRecognizer recognizer,
@@ -29,7 +29,7 @@ namespace MShare.Songs.Application.Queries.V1.GetAlbumByUrl
             IMapper mapper,
             IRequestContext<GetAlbumByUrlQuery, AlbumResponseDto> context,
             ISqlQueryExecutor sqlQueryExecutor,
-            IIdExtractor idExtractor)
+            IMetadataExtractor idExtractor)
         {
             _recognizer = recognizer;
             _clientFactory = clientFactory;
@@ -64,17 +64,20 @@ namespace MShare.Songs.Application.Queries.V1.GetAlbumByUrl
 
         public async Task<AlbumResponseDto?> GetAlbumFromDatabase(StreamingServiceType streamingService, string url)
         {
-            var idResult = _idExtractor.Extract(url, streamingService, MediaType.Album);
+            var idResult = _idExtractor.ExtractId(url, streamingService, MediaType.Album);
+            var regionResult = _idExtractor.ExtractRegion(url, streamingService, MediaType.Album);
 
-            if (idResult.IsSuccess)
+            if (idResult.IsSuccess && regionResult.IsSuccess)
             {
-
                 var sql =
                     $"SELECT " +
                         $"service_type as  ServiceType, source_id AlbumSourceId, " +
                         $"image_url CoverImageUrl, source_url AlbumUrl, " +
                         $"artist_name ArtistName, name AlbumName " +
-                    $"FROM album WHERE service_type = '{streamingService}' AND source_id='{idResult.Data}'";
+                    $"FROM album " +
+                        $"WHERE service_type = '{streamingService}' " +
+                        $"AND source_id='{idResult.Data}' " +
+                        $"AND region='{regionResult.Data}'";
 
                 return await _sqlQueryExecutor.QueryFirstOrDefaultAsync<AlbumResponseDto>(sql);
             }

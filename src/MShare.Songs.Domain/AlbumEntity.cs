@@ -9,10 +9,11 @@ namespace MShare.Songs.Domain
 {
 	public class AlbumEntity : EntityBase, IEntity
 	{
-        public virtual DateTime CreationDate { get; set; }
-		public virtual string Name { get; init; }
-		public virtual string ArtistName { get; init; }
-		public virtual StreamingServiceType ServiceType { get; protected set; }
+        public long Id { get; protected set; }
+        public DateTime CreationDate { get; set; }
+		public string Name { get; init; }
+		public string ArtistName { get; init; }
+		public StreamingServiceType ServiceType { get; protected set; }
         public string ImageUrl { get; init; }
         public string ImageThumbnailUrl { get; init; }
         public string SourceId { get; protected set; }

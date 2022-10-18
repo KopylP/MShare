@@ -12,10 +12,10 @@ namespace AppleProxy.WebService.Infrastructure.Client
 	{
         public async Task<SongResponseDto> GetSongByUrlAsync(GetByUrlRequestDto request)
         {
-            var region = request.Url?.GetAppleRegion() ?? Region.Invariant;
+            var region = request.Url?.GetAppleRegion() ?? string.Empty;
 
             var response = await _publicApiUrl
-                .AppendPathSegmentIf(region != Region.Invariant, region)
+                .AppendPathSegmentIf(region != string.Empty, region)
                 .AppendPathSegment("lookup")
                 .SetQueryParam("id", request.Url?.GetAppleSongId())
                 .SetQueryParam("limit", 1)

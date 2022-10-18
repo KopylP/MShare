@@ -16,7 +16,7 @@ namespace Proxy.Api
                 SourceId = sourceId,
                 SourceUrl = sourceUrl,
                 Isrc = isrc,
-                Region = region ?? Api.Region.Invariant
+                Region = region ?? "Invariant"
             };
     }
 }

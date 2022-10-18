@@ -48,7 +48,7 @@ namespace SpotifyProxy.WebService.Infrastructure.Client.Models.Mapping
                     Name = source.Name,
                     SourceId = source.Id,
                     SourceUrl = source.ExternalUrls.Spotify,
-                    Region = Region.Invariant,
+                    Region = "Invariant",
                     ImageUrl = source.Images.First().Url,
                     ImageThumbnailUrl = source.Images.Last().Url,
                     Upc = source.ExternalIds.Upc ?? ""
