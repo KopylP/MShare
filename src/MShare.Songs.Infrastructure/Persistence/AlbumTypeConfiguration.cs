@@ -11,13 +11,11 @@ namespace MShare.Songs.Infrastructure.Persistence
         {
             builder.ToTable("album");
 
-            //builder.HasKey(p => new { p.SourceId, p.ServiceType, p.Country.Code })
-            builder.HasKey(p => new
-            {
-                p.SourceId,
-                p.ServiceType
-            })
-            .HasName("PK_Album");
+            builder.HasKey(p => p.Id)
+                .HasName("PK_Album");
+
+            builder.Property(p => p.Id)
+                .ValueGeneratedOnAdd();
 
             builder
                 .Property(p => p.ServiceType)

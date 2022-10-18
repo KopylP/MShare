@@ -20,7 +20,7 @@ namespace MShare.Songs.Domain.Specifications
         }
 
         public override Expression<Func<SongEntity, bool>> Criteria =>
-            p => p.SourceId == _sourceId && p.ServiceType == _streamingType && p.Region == _region;
+            p => p.SourceId == _sourceId && p.ServiceType == _streamingType && p.Region.Code == _region.Code;
 
         public static SongByIdSpecification Of(string sourceId, StreamingServiceType serviceType, string region)
             => new SongByIdSpecification(sourceId, serviceType, region);

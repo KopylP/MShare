@@ -36,6 +36,17 @@ namespace System
 
             return id;
         }
+
+        public static string GetAppleRegion(this string urlStr)
+        {
+            var url = new Uri(urlStr);
+            var region = url.PathAndQuery.RemoveFrom('?').Split("/", StringSplitOptions.RemoveEmptyEntries).First();
+
+            if (region.Length != 2)
+                return "us";
+
+            return region;
+        }
     }
 }
 

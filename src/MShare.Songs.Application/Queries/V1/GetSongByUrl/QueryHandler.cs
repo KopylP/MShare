@@ -21,7 +21,7 @@ namespace MShare.Songs.Application.Queries.V1.GetSongByUrl
         private readonly IMapper _mapper;
         private readonly QueryContext _context;
         private readonly ISqlQueryExecutor _sqlQueryExecutor;
-        private readonly IIdExtractor _idExtractor;
+        private readonly IMetadataExtractor _idExtractor;
         private readonly IExecutionContext _executionContext;
 
         public QueryHandler(
@@ -30,7 +30,7 @@ namespace MShare.Songs.Application.Queries.V1.GetSongByUrl
             IProxyServiceClientFactory clientFactory,
             IMapper mapper,
             ISqlQueryExecutor sqlQueryExecutor,
-            IIdExtractor idExtractor,
+            IMetadataExtractor idExtractor,
             IExecutionContext executionContext)
         {
             _recognizer = recognizer;
@@ -68,7 +68,8 @@ namespace MShare.Songs.Application.Queries.V1.GetSongByUrl
 
         public async Task<SongResponseDto?> GetSongFromDatabase(StreamingServiceType streamingService, string url)
         {
-            var idResult = _idExtractor.Extract(url, streamingService, MediaType.Song);
+            var idResult = _idExtractor.ExtractId(url, streamingService, MediaType.Song);
+            var regionResult = _idExtractor.ExtractRegion(url, streamingService, MediaType.Song);
 
             if (idResult.IsSuccess)
             {
@@ -80,7 +81,8 @@ namespace MShare.Songs.Application.Queries.V1.GetSongByUrl
                         $"name SongName " +
                     $"FROM song " +
                         $"WHERE service_type = '{streamingService}' " +
-                        $"AND source_id='{idResult.Data}'";
+                        $"AND source_id='{idResult.Data}' " +
+                        $"AND region='{regionResult.Data}'";
 
                 var songs = await _sqlQueryExecutor.QueryAsync<SongResponseDto>(sql);
             }

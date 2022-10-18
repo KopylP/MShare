@@ -41,7 +41,7 @@ namespace MShare.Songs.Infrastructure
             services.AddScoped<IStreamingServiceTypeRecognizer, StreamingServiceTypeRecognizer>();
             services.AddScoped<IMediaTypeRecognizer, MediaTypeRecognizer>();
             services.AddScoped<IProxyServiceClientFactory, ProxyServiceClientFactory>();
-            services.AddScoped<IIdExtractor, IdExtractor>();
+            services.AddScoped<IMetadataExtractor, IdExtractor>();
         }
 
         private static void RegisterRepositories(IServiceCollection services)
