@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
-using MediatR;
 using MShare.Framework.Api;
 using MShare.Framework.Application;
 using MShare.Framework.Application.Context;
 using MShare.Framework.Application.SqlClient;
-using MShare.Framework.Types.Addresses;
 using MShare.Framework.WebApi.Exceptions;
 using MShare.Songs.Abstractions;
 using MShare.Songs.Api.Queries.Dtos.V1;
@@ -80,11 +78,11 @@ namespace MShare.Songs.Application.Queries.V1.GetSongByUrl
                         $"artist_name ArtistName, album_name AlbumName," +
                         $"name SongName " +
                     $"FROM song " +
-                        $"WHERE service_type = '{streamingService}' " +
+                    $"WHERE service_type = '{streamingService}' " +
                         $"AND source_id='{idResult.Data}' " +
                         $"AND region='{regionResult.Data}'";
 
-                var songs = await _sqlQueryExecutor.QueryAsync<SongResponseDto>(sql);
+                return await _sqlQueryExecutor.QueryFirstOrDefaultAsync<SongResponseDto>(sql);
             }
 
             return null;
