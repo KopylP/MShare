@@ -17,7 +17,7 @@ namespace MShare.Framework.Types
 
             var value = long.Parse(upc).ToString();
 
-			Thrower.ThrowIf<ArgumentException>(value.Length < 12 || value.Length > 13, "Upc code has incorrect length");
+			Thrower.ThrowIf<ArgumentException>(value.Length > 13, "Upc code has incorrect length");
 
             Value = value;
         }
