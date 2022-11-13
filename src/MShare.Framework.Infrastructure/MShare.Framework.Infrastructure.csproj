@@ -43,6 +43,9 @@
     <None Remove="Dapper.SqlBuilder" />
     <None Remove="System.Data.SqlClient" />
     <None Remove="Npgsql" />
+    <None Remove="AccessToken\Factories\" />
+    <None Remove="System.IdentityModel.Tokens.Jwt" />
+    <None Remove="AccessToken\Factories\Apple\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Clients\" />
@@ -56,6 +59,8 @@
     <Folder Include="Persistance\" />
     <Folder Include="Persistance\EntityFrameworkCore\Postgres\" />
     <Folder Include="SqlClient\" />
+    <Folder Include="AccessToken\Factories\" />
+    <Folder Include="AccessToken\Factories\Apple\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Flurl.Http" Version="3.2.4" />
@@ -80,6 +85,7 @@
     <PackageReference Include="Dapper.SqlBuilder" Version="2.0.78" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
     <PackageReference Include="Npgsql" Version="6.0.7" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.25.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MShare.Framework.Types\MShare.Framework.Types.csproj" />
@@ -88,5 +94,6 @@
     <ProjectReference Include="..\MShare.Framework.Application\MShare.Framework.Application.csproj" />
     <ProjectReference Include="..\MShare.Framework\MShare.Framework.csproj" />
     <ProjectReference Include="..\MShare.Framework.Domain\MShare.Framework.Domain.csproj" />
+    <ProjectReference Include="..\MShare.Framework.WebApi\MShare.Framework.WebApi.csproj" />
   </ItemGroup>
 </Project>

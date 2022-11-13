@@ -3,9 +3,9 @@ namespace Proxy.Api
 {
     public record SongResponseDto
     {
-        public SongSourceDto Song { get; init; }
-        public AlbumSourceDto Album { get; init; }
-        public ArtistSourceDto[] Artists { get; init; }
+        public SongSourceDto Song { get; set; }
+        public AlbumSourceDto Album { get; set; }
+        public ArtistSourceDto[] Artists { get; set; }
     }
 }
 

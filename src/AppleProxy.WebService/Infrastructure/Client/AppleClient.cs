@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MShare.Framework.Infrastructure.AccessToken;
 using MShare.Framework.Types;
 using Proxy.Api;
 
@@ -8,11 +9,12 @@ namespace AppleProxy.WebService.Infrastructure.Client
     {
         private readonly string _publicApiUrl;
         private readonly IMapper _mapper;
+        private readonly IAccessTokenProvider _accessTokenProvider;
 
-        private (int RetryCount, IntRange waitRangeInMilliseconds) _retryPolicy => (2, IntRange.Of(100, 300));
 
-        public AppleClient(IConfiguration configuration, IMapper mapper)
+        public AppleClient(IConfiguration configuration, IMapper mapper, IAccessTokenProvider accessTokenProvider)
         {
+            _accessTokenProvider = accessTokenProvider;
             _publicApiUrl = configuration.GetValue<string>("ApplePublicApiUrl");
             _mapper = mapper;
         }

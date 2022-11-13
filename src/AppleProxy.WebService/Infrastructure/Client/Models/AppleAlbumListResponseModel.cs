@@ -5,7 +5,7 @@ namespace AppleProxy.WebService.Infrastructure.Client.Models
 	{
         public static AppleAlbumListResponseModel Empty => new AppleAlbumListResponseModel
         {
-            Results = new AppleAlbumResponseModel[0]
+            Data = new AppleAlbumResponseModel[0]
         };
     }
 }

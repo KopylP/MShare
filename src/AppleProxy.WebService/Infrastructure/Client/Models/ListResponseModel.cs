@@ -3,9 +3,9 @@ namespace AppleProxy.WebService.Infrastructure.Client.Models
 {
 	public class ListResponseModel<T>
 	{
-        public T[] Results { get; set; }
+        public T[] Data { get; set; }
 
-        public bool IsEmpty => !Results?.Any() ?? true;
+        public bool IsEmpty => !Data?.Any() ?? true;
     }
 }
 

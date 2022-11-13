@@ -9,7 +9,7 @@ namespace AppleProxy.WebService.Infrastructure.Client.Models.Mapping
 		public AutoMapperProfile()
 		{
             CreateMap<AppleTrackListResponseModel, SongsResponseDto>()
-                .ForMember(p => p.Items, o => o.MapFrom(p => p.Results));
+                .ForMember(p => p.Items, o => o.MapFrom(p => p.Data));
 			CreateMap<(AppleTrackResponseModel, string), SongResponseDto>()
 				.ConvertUsing<SongResponseConverter>();
             CreateMap<(AppleAlbumResponseModel, string), AlbumResponseDto>()
@@ -22,19 +22,10 @@ namespace AppleProxy.WebService.Infrastructure.Client.Models.Mapping
             {
                 return new SongResponseDto
                 {
-                    Song = SongSourceDto.Of(source.Track.TrackName, source.Track.TrackId, source.Track.TrackViewUrl, null, source.Region),
-                    Album = new()
-                    {
-                        Name = source.Track.CollectionName,
-                        SourceId = source.Track.CollectionId,
-                        SourceUrl = source.Track.CollectionViewUrl.RemoveFrom('?'),
-                        Region = source.Region,
-                        ImageThumbnailUrl = source.Track.ArtworkUrl100.GetApplePhotoSizeUrl(64),
-                        ImageUrl = source.Track.ArtworkUrl100.GetApplePhotoSizeUrl(640)
-                    },
+                    Song = SongSourceDto.Of(source.Track.Attributes.Name, source.Track.Id, source.Track.Attributes.Url, source.Track.Attributes.Isrc, source.Region),
                     Artists = new ArtistSourceDto[]
                     {
-                        ArtistSourceDto.Of(source.Track.ArtistName, source.Track.CollectionId)
+                        ArtistSourceDto.Of(source.Track.Attributes.ArtistName, source.Track.Relationships.Artists?.Data?.First()?.Id ?? "")
                     },
                 };
             }
@@ -48,16 +39,17 @@ namespace AppleProxy.WebService.Infrastructure.Client.Models.Mapping
                 {
                     Album = new()
                     {
-                        Name = source.Album.CollectionName,
-                        SourceId = source.Album.CollectionId,
-                        SourceUrl = source.Album.CollectionViewUrl.RemoveFrom('?'),
+                        Name = source.Album.Attributes.Name,
+                        SourceId = source.Album.Id,
+                        SourceUrl = source.Album.Attributes.Url.RemoveFrom('?'),
                         Region = source.Region,
-                        ImageThumbnailUrl = source.Album.ArtworkUrl100.GetApplePhotoSizeUrl(64),
-                        ImageUrl = source.Album.ArtworkUrl100.GetApplePhotoSizeUrl(640)
+                        ImageThumbnailUrl = source.Album.Attributes.Artwork.Url.GetApplePhotoSizeUrl(64),
+                        ImageUrl = source.Album.Attributes.Artwork.Url.GetApplePhotoSizeUrl(640),
+                        Upc = source.Album.Attributes.Upc
                     },
                     Artists = new ArtistSourceDto[]
                     {
-                        ArtistSourceDto.Of(source.Album.ArtistName, source.Album.CollectionId)
+                        ArtistSourceDto.Of(source.Album.Attributes.ArtistName, source.Album.Relationships.Artists?.Data?.FirstOrDefault()?.Id ?? "")
                     },
                 };
             }

@@ -30,7 +30,7 @@ namespace MShare.Songs.Application.Commands.SaveAlbum
 
             if (album is null)
             {
-                album = new AlbumEntity(request.SourceId, request.ServiceType, request.Region, request.Upc ?? "111111111" + Number.Random((100, 999))) // TODO remove mock data
+                album = new AlbumEntity(request.SourceId, request.ServiceType, request.Region, request.Upc)
                 {
                     Name = request.Name,
                     ArtistName = request.ArtistName,

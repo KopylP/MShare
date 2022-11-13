@@ -4,7 +4,7 @@
     {
 		public static AppleTrackListResponseModel Empty => new AppleTrackListResponseModel
 		{
-			Results = new AppleTrackResponseModel[0]
+			Data = new AppleTrackResponseModel[0]
 		};
 	}
 }
