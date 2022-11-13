@@ -29,7 +29,7 @@ namespace MShare.Songs.Application.Commands.SaveSong
 
             if (song is null)
             {
-                song = new SongEntity(request.SourceId, request.ServiceType, request.Region, request.Isrc ?? "111111111" + Number.Random((100, 999))) // TODO Remove mock data 
+                song = new SongEntity(request.SourceId, request.ServiceType, request.Region, request.Isrc)
                 {
                     Name = request.Name,
                     ArtistName = request.ArtistName,

@@ -17,6 +17,7 @@ builder.Services.AddAccessTokenStore();
 builder.Services.AddMemoryCache();
 builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(Program)));
 builder.Services.AddScoped<IStreamingServiceClient, SpotifyClient>();
+builder.Services.AddScoped<IAccessTokenProvider, AccessTokenProvider>();
 
 var app = builder.Build();
 

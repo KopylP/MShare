@@ -1,4 +1,7 @@
 ﻿using AppleProxy.WebService.Infrastructure.Client;
+using MShare.Framework.Infrastructure.AccessToken;
+using MShare.Framework.Infrastructure.AccessToken.Factories;
+using MShare.Framework.Infrastructure.AccessToken.Factories.Apple;
 using Proxy.Api;
 using System.Reflection;
 
@@ -14,6 +17,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(Program)));
 builder.Services.AddScoped<IStreamingServiceClient, AppleClient>();
+builder.Services.AddAccessTokenStore();
+builder.Services.AddMemoryCache();
+builder.Services.AddScoped<IAccessTokenProvider, AccessTokenProvider>();
+builder.Services.AddScoped<ITokenFactory, TokenFactory>();
 
 var app = builder.Build();
 

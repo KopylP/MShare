@@ -6,19 +6,20 @@ using System.Text;
 using MShare.Framework.Extentions;
 using Flurl.Http;
 using MShare.Framework.WebApi.Exceptions;
+using MShare.Framework.Infrastructure.AccessToken;
 
 namespace SpotifyProxy.WebService.Infrastructure.Client
 {
     internal class SpotifyClient : IStreamingServiceClient
     {
         private readonly string _publicApiUrl;
-        private readonly IServiceProvider _provider;
+        private readonly IAccessTokenProvider _accessTokenProvider;
         private readonly IMapper _mapper;
 
-        public SpotifyClient(IConfiguration configuration, IServiceProvider provider, IMapper mapper)
+        public SpotifyClient(IConfiguration configuration, IAccessTokenProvider provider, IMapper mapper)
         {
             _publicApiUrl = configuration.GetValue<string>("SpotifyPublicApiUrl");
-            _provider = provider;
+            _accessTokenProvider = provider;
             _mapper = mapper;
         }
 
@@ -34,7 +35,7 @@ namespace SpotifyProxy.WebService.Infrastructure.Client
                 .SetQueryParam("type", "track")
                 .SetQueryParam("q", searchParam)
                 .SetQueryParam("limit", GetLimit(request, limit))
-                .GetAuthorizedAsync<SpotifySearchTrackResponseModel>(_provider);
+                .GetAuthorizedAsync<SpotifySearchTrackResponseModel>(_accessTokenProvider);
 
             return _mapper.Map<SongsResponseDto>(response);
         }
@@ -52,7 +53,7 @@ namespace SpotifyProxy.WebService.Infrastructure.Client
             var response = await _publicApiUrl
                 .AppendPathSegment("albums")
                 .AppendPathSegment(request.Url?.GetSpotifyId())
-                .GetAuthorizedAsync<SpotifyAlbumResponseModel>(_provider);
+                .GetAuthorizedAsync<SpotifyAlbumResponseModel>(_accessTokenProvider);
 
             return _mapper.Map<AlbumResponseDto>(response);
         }
@@ -62,7 +63,7 @@ namespace SpotifyProxy.WebService.Infrastructure.Client
             return await _publicApiUrl
                 .AppendPathSegment("tracks")
                 .AppendPathSegment(id)
-                .GetAuthorizedAsync<SpotifyTrackResponseModel>(_provider);
+                .GetAuthorizedAsync<SpotifyTrackResponseModel>(_accessTokenProvider);
         }
 
         private async Task<SpotifyAlbumResponseModel> GetAlbumAsync(string? id)
@@ -70,7 +71,7 @@ namespace SpotifyProxy.WebService.Infrastructure.Client
             return await _publicApiUrl
                 .AppendPathSegment("albums")
                 .AppendPathSegment(id)
-                .GetAuthorizedAsync<SpotifyAlbumResponseModel>(_provider);
+                .GetAuthorizedAsync<SpotifyAlbumResponseModel>(_accessTokenProvider);
         }
 
         private static int GetLimit(FindSongsRequestDto model, int limit)

@@ -1,6 +1,8 @@
 ﻿using AppleProxy.WebService.Helpers;
 using AppleProxy.WebService.Infrastructure.Client.Models;
+using Flurl;
 using Flurl.Http;
+using MShare.Framework.Types.Addresses;
 using MShare.Framework.WebApi.Exceptions;
 using Proxy.Api;
 
@@ -10,19 +12,19 @@ namespace AppleProxy.WebService.Infrastructure.Client
 	{
         public async Task<AlbumResponseDto> GetAlbumByUrl(GetByUrlRequestDto request)
         {
-            var region = request.Url?.GetAppleRegion() ?? string.Empty;
+            var region = request.Url?.GetAppleRegion() ?? CountryCode2.Us.ToString();
 
             var response = await _publicApiUrl
-                .AppendPathSegmentIf(region != string.Empty, region)
-                .AppendPathSegment("lookup")
-                .SetQueryParam("id", request.Url?.GetAppleCollectionId())
-                .SetQueryParam("limit", 1)
-                .GetJsonWithRetryAsync<AppleAlbumListResponseModel>(_retryPolicy);
+                .AppendPathSegment("catalog")
+                .AppendPathSegment(region)
+                .AppendPathSegment("albums")
+                .AppendPathSegment(request.Url?.GetAppleCollectionId())
+                .GetAuthorizedAsync<AppleAlbumListResponseModel>(_accessTokenProvider);
 
-            if (!response.Results.Any())
+            if (!response.Data.Any())
                 throw new NotFoundException();
 
-            return _mapper.Map<AlbumResponseDto>((response.Results.First(), region));
+            return _mapper.Map<AlbumResponseDto>((response.Data.First(), region));
         }
     }
 }

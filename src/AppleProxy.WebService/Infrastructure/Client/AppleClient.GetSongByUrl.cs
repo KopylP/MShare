@@ -15,16 +15,20 @@ namespace AppleProxy.WebService.Infrastructure.Client
             var region = request.Url?.GetAppleRegion() ?? string.Empty;
 
             var response = await _publicApiUrl
-                .AppendPathSegmentIf(region != string.Empty, region)
-                .AppendPathSegment("lookup")
-                .SetQueryParam("id", request.Url?.GetAppleSongId())
-                .SetQueryParam("limit", 1)
-                .GetJsonWithRetryAsync<AppleTrackListResponseModel>(_retryPolicy);
+                .AppendPathSegment("catalog")
+                .AppendPathSegment(region)
+                .AppendPathSegment("songs")
+                .AppendPathSegment(request.Url?.GetAppleSongId())
+                .GetAuthorizedAsync<AppleTrackListResponseModel>(_accessTokenProvider);
+            var album = await GetAlbumByUrl(request);
 
-            if (!response.Results.Any())
+            if (!response.Data.Any())
                 throw new NotFoundException();
 
-            return _mapper.Map<SongResponseDto>((response.Results.First(), region));
+            var result = _mapper.Map<SongResponseDto>((response.Data.First(), region));
+            result.Album = album.Album;
+
+            return result;
         }
     }
 }

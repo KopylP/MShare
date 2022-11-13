@@ -1,8 +1,13 @@
 ﻿using System;
 using Flurl;
 using Flurl.Http;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using MShare.Framework.Infrastructure.AccessToken;
 using MShare.Framework.Types;
 using MShare.Framework.Types.Variations;
+using MShare.Framework.WebApi.Exceptions;
 using Polly;
 
 namespace Flurl.Http
@@ -60,6 +65,38 @@ namespace Flurl.Http
             var url = new Url(request);
             return url.AppendPathSegmentIf(condition, value);
         }
+
+        public static async Task<T> GetAuthorizedAsync<T>(this Flurl.Url url, IAccessTokenProvider tokenProvider)
+        {
+            var currentToken = await tokenProvider.GetAsync(newToken: false);
+
+            IFlurlResponse? response = null;
+            var request = url.ToRequest();
+
+            if (currentToken.IsSuccess)
+            {
+                request = request.WithBearerToken(currentToken.Data);
+                response = await request.AllowAnyHttpStatus().GetAsync();
+            }
+
+            if (currentToken.IsFail || response?.StatusCode != StatusCodes.Status200OK)
+            {
+                var newToken = await tokenProvider.GetAsync(newToken: true);
+
+                if (newToken.IsFail)
+                    throw new UnauthorizedException();
+
+                request = request.WithBearerToken(newToken.Data);
+            }
+
+            response = await request.AllowAnyHttpStatus().GetAsync();
+
+            if (response.StatusCode != StatusCodes.Status200OK)
+                throw new ApiException(response.StatusCode);
+
+            return await response.GetJsonAsync<T>();
+        }
     }
 }
+
 
