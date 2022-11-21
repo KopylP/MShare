@@ -7,6 +7,8 @@ using MShare.Framework.Extentions;
 using Flurl.Http;
 using MShare.Framework.WebApi.Exceptions;
 using MShare.Framework.Infrastructure.AccessToken;
+using MassTransit;
+using System.Collections.Generic;
 
 namespace SpotifyProxy.WebService.Infrastructure.Client
 {
@@ -80,6 +82,24 @@ namespace SpotifyProxy.WebService.Infrastructure.Client
                 return 1;
 
             return limit;
+        }
+
+        public async Task<SongResponseDto> GetSongByIsrcAsync(GetByIsrcRequestDto request)
+        {
+            var response = await _publicApiUrl
+                .AppendPathSegment("search")
+                .SetQueryParam("type", "track")
+                .SetQueryParam("q", $"isrc:{request.Isrc}")
+                .SetQueryParam("limit", 1)
+                .GetAuthorizedAsync<SpotifySearchTrackResponseModel>(_accessTokenProvider);
+
+            if (!response?.Tracks?.Items?.Any() ?? true)
+                throw new NotFoundException();
+
+            var song = response.Tracks.Items.First();
+            var album = await GetAlbumAsync(song.Album.Id);
+
+            return _mapper.Map<SongResponseDto>((song, album));
         }
     }
 }

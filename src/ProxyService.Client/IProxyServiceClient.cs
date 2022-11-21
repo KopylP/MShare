@@ -1,4 +1,5 @@
 ﻿using System;
+using MShare.Framework.Types.Addresses;
 
 namespace ProxyService.Client
 {
@@ -6,7 +7,8 @@ namespace ProxyService.Client
 	{
 		// Song
 		Task<SongResponseDto> GetSongByUrlAsync(string url);
-		Task<SongsResponseDto> FindSongAsync(string songName, string artistName, string? albumName);
+		Task<SongResponseDto> GetSongByIsrcAsync(string isrc, CountryCode2? region = default);
+        Task<SongsResponseDto> FindSongAsync(string songName, string artistName, string? albumName);
 
 		// Album
         Task<AlbumResponseDto> GetAlbumByUrlAsync(string url);

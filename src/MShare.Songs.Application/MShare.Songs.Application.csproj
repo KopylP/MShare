@@ -24,6 +24,11 @@
     <None Remove="Commands\" />
     <None Remove="Commands\SaveAlbum\" />
     <None Remove="Commands\SaveSong\" />
+    <None Remove="Shared\" />
+    <None Remove="Shared\Mapping\" />
+    <None Remove="Queries\V1\GetSongForService\" />
+    <None Remove="Queries\V1\Shared\" />
+    <None Remove="Queries\V1\Shared\SqlBuilders\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Queries\" />
@@ -39,6 +44,11 @@
     <Folder Include="Commands\" />
     <Folder Include="Commands\SaveAlbum\" />
     <Folder Include="Commands\SaveSong\" />
+    <Folder Include="Shared\" />
+    <Folder Include="Shared\Mapping\" />
+    <Folder Include="Queries\V1\GetSongForService\" />
+    <Folder Include="Queries\V1\Shared\" />
+    <Folder Include="Queries\V1\Shared\SqlBuilders\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MShare.Framework.Application\MShare.Framework.Application.csproj" />

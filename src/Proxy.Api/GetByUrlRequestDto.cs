@@ -7,5 +7,10 @@ namespace Proxy.Api
         [Url]
         [Required]
         public string Url { get; set; }
+
+        public static GetByUrlRequestDto Of(string url) => new GetByUrlRequestDto
+        {
+            Url = url
+        };
     }
 }
