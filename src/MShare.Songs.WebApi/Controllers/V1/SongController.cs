@@ -8,6 +8,7 @@ using MShare.Framework.Api;
 using MShare.Framework.Api.Shared;
 using MShare.Framework.WebApi;
 using MShare.Framework.WebApi.Filters;
+using MShare.Songs.Abstractions;
 using MShare.Songs.Api.Queries.Dtos.V1;
 using MShare.Songs.Api.Queries.V1;
 using MShare.Songs.Api.V1.Queries;
@@ -34,7 +35,7 @@ namespace MShare.Songs.WebApi.Controllers.V1
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ApiError))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ApiError))]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ListResponseDto<SongResponseDto>))]
-        public async Task<IActionResult> GetForService(string originService, string sourceId, string destinationService)
+        public async Task<IActionResult> GetForService(StreamingServiceType originService, string sourceId, StreamingServiceType destinationService)
             => await ExecuteAsync(new GetSongForServiceQuery
             {
                 DestinationService = destinationService,
