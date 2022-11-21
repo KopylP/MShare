@@ -12,7 +12,7 @@ using MShare.Songs.Domain;
 
 namespace MShare.Songs.Application.Queries.V1.GetSongByUrl
 {
-    internal class QueryHandler : IQueryHandler<GetSongByUrlQuery, SongResponseDto>
+    internal partial class QueryHandler : IQueryHandler<GetSongByUrlQuery, SongResponseDto>
     {
         private readonly IStreamingServiceTypeRecognizer _recognizer;
         private readonly IProxyServiceClientFactory _clientFactory;
@@ -71,18 +71,7 @@ namespace MShare.Songs.Application.Queries.V1.GetSongByUrl
 
             if (idResult.IsSuccess)
             {
-                var sql =
-                    $"SELECT " +
-                        $"service_type as ServiceType, source_id SongSourceId, " +
-                        $"image_url CoverImageUrl, source_url SongUrl, " +
-                        $"artist_name ArtistName, album_name AlbumName," +
-                        $"name SongName " +
-                    $"FROM song " +
-                    $"WHERE service_type = '{streamingService}' " +
-                        $"AND source_id='{idResult.Data}' " +
-                        $"AND region='{regionResult.Data}'";
-
-                return await _sqlQueryExecutor.QueryFirstOrDefaultAsync<SongResponseDto>(sql);
+                return await _sqlQueryExecutor.QueryFirstOrDefaultAsync<SongResponseDto>(SqlBuilder.Of(streamingService, idResult.Data!, regionResult.Data!));
             }
 
             return null;

@@ -21,6 +21,13 @@ public class SongController : ControllerBase
     public async Task<IActionResult> GetByUrl([FromQuery] GetByUrlRequestDto model)
         => Ok(await _client.GetSongByUrlAsync(model));
 
+    [HttpGet("Isrc")]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(string))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SongResponseDto))]
+    public async Task<IActionResult> GetByIsrc([FromQuery] GetByIsrcRequestDto model)
+    => Ok(await _client.GetSongByIsrcAsync(model));
+
     [HttpGet("Find")]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]

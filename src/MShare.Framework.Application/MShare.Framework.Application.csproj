@@ -17,6 +17,8 @@
     <None Remove="Context\" />
     <None Remove="MassTransit" />
     <None Remove="SqlClient\" />
+    <None Remove="Dapper" />
+    <None Remove="Dapper.SqlBuilder" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Actions\" />
@@ -27,5 +29,7 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="MassTransit" Version="8.0.6" />
+    <PackageReference Include="Dapper" Version="2.0.123" />
+    <PackageReference Include="Dapper.SqlBuilder" Version="2.0.78" />
   </ItemGroup>
 </Project>

@@ -9,6 +9,7 @@
   <ItemGroup>
     <None Remove="MediatR" />
     <None Remove="MassTransit" />
+    <None Remove="Shared\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MediatR" Version="10.0.1" />
@@ -16,5 +17,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MShare.Framework.Types\MShare.Framework.Types.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Shared\" />
   </ItemGroup>
 </Project>

@@ -1,5 +1,4 @@
 ﻿using System;
-using AppleProxy.WebService.Helpers;
 using AppleProxy.WebService.Infrastructure.Client.Models;
 using Flurl;
 using Flurl.Http;
@@ -11,22 +10,22 @@ namespace AppleProxy.WebService.Infrastructure.Client
 {
 	public partial class AppleClient
 	{
-        public async Task<SongResponseDto> GetSongByUrlAsync(GetByUrlRequestDto request)
+        public async Task<SongResponseDto> GetSongByIsrcAsync(GetByIsrcRequestDto request)
         {
-            var region = request.Url?.GetAppleRegion() ?? CountryCode2.Us.ToString();
+            var region = request.Region ?? CountryCode2.Us.ToString();
 
             var response = await _publicApiUrl
                 .AppendPathSegment("catalog")
                 .AppendPathSegment(region)
                 .AppendPathSegment("songs")
-                .AppendPathSegment(request.Url?.GetAppleSongId())
+                .SetQueryParam("filter[isrc]", request.Isrc)
                 .GetAuthorizedAsync<AppleTrackListResponseModel>(_accessTokenProvider);
 
             if (!response.Data.Any())
                 throw new NotFoundException();
 
-            var album = await GetAlbumByUrl(request);
             var result = _mapper.Map<SongResponseDto>((response.Data.First(), region));
+            var album = await GetAlbumByUrl(GetByUrlRequestDto.Of(result.Song.SourceUrl.RemoveFrom('?')));
             result.Album = album.Album;
 
             return result;
