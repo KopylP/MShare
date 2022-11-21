@@ -19,8 +19,8 @@ namespace MShare.Songs.Application.Queries.V1.GetSongForService
 				_region = region;
 			}
 
-			public static SqlBuilder Of(string region, string streamingService, string sourceId)
-				=> new SqlBuilder(region, streamingService, sourceId);
+			public static SqlBuilder Of(string region, StreamingServiceType streamingService, string sourceId)
+				=> new SqlBuilder(region, streamingService.ToString(), sourceId);
 
             protected override void ApplySelect(SelectBuilder selectBuilder)
             {

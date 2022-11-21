@@ -10,6 +10,7 @@ using MShare.Framework.Infrastructure.Localization;
 using MShare.Songs.Infrastructure;
 using MShare.Songs.Infrastructure.Persistence;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Text.Json.Serialization;
 
 namespace MShare.Songs.WebApi.Core
 {
@@ -21,9 +22,10 @@ namespace MShare.Songs.WebApi.Core
 		{
 			_builder = builder;
 
-            builder.Services.AddControllers();
-            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddControllers()
+                .AddJsonOptions(opts => opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
+            builder.Services.AddEndpointsApiExplorer();
         }
 
         public Bootstrapper InitApiVersioning(ApiVersion version)

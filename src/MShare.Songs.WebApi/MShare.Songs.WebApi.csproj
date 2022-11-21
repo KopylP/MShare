@@ -25,6 +25,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,6 +38,7 @@
     <None Remove="Filters\" />
     <None Remove="Resourses\" />
     <None Remove="Microsoft.EntityFrameworkCore.Tools" />
+    <None Remove="Microsoft.AspNetCore.Mvc.Formatters.Json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
