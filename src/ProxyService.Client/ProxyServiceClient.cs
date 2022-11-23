@@ -3,6 +3,7 @@ using Flurl;
 using Flurl.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MShare.Framework.Types;
 using MShare.Framework.Types.Addresses;
 
 namespace ProxyService.Client
@@ -36,14 +37,22 @@ namespace ProxyService.Client
             return await Get<AlbumResponseDto>(uri);
         }
 
+        public async Task<SongResponseDto> GetSongByIdAsync(string id, CountryCode2? region = null)
+        {
+            var uri = _baseUrl
+               .AppendPathSegments("api", "Song", "Id")
+               .SetQueryParam("Id", id)
+               .SetQueryParam("Region", region?.Code ?? CountryCode2.Invariant);
+
+            return await Get<SongResponseDto>(uri);
+        }
+
         public async Task<SongResponseDto> GetSongByIsrcAsync(string isrc, CountryCode2? region = default)
         {
-            var shouldAddRegion = !region?.Code?.Equals(CountryCode2.Invariant.Code) ?? false;
-
             var uri = _baseUrl
                .AppendPathSegments("api", "Song", "Isrc")
                .SetQueryParam("Isrc", isrc)
-               .SetQueryParamIf(shouldAddRegion, "Region", region?.Code);
+               .SetQueryParam("Region", region?.Code ?? CountryCode2.Invariant);
 
             return await Get<SongResponseDto>(uri);
         }

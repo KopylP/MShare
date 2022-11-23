@@ -22,4 +22,7 @@
   <ItemGroup>
     <Folder Include="Utils\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MShare.Framework.Types\MShare.Framework.Types.csproj" />
+  </ItemGroup>
 </Project>

@@ -24,7 +24,7 @@ namespace MShare.Songs.Application.Queries.V1.GetAlbumByUrl
             IStreamingServiceTypeRecognizer recognizer,
             IProxyServiceClientFactory clientFactory,
             IMapper mapper,
-            IRequestContext<GetAlbumByUrlQuery, AlbumResponseDto> context,
+            IQueryContext<GetAlbumByUrlQuery, AlbumResponseDto> context,
             ISqlQueryExecutor sqlQueryExecutor,
             IMetadataExtractor idExtractor)
         {

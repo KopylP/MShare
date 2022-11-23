@@ -8,7 +8,7 @@ namespace MShare.Framework.Application.Context
     {
         public static IServiceCollection RegisterRequestContexts(this IServiceCollection services, params Type[] assembliesTypes)
         {
-            services.RegisterGenericForAssemblies(typeof(IRequestContext<, >), assembliesTypes);
+            services.RegisterGenericForAssemblies(typeof(IQueryContext<, >), assembliesTypes);
 
             return services;
         }

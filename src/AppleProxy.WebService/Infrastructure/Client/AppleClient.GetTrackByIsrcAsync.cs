@@ -10,9 +10,9 @@ namespace AppleProxy.WebService.Infrastructure.Client
 {
 	public partial class AppleClient
 	{
-        public async Task<SongResponseDto> GetSongByIsrcAsync(GetByIsrcRequestDto request)
+        public async Task<SongResponseDto> GetTrackByIsrcAsync(GetByIsrcRequestDto request)
         {
-            var region = request.Region ?? CountryCode2.Us.ToString();
+            var region = request.Region != CountryCode2.Invariant.ToString() ? request.Region : CountryCode2.Us.ToString();
 
             var response = await _publicApiUrl
                 .AppendPathSegment("catalog")

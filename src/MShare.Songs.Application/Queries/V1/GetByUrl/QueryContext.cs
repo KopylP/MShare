@@ -6,7 +6,7 @@ using MShare.Songs.Api.Queries.V1;
 
 namespace MShare.Songs.Application.Queries.V1.GetByUrl
 {
-	public class QueryContext : IRequestContext<GetByUrlQuery, GetByUrlResponseDto>
+	public class QueryContext : IQueryContext<GetByUrlQuery, GetByUrlResponseDto>
 	{
 		public MediaType MediaType { get; set; }
 		public StreamingServiceType ServiceType { get; set; }
