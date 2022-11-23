@@ -16,6 +16,7 @@ namespace MShare.Songs.Application.Queries.V1.Shared.SqlBuilders
             selectBuilder.Select("album_name AlbumName");
             selectBuilder.Select("name SongName");
         }
+
         protected override sealed string GetTamplate()
         {
             return "SELECT /**select**/ FROM song /**where**/";

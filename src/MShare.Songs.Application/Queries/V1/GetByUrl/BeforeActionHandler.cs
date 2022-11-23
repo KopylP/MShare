@@ -21,7 +21,7 @@ namespace MShare.Songs.Application.Queries.V1.GetByUrl
         public BeforeActionHandler(IMediaTypeRecognizer mediaTypeRecognizer,
             IStreamingServiceTypeRecognizer streamingServiceTypeRecognizer,
             IStringLocalizer<SharedResource> sharedLocalizer,
-            IRequestContext<GetByUrlQuery, GetByUrlResponseDto> context)
+            IQueryContext<GetByUrlQuery, GetByUrlResponseDto> context)
         {
             _mediaTypeRecognizer = mediaTypeRecognizer;
             _streamingServiceTypeRecognizer = streamingServiceTypeRecognizer;

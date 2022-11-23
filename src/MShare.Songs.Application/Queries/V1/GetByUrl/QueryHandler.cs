@@ -18,7 +18,7 @@ namespace MShare.Songs.Application.Queries.V1.GetByUrl
         private readonly IMediator _mediator;
         private readonly QueryContext _context;
 
-        public QueryHandler(IRequestContext<GetByUrlQuery, GetByUrlResponseDto> context, IMediator mediator)
+        public QueryHandler(IQueryContext<GetByUrlQuery, GetByUrlResponseDto> context, IMediator mediator)
         {
             _mediator = mediator;
             _context = (QueryContext)context;

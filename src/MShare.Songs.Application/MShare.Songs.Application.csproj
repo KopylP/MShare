@@ -29,6 +29,8 @@
     <None Remove="Queries\V1\GetSongForService\" />
     <None Remove="Queries\V1\Shared\" />
     <None Remove="Queries\V1\Shared\SqlBuilders\" />
+    <None Remove="Queries\V1\Shared\QueryContexts\" />
+    <None Remove="Queries\V1\Shared\Mapping\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Queries\" />
@@ -49,6 +51,8 @@
     <Folder Include="Queries\V1\GetSongForService\" />
     <Folder Include="Queries\V1\Shared\" />
     <Folder Include="Queries\V1\Shared\SqlBuilders\" />
+    <Folder Include="Queries\V1\Shared\QueryContexts\" />
+    <Folder Include="Queries\V1\Shared\Mapping\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MShare.Framework.Application\MShare.Framework.Application.csproj" />

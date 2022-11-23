@@ -23,7 +23,7 @@ namespace MShare.Songs.Application.Queries.V1.GetSongByUrl
         private readonly IExecutionContext _executionContext;
 
         public QueryHandler(
-            IRequestContext<GetSongByUrlQuery, SongResponseDto> context,
+            IQueryContext<GetSongByUrlQuery, SongResponseDto> context,
             IStreamingServiceTypeRecognizer recognizer,
             IProxyServiceClientFactory clientFactory,
             IMapper mapper,

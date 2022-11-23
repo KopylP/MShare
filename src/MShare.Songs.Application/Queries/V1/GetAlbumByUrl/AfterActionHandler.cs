@@ -16,7 +16,7 @@ namespace MShare.Songs.Application.Queries.V1.GetAlbumByUrl
         private readonly IIntegrationBus _integrationBus;
         private readonly IMapper _mapper;
 
-        public AfterActionHandler(IRequestContext<GetAlbumByUrlQuery, AlbumResponseDto> context, IIntegrationBus integrationBus, IMapper mapper)
+        public AfterActionHandler(IQueryContext<GetAlbumByUrlQuery, AlbumResponseDto> context, IIntegrationBus integrationBus, IMapper mapper)
         {
             _context = (QueryContext)context;
             _integrationBus = integrationBus;

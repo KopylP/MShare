@@ -1,16 +1,15 @@
 ﻿using System;
 using AutoMapper;
-using MShare.Songs.Abstractions;
 using MShare.Songs.Api.Events;
-using MShare.Songs.Api.Queries.Dtos.V1;
+using MShare.Songs.Application.Queries.V1.Shared.QueryContexts;
 
-namespace MShare.Songs.Application.Queries.V1.GetSongByUrl
+namespace MShare.Songs.Application.Queries.V1.Shared.Mapping
 {
 	public class AutoMapperProfile : Profile
 	{
 		public AutoMapperProfile()
 		{
-            CreateMap<QueryContext, UnsavedSongRequestedEvent>()
+            CreateMap<ISongResponseQueryContext, UnsavedSongRequestedEvent>()
                 .ForMember(p => p.Name, o => o.MapFrom(p => p.ServiceProxyResponse.Song.Name))
                 .ForMember(p => p.ArtistName, o => o.MapFrom(p => string.Join(" & ", p.ServiceProxyResponse.Artists.Select(p => p.Name))))
                 .ForMember(p => p.ImageUrl, o => o.MapFrom(p => p.ServiceProxyResponse.Album.ImageUrl))
@@ -27,4 +26,3 @@ namespace MShare.Songs.Application.Queries.V1.GetSongByUrl
         }
 	}
 }
-

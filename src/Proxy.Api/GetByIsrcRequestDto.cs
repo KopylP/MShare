@@ -8,7 +8,7 @@ namespace Proxy.Api
         [Required]
         public string Isrc { get; set; }
 
-        public string? Region { get; set; }
+        public string Region { get; set; }
     }
 }
 
