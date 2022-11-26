@@ -17,7 +17,7 @@ namespace MShare.Songs.Application.Queries.V1.GetSongForService
             {
                 _streamingService = streamingService;
                 _isrc = isrc;
-                _region = region;
+                _region = region.ToUpperInvariant();
             }
 
             public static SongByIsrcSqlBuilder Of(string region, StreamingServiceType streamingService, string isrc)
@@ -29,7 +29,7 @@ namespace MShare.Songs.Application.Queries.V1.GetSongForService
 
                 filterBuilder.Where($"service_type = '{_streamingService}'");
                 filterBuilder.Where($"isrc='{_isrc}'");
-                filterBuilder.WhereIf(_region != CountryCode2.Invariant, $"(region = '{CountryCode2.Invariant} OR 'region='{_region}')");
+                filterBuilder.WhereIf(_region != CountryCode2.Invariant, $"(region = '{CountryCode2.Invariant}' OR region='{_region}')");
             }
         }
 	}
