@@ -5,12 +5,16 @@ namespace MShare.Framework.WebApi
 {
 	public class ApiError
 	{
-        public int StatusCode { get; private set; }
+        public int StatusCode { get; protected set; }
 
-        public string StatusDescription { get; private set; }
+        public string StatusDescription { get; protected set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-        public string Message { get; private set; }
+        public string Message { get; protected set; }
+
+        protected ApiError()
+        {
+        }
 
         public ApiError(int statusCode, string statusDescription)
         {

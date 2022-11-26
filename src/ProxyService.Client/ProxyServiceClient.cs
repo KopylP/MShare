@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MShare.Framework.Types;
 using MShare.Framework.Types.Addresses;
+using MShare.Framework.WebApi;
 
 namespace ProxyService.Client
 {
@@ -74,7 +75,8 @@ namespace ProxyService.Client
             }
             catch (FlurlHttpException ex)
             {
-                throw new MShare.Framework.WebApi.Exceptions.ApiException(ex.StatusCode ?? 500, await ex.GetResponseStringAsync());
+                var error = await ex.GetResponseJsonAsync<ApiError>();
+                throw new MShare.Framework.WebApi.Exceptions.ApiException(ex.StatusCode ?? 500, error.Message);
             }
         }
     }
