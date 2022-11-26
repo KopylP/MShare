@@ -19,7 +19,7 @@ namespace MShare.Framework.Types.Addresses
 		{
 			Thrower.ThrowIf<ArgumentException>(
 				countryCode2 is null || (countryCode2.Length != 2 && countryCode2.ToLowerInvariant() != "invariant"),
-				$"{nameof(countryCode2)} is not valid");
+				$" Country code {nameof(countryCode2)} is not valid");
 
 			Code = countryCode2.ToUpperInvariant();
         }

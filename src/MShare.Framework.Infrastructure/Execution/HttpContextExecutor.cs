@@ -4,6 +4,7 @@ using Microsoft.Net.Http.Headers;
 using Microsoft.AspNetCore.Http;
 using MediatR;
 using MShare.Framework.Types.Addresses;
+using MShare.Framework.WebApi.Exceptions;
 
 namespace MShare.Framework.Infrastructure.Execution
 {
@@ -38,9 +39,17 @@ namespace MShare.Framework.Infrastructure.Execution
                 executionContext.Os = os;
                 executionContext.OsVersion = osVersion;
                 executionContext.DeviceId = deviceId;
-                executionContext.StoreRegion = !string.IsNullOrEmpty(region.ToString())
-                    ? region
-                    : CountryCode2.Invariant.ToString();
+
+                try
+                {
+                    executionContext.StoreRegion = !string.IsNullOrEmpty(region.ToString())
+                        ? CountryCode2.Of(region).Code
+                        : CountryCode2.Invariant.ToString();
+                }
+                catch (ArgumentException)
+                {
+                    throw new BadRequestException("Region is invalid");
+                }
             }
         }
     }
