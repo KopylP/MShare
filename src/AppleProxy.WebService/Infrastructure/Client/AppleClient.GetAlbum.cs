@@ -12,7 +12,7 @@ namespace AppleProxy.WebService.Infrastructure.Client
 	{
         public async Task<AlbumResponseDto> GetAlbumById(GetByIdRequestDto request)
         {
-            var region = request.Region != CountryCode2.Invariant.ToString() ? request.Region : CountryCode2.Us.ToString();
+            var region = GetRegion(request.Region);
 
             var response = await _publicApiUrl
                 .AppendPathSegment("catalog")
@@ -24,15 +24,14 @@ namespace AppleProxy.WebService.Infrastructure.Client
             if (!response.Data.Any())
                 throw new NotFoundException();
 
-            return _mapper.Map<AlbumResponseDto>((response.Data.First(), request.Region));
+            return _mapper.Map<AlbumResponseDto>((response.Data.First(), region));
         }
 
         public async Task<AlbumResponseDto> GetAlbumByUrl(GetByUrlRequestDto request)
         {
             var id = request.Url?.GetAppleCollectionId();
-            var region = request.Url?.GetAppleRegion() ?? CountryCode2.Us.ToString();
 
-            return await GetAlbumById(GetByIdRequestDto.Of(id, region));
+            return await GetAlbumById(GetByIdRequestDto.Of(id, GetRegion(request.Region)));
         }
     }
 }

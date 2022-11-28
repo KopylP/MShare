@@ -46,7 +46,7 @@ namespace MShare.Songs.Infrastructure.Persistence
 
             builder.Property(p => p.SourceUrl)
                 .IsRequired()
-                .HasColumnType("varchar(200)")
+                .HasColumnType("varchar(2000)")
                 .HasColumnName("source_url");
 
             builder.Property(p => p.ImageUrl)

@@ -29,4 +29,3 @@ namespace MShare.Songs.Application.Shared.Mapping
         }
 	}
 }
-

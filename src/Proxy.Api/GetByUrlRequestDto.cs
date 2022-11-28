@@ -5,12 +5,14 @@ namespace Proxy.Api
     public record GetByUrlRequestDto
     {
         [Url]
-        [Required]
         public string Url { get; set; }
 
-        public static GetByUrlRequestDto Of(string url) => new GetByUrlRequestDto
+        public string Region { get; set; }
+
+        public static GetByUrlRequestDto Of(string url, string region) => new GetByUrlRequestDto
         {
-            Url = url
+            Url = url,
+            Region = region
         };
-    }
+    } 
 }

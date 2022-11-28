@@ -29,6 +29,7 @@ namespace MShare.Framework.Types.Addresses
 		public override string ToString() => Code;
 
 		public static implicit operator CountryCode2(string code) => CountryCode2.Of(code);
+		public static implicit operator string(CountryCode2 code) => code.ToString();
     }
 }
 

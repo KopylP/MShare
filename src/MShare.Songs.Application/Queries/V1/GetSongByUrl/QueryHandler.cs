@@ -19,7 +19,7 @@ namespace MShare.Songs.Application.Queries.V1.GetSongByUrl
         private readonly IMapper _mapper;
         private readonly QueryContext _context;
         private readonly ISqlQueryExecutor _sqlQueryExecutor;
-        private readonly IMetadataExtractor _idExtractor;
+        private readonly IMetadataExtractor _extractor;
         private readonly IExecutionContext _executionContext;
 
         public QueryHandler(
@@ -28,7 +28,7 @@ namespace MShare.Songs.Application.Queries.V1.GetSongByUrl
             IProxyServiceClientFactory clientFactory,
             IMapper mapper,
             ISqlQueryExecutor sqlQueryExecutor,
-            IMetadataExtractor idExtractor,
+            IMetadataExtractor extractor,
             IExecutionContext executionContext)
         {
             _recognizer = recognizer;
@@ -36,7 +36,7 @@ namespace MShare.Songs.Application.Queries.V1.GetSongByUrl
             _mapper = mapper;
             _context = (QueryContext)context;
             _sqlQueryExecutor = sqlQueryExecutor;
-            _idExtractor = idExtractor;
+            _extractor = extractor;
             _executionContext = executionContext;
         }
 
@@ -52,7 +52,7 @@ namespace MShare.Songs.Application.Queries.V1.GetSongByUrl
 
                 var serviceClient = _clientFactory.Create(recognizerServiceResult.Data);
 
-                var songResult = await serviceClient.GetSongByUrlAsync(request.SongUrl);
+                var songResult = await serviceClient.GetSongByUrlAsync(request.SongUrl, _executionContext.StoreRegion);
                 NotFoundException.ThrowIf(songResult is null, "Song not found");
 
                 _context.ServiceProxyResponse = songResult;
@@ -66,12 +66,11 @@ namespace MShare.Songs.Application.Queries.V1.GetSongByUrl
 
         public async Task<SongResponseDto?> GetSongFromDatabase(StreamingServiceType streamingService, string url)
         {
-            var idResult = _idExtractor.ExtractId(url, streamingService, MediaType.Song);
-            var regionResult = _idExtractor.ExtractRegion(url, streamingService, MediaType.Song);
+            var idResult = _extractor.ExtractId(url, streamingService, MediaType.Song);
 
             if (idResult.IsSuccess)
             {
-                return await _sqlQueryExecutor.QueryFirstOrDefaultAsync<SongResponseDto>(SqlBuilder.Of(streamingService, idResult.Data!, regionResult.Data!));
+                return await _sqlQueryExecutor.QueryFirstOrDefaultAsync<SongResponseDto>(SqlBuilder.Of(streamingService, idResult.Data!, _executionContext.StoreRegion));
             }
 
             return null;

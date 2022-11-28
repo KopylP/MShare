@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MShare.Framework.Api;
 using MShare.Framework.Application;
 using MShare.Framework.Application.Context;
 using MShare.Framework.Application.SqlClient;
@@ -19,6 +20,7 @@ namespace MShare.Songs.Application.Queries.V1.GetAlbumByUrl
         private readonly QueryContext _context;
         private readonly ISqlQueryExecutor _sqlQueryExecutor;
         private readonly IMetadataExtractor _idExtractor;
+        private readonly IExecutionContext _executionContext;
 
         public QueryHandler(
             IStreamingServiceTypeRecognizer recognizer,
@@ -26,7 +28,8 @@ namespace MShare.Songs.Application.Queries.V1.GetAlbumByUrl
             IMapper mapper,
             IQueryContext<GetAlbumByUrlQuery, AlbumResponseDto> context,
             ISqlQueryExecutor sqlQueryExecutor,
-            IMetadataExtractor idExtractor)
+            IMetadataExtractor idExtractor,
+            IExecutionContext executionContext)
         {
             _recognizer = recognizer;
             _clientFactory = clientFactory;
@@ -34,6 +37,7 @@ namespace MShare.Songs.Application.Queries.V1.GetAlbumByUrl
             _context = (QueryContext)context;
             _sqlQueryExecutor = sqlQueryExecutor;
             _idExtractor = idExtractor;
+            _executionContext = executionContext;
         }
 
         public async Task<AlbumResponseDto> Handle(GetAlbumByUrlQuery request, CancellationToken cancellationToken)
@@ -47,7 +51,7 @@ namespace MShare.Songs.Application.Queries.V1.GetAlbumByUrl
             {
                 var serviceClient = _clientFactory.Create(recognizerServiceResult.Data);
 
-                var albumResult = await serviceClient.GetAlbumByUrlAsync(request.AlbumUrl);
+                var albumResult = await serviceClient.GetAlbumByUrlAsync(request.AlbumUrl, _executionContext.StoreRegion);
                 NotFoundException.ThrowIf(albumResult is null, "Album not found");
 
                 _context.ServiceProxyResponse = albumResult;
@@ -62,9 +66,8 @@ namespace MShare.Songs.Application.Queries.V1.GetAlbumByUrl
         public async Task<AlbumResponseDto?> GetAlbumFromDatabase(StreamingServiceType streamingService, string url)
         {
             var idResult = _idExtractor.ExtractId(url, streamingService, MediaType.Album);
-            var regionResult = _idExtractor.ExtractRegion(url, streamingService, MediaType.Album);
 
-            if (idResult.IsSuccess && regionResult.IsSuccess)
+            if (idResult.IsSuccess)
             {
                 var sql =
                     $"SELECT " +
@@ -74,7 +77,7 @@ namespace MShare.Songs.Application.Queries.V1.GetAlbumByUrl
                     $"FROM album " +
                     $"WHERE service_type = '{streamingService}' " +
                         $"AND source_id='{idResult.Data}' " +
-                        $"AND region='{regionResult.Data}'";
+                        $"AND region='{_executionContext.StoreRegion}'";
 
                 return await _sqlQueryExecutor.QueryFirstOrDefaultAsync<AlbumResponseDto>(sql);
             }
