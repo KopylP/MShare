@@ -29,40 +29,42 @@ namespace ProxyService.Client
             return await Get<SongsResponseDto>(url);
         }
 
-        public async Task<AlbumResponseDto> GetAlbumByUrlAsync(string url)
+        public async Task<AlbumResponseDto> GetAlbumByUrlAsync(string url, CountryCode2 region)
         {
             var uri = _baseUrl
                .AppendPathSegments("api", "Album", "Url")
-               .SetQueryParam("url", url);
+               .SetQueryParam("url", url)
+               .SetQueryParam("Region", region.Code);
 
             return await Get<AlbumResponseDto>(uri);
         }
 
-        public async Task<SongResponseDto> GetSongByIdAsync(string id, CountryCode2? region = null)
+        public async Task<SongResponseDto> GetSongByIdAsync(string id, CountryCode2 region)
         {
             var uri = _baseUrl
                .AppendPathSegments("api", "Song", "Id")
                .SetQueryParam("Id", id)
-               .SetQueryParam("Region", region?.Code ?? CountryCode2.Invariant);
+               .SetQueryParam("Region", region.Code);
 
             return await Get<SongResponseDto>(uri);
         }
 
-        public async Task<SongResponseDto> GetSongByIsrcAsync(string isrc, CountryCode2? region = default)
+        public async Task<SongResponseDto> GetSongByIsrcAsync(string isrc, CountryCode2 region)
         {
             var uri = _baseUrl
                .AppendPathSegments("api", "Song", "Isrc")
                .SetQueryParam("Isrc", isrc)
-               .SetQueryParam("Region", region?.Code ?? CountryCode2.Invariant);
+               .SetQueryParam("Region", region.Code);
 
             return await Get<SongResponseDto>(uri);
         }
 
-        public async Task<SongResponseDto> GetSongByUrlAsync(string url)
+        public async Task<SongResponseDto> GetSongByUrlAsync(string url, CountryCode2 region)
         {
             var uri = _baseUrl
                 .AppendPathSegments("api", "Song", "Url")
-                .SetQueryParam("url", url);
+                .SetQueryParam("url", url)
+                .SetQueryParam("Region", region.Code);
 
             return await Get<SongResponseDto>(uri);
         }

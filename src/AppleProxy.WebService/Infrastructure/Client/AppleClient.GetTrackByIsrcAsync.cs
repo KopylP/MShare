@@ -12,7 +12,7 @@ namespace AppleProxy.WebService.Infrastructure.Client
 	{
         public async Task<SongResponseDto> GetTrackByIsrcAsync(GetByIsrcRequestDto request)
         {
-            var region = request.Region != CountryCode2.Invariant.ToString() ? request.Region : CountryCode2.Us.ToString();
+            var region = GetRegion(request.Region);
 
             var response = await _publicApiUrl
                 .AppendPathSegment("catalog")
@@ -25,7 +25,7 @@ namespace AppleProxy.WebService.Infrastructure.Client
                 throw new NotFoundException();
 
             var result = _mapper.Map<SongResponseDto>((response.Data.First(), region));
-            var album = await GetAlbumByUrl(GetByUrlRequestDto.Of(result.Song.SourceUrl.RemoveFrom('?')));
+            var album = await GetAlbumByUrl(GetByUrlRequestDto.Of(result.Song.SourceUrl.RemoveFrom('?'), region));
             result.Album = album.Album;
 
             return result;

@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "SpotifyProxy.WebService",
+    "title": "AppleProxy.WebService",
     "version": "1.0"
   },
   "paths": {
@@ -14,10 +14,16 @@
           {
             "name": "Url",
             "in": "query",
-            "required": true,
             "schema": {
               "type": "string",
               "format": "uri"
+            }
+          },
+          {
+            "name": "Region",
+            "in": "query",
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -179,10 +185,16 @@
           {
             "name": "Url",
             "in": "query",
-            "required": true,
             "schema": {
               "type": "string",
               "format": "uri"
+            }
+          },
+          {
+            "name": "Region",
+            "in": "query",
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -259,7 +271,6 @@
           {
             "name": "Isrc",
             "in": "query",
-            "required": true,
             "schema": {
               "type": "string"
             }

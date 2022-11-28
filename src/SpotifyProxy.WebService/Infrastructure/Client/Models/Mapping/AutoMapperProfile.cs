@@ -7,25 +7,23 @@ namespace SpotifyProxy.WebService.Infrastructure.Client.Models.Mapping
     {
         public AutoMapperProfile()
         {
-            CreateMap<(SpotifyTrackResponseModel Song, SpotifyAlbumResponseModel Album), SongResponseDto>().ConvertUsing<SongResponseConverter>();
+            CreateMap<(SpotifyTrackResponseModel Song, SpotifyAlbumResponseModel Album, string Region), SongResponseDto>().ConvertUsing<SongResponseConverter>();
             CreateMap<SpotifyArtistResponseModel, ArtistSourceDto>()
                 .ConvertUsing<ArtistResponseConverter>();
-            CreateMap<SpotifyAlbumResponseModel, AlbumSourceDto>()
+            CreateMap<(SpotifyAlbumResponseModel, string), AlbumSourceDto>()
                 .ConvertUsing<AlbumConverter>();
-            CreateMap<SpotifySearchTrackResponseModel, SongsResponseDto>()
-                .ForMember(p => p.Items, o => o.MapFrom(p => p.Tracks.Items ?? Array.Empty<SpotifyTrackResponseModel>()));
-            CreateMap<SpotifyAlbumResponseModel, AlbumResponseDto>()
+            CreateMap<(SpotifyAlbumResponseModel Album, string Region), AlbumResponseDto>()
                 .ConvertUsing<AlbumResponseConverter>();
         }
 
-        private class SongResponseConverter : ITypeConverter<(SpotifyTrackResponseModel Song, SpotifyAlbumResponseModel Album), SongResponseDto>
+        private class SongResponseConverter : ITypeConverter<(SpotifyTrackResponseModel Song, SpotifyAlbumResponseModel Album, string Region), SongResponseDto>
         {
-            public SongResponseDto Convert((SpotifyTrackResponseModel Song, SpotifyAlbumResponseModel Album) source, SongResponseDto destination, ResolutionContext context)
+            public SongResponseDto Convert((SpotifyTrackResponseModel Song, SpotifyAlbumResponseModel Album, string Region) source, SongResponseDto destination, ResolutionContext context)
             {
                 return new SongResponseDto
                 {
-                    Song = SongSourceDto.Of(source.Song.Name, source.Song.Id, source.Song.ExternalUrls.Spotify, source.Song.ExternalIds.Isrc),
-                    Album = context.Mapper.Map<AlbumSourceDto>(source.Album),
+                    Song = SongSourceDto.Of(source.Song.Name, source.Song.Id, source.Song.ExternalUrls.Spotify, source.Song.ExternalIds.Isrc, source.Region),
+                    Album = context.Mapper.Map<AlbumSourceDto>((source.Album, source.Region)),
                     Artists = context.Mapper.Map<ArtistSourceDto[]>(source.Song.Artists)
                 };
             }
@@ -39,31 +37,31 @@ namespace SpotifyProxy.WebService.Infrastructure.Client.Models.Mapping
             }
         }
 
-        private class AlbumConverter : ITypeConverter<SpotifyAlbumResponseModel, AlbumSourceDto>
+        private class AlbumConverter : ITypeConverter<(SpotifyAlbumResponseModel Album, string Region), AlbumSourceDto>
         {
-            public AlbumSourceDto Convert(SpotifyAlbumResponseModel source, AlbumSourceDto destination, ResolutionContext context)
+            public AlbumSourceDto Convert((SpotifyAlbumResponseModel Album, string Region) source, AlbumSourceDto destination, ResolutionContext context)
             {
                 return new AlbumSourceDto()
                 {
-                    Name = source.Name,
-                    SourceId = source.Id,
-                    SourceUrl = source.ExternalUrls.Spotify,
-                    Region = "Invariant",
-                    ImageUrl = source.Images.First().Url,
-                    ImageThumbnailUrl = source.Images.Last().Url,
-                    Upc = source.ExternalIds.Upc ?? ""
+                    Name = source.Album.Name,
+                    SourceId = source.Album.Id,
+                    SourceUrl = source.Album.ExternalUrls.Spotify,
+                    Region = source.Region,
+                    ImageUrl = source.Album.Images.First().Url,
+                    ImageThumbnailUrl = source.Album.Images.Last().Url,
+                    Upc = source.Album.ExternalIds.Upc ?? "",
                 };
             }
         }
 
-        private class AlbumResponseConverter : ITypeConverter<SpotifyAlbumResponseModel, AlbumResponseDto>
+        private class AlbumResponseConverter : ITypeConverter<(SpotifyAlbumResponseModel Album, string Region), AlbumResponseDto>
         {
-            public AlbumResponseDto Convert(SpotifyAlbumResponseModel source, AlbumResponseDto destination, ResolutionContext context)
+            public AlbumResponseDto Convert((SpotifyAlbumResponseModel Album, string Region) source, AlbumResponseDto destination, ResolutionContext context)
             {
                 return new AlbumResponseDto
                 {
-                    Album = context.Mapper.Map<AlbumSourceDto>(source),
-                    Artists = context.Mapper.Map<ArtistSourceDto[]>(source.Artists)
+                    Album = context.Mapper.Map<AlbumSourceDto>((source.Album, source.Region)),
+                    Artists = context.Mapper.Map<ArtistSourceDto[]>(source.Album.Artists)
                 };
             }
         }

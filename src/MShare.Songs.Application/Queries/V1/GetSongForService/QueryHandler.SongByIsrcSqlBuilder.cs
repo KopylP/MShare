@@ -28,7 +28,7 @@ namespace MShare.Songs.Application.Queries.V1.GetSongForService
                 base.ApplyFilters(filterBuilder);
 
                 filterBuilder.Where($"service_type = '{_streamingService}'");
-                filterBuilder.Where($"isrc='{_isrc}'");
+                filterBuilder.Where($"UPPER(isrc)='{_isrc.ToUpperInvariant()}'");
                 filterBuilder.WhereIf(_region != CountryCode2.Invariant, $"(region = '{CountryCode2.Invariant}' OR region='{_region}')");
             }
         }
