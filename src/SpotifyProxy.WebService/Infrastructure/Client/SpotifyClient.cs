@@ -68,7 +68,7 @@ namespace SpotifyProxy.WebService.Infrastructure.Client
                 .AppendPathSegment("search")
                 .SetQueryParam("type", "track")
                 .SetQueryParam("q", $"isrc:{requestDto.Isrc}")
-                .SetQueryParam("region", GetRegion(requestDto.Region))
+                .SetQueryParam("market", region)
                 .SetQueryParam("limit", 1);
 
             var response = await request
