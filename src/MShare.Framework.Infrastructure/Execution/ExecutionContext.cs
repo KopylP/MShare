@@ -10,6 +10,7 @@ namespace MShare.Framework.Infrastructure.Execution
         public string Os { get; set; }
         public string DeviceId { get; set; }
         public string StoreRegion { get; set; }
+        public string UserLocate { get; set; }
 
         public void UpdateFrom(IExecutionContext context)
         {
@@ -17,6 +18,7 @@ namespace MShare.Framework.Infrastructure.Execution
             Os = context.Os;
             DeviceId = context.DeviceId;
             StoreRegion = context.StoreRegion;
+            UserLocate = context.UserLocate;
         }
     }
 }

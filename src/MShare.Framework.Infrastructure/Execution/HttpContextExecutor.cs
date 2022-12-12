@@ -33,24 +33,44 @@ namespace MShare.Framework.Infrastructure.Execution
             var osVersion = _httpContextAccessor.HttpContext.Request.Headers["mshare-os-version"];
             var deviceId = _httpContextAccessor.HttpContext.Request.Headers["mshare-device-id"];
             var region = _httpContextAccessor.HttpContext.Request.Headers["mshare-store-region"];
+            var locate = _httpContextAccessor.HttpContext.Request.Headers["mshare-user-locate"];
 
             if (_executionContext is ExecutionContext executionContext)
             {
                 executionContext.Os = os;
                 executionContext.OsVersion = osVersion;
                 executionContext.DeviceId = deviceId;
-
-                try
-                {
-                    executionContext.StoreRegion = !string.IsNullOrEmpty(region.ToString())
-                        ? CountryCode2.Of(region).Code
-                        : CountryCode2.Invariant.ToString();
-                }
-                catch (ArgumentException)
-                {
-                    throw new BadRequestException("Region is invalid");
-                }
+                executionContext.StoreRegion = GetStoreRegion(region, locate);
+                executionContext.UserLocate = GetLocate(locate);
             }
+        }
+
+        private string GetStoreRegion(string region, string locate)
+        {
+            try
+            {
+                region = !string.IsNullOrEmpty(region) ? region : locate;
+
+                if (string.IsNullOrEmpty(region))
+                    return CountryCode2.Invariant;
+
+                if (region.Length == 3)
+                    return CountryCodeConverter.To2(CountryCode3.Of(region));
+
+                return CountryCode2.Of(region);
+            }
+            catch (ArgumentException)
+            {
+                throw new BadRequestException("Region is invalid");
+            }
+        }
+
+        private string GetLocate(string? locate)
+        {
+            if (string.IsNullOrEmpty(locate))
+                return CountryCode2.Invariant.Code;
+
+            return CountryCode2.Of(locate).Code;
         }
     }
 }
