@@ -9,6 +9,7 @@ namespace MShare.Framework.Api
 		public string Os { get; }
 		public string DeviceId { get; }
         public string StoreRegion { get; }
+		public string UserLocate { get; }
     }
 }
 
