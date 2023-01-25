@@ -61,16 +61,23 @@ namespace MShare.Framework.Infrastructure.Execution
             }
             catch (ArgumentException)
             {
-                throw new BadRequestException("Region is invalid");
+                throw new BadRequestException("Store region is invalid");
             }
         }
 
         private string GetLocate(string? locate)
         {
-            if (string.IsNullOrEmpty(locate))
-                return CountryCode2.Invariant.Code;
+            try
+            {
+                if (string.IsNullOrEmpty(locate))
+                    return CountryCode2.Invariant.Code;
 
-            return CountryCode2.Of(locate).Code;
+                return CountryCode2.Of(locate).Code;
+            }
+            catch (ArgumentException)
+            {
+                throw new BadRequestException("Locate is invalid");
+            }
         }
     }
 }
