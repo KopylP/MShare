@@ -9,7 +9,7 @@ namespace AppleProxy.WebService.Infrastructure.Client
 {
 	public partial class AppleClient
 	{
-        public async Task<SongsResponseDto> FindSongAsync(FindSongsRequestDto request)
+        public async Task<SongsResponseDto> FindTrackAsync(FindSongsRequestDto request)
         {
             throw new NotImplementedException();
         }

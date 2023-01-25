@@ -20,7 +20,11 @@ namespace AppleProxy.WebService.Infrastructure.Client
             _mapper = mapper;
         }
 
+        public Task<AlbumResponseDto> GetAlbumByUpc(GetByUpcRequestDto request)
+        {
+            throw new NotImplementedException();
+        }
+
         private string GetRegion(string region) => region != CountryCode2.Invariant.ToString() ? region : ApiConstants.DefaultRegion;
     }
 }
-

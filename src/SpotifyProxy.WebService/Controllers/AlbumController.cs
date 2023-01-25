@@ -20,6 +20,22 @@ namespace SpotifyProxy.WebService.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AlbumResponseDto))]
         public async Task<IActionResult> GetByUrl([FromQuery] GetByUrlRequestDto model)
             => Ok(await _client.GetAlbumByUrl(model));
+
+        [HttpGet("Id")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SongResponseDto))]
+        public async Task<IActionResult> GetById([FromQuery] GetByIdRequestDto model)
+            => Ok(await _client.GetAlbumById(model));
+
+        [HttpGet("Upc")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SongResponseDto))]
+        public async Task<IActionResult> GetByIsrc([FromQuery] GetByUpcRequestDto model)
+            => Ok(await _client.GetAlbumByUpc(model));
     }
 }
 

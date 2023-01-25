@@ -26,7 +26,7 @@ namespace SpotifyProxy.WebService.Infrastructure.Client
             _mapper = mapper;
         }
 
-        public async Task<SongsResponseDto> FindSongAsync(FindSongsRequestDto request)
+        public async Task<SongsResponseDto> FindTrackAsync(FindSongsRequestDto request)
         {
             throw new NotImplementedException();
             //var searchParam = new StringBuilder();
@@ -52,13 +52,10 @@ namespace SpotifyProxy.WebService.Infrastructure.Client
         public async Task<AlbumResponseDto> GetAlbumByUrl(GetByUrlRequestDto request)
         {
             var region = GetRegion(request.Region);
-            var response = await _publicApiUrl
-                .AppendPathSegment("albums")
-                .AppendPathSegment(request.Url?.GetSpotifyId())
-                .SetQueryParam("region", GetRegion(region))
-                .GetAuthorizedAsync<SpotifyAlbumResponseModel>(_accessTokenProvider);
+            var response = await GetAlbumAsync(request.Url.GetSpotifyId(), region);
 
-            return _mapper.Map<AlbumResponseDto>((response, region));        }
+            return _mapper.Map<AlbumResponseDto>((response, region));
+        }
 
         public async Task<SongResponseDto> GetTrackByIsrcAsync(GetByIsrcRequestDto requestDto)
         {
@@ -104,6 +101,36 @@ namespace SpotifyProxy.WebService.Infrastructure.Client
             var album = await GetAlbumAsync(song.Album.Id, region);
 
             return _mapper.Map<SongResponseDto>((song, album, region));
+        }
+
+        public async Task<AlbumResponseDto> GetAlbumByUpc(GetByUpcRequestDto requestDto)
+        {
+            var region = GetRegion(requestDto.Region);
+
+            var request = _publicApiUrl
+                .AppendPathSegment("search")
+                .SetQueryParam("type", "album")
+                .SetQueryParam("q", $"upc:{requestDto.Upc}")
+                .SetQueryParam("market", region)
+                .SetQueryParam("limit", 1);
+
+            var response = await request
+                .GetAuthorizedAsync<SpotifySearchAlbumsResponseModel>(_accessTokenProvider);
+
+            if (!response?.Albums?.Items?.Any() ?? true)
+                throw new NotFoundException();
+
+            var albumId = response.Albums.Items.Select(p => p.Id).First();
+
+            return _mapper.Map<AlbumResponseDto>((await GetAlbumAsync(albumId, region), region));
+        }
+
+        public async Task<AlbumResponseDto> GetAlbumById(GetByIdRequestDto request)
+
+        {
+            var region = GetRegion(request.Region);
+            var album = await GetAlbumAsync(request.Id, region);
+            return _mapper.Map<AlbumResponseDto>((album, region));
         }
 
         private async Task<SpotifyTrackResponseModel> GetTrackAsync(string? id, string region)
