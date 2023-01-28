@@ -4,7 +4,7 @@ using Microsoft.Net.Http.Headers;
 using Microsoft.AspNetCore.Http;
 using MediatR;
 using MShare.Framework.Types.Addresses;
-using MShare.Framework.WebApi.Exceptions;
+using MShare.Framework.Api.Exceptions;
 
 namespace MShare.Framework.Infrastructure.Execution
 {

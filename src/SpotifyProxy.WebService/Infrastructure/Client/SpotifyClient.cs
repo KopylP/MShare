@@ -5,11 +5,11 @@ using AutoMapper;
 using System.Text;
 using MShare.Framework.Extentions;
 using Flurl.Http;
-using MShare.Framework.WebApi.Exceptions;
 using MShare.Framework.Infrastructure.AccessToken;
 using MassTransit;
 using System.Collections.Generic;
 using MShare.Framework.Types.Addresses;
+using MShare.Framework.Api.Exceptions;
 
 namespace SpotifyProxy.WebService.Infrastructure.Client
 {

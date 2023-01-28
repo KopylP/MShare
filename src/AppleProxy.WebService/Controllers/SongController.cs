@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MShare.Framework.WebApi.Exceptions;
 using MShare.Framework.WebApi.Filters;
 using Proxy.Api;
 using Unidecode.NET;

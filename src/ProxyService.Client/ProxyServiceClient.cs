@@ -78,7 +78,7 @@ namespace ProxyService.Client
             catch (FlurlHttpException ex)
             {
                 var error = await ex.GetResponseJsonAsync<ApiError>();
-                throw new MShare.Framework.WebApi.Exceptions.ApiException(ex.StatusCode ?? 500, error.Message);
+                throw new MShare.Framework.Api.Exceptions.ApiException(ex.StatusCode ?? 500, error.Message);
             }
         }
     }

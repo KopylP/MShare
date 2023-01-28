@@ -3,7 +3,6 @@ using System.IO;
 using Microsoft.Extensions.Localization;
 using MShare.Framework.Exceptions;
 using MShare.Framework.Types;
-using MShare.Framework.WebApi.Exceptions;
 using MShare.Songs.Abstractions;
 using MShare.Songs.Domain;
 using MShare.Songs.Resources;

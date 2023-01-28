@@ -1,8 +1,8 @@
 ﻿using System;
 using Microsoft.Extensions.Localization;
+using MShare.Framework.Api.Exceptions;
 using MShare.Framework.Application.Actions;
 using MShare.Framework.Application.Context;
-using MShare.Framework.WebApi.Exceptions;
 using MShare.Songs.Abstractions;
 using MShare.Songs.Api.Queries.Dtos.V1;
 using MShare.Songs.Api.Queries.V1;

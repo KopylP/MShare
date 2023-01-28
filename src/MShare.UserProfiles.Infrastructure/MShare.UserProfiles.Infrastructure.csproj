@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MShare.Framework.Infrastructure\MShare.Framework.Infrastructure.csproj" />
+    <ProjectReference Include="..\MShare.Framework.System\MShare.Framework.System.csproj" />
+    <ProjectReference Include="..\MShare.UserProfiles.Application\MShare.UserProfiles.Application.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Persistence\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Persistence\" />
+  </ItemGroup>
+</Project>

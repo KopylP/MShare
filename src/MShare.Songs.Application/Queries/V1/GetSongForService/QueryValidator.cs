@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.Extensions.Configuration;
+using MShare.Framework.Api.Exceptions;
 using MShare.Framework.Api.Shared;
 using MShare.Framework.Application.Actions;
 using MShare.Framework.Exceptions;
-using MShare.Framework.WebApi.Exceptions;
 using MShare.Songs.Abstractions;
 using MShare.Songs.Api.Queries.Dtos.V1;
 using MShare.Songs.Api.Queries.V1;

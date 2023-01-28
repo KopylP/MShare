@@ -1,6 +1,6 @@
 ﻿using System;
+using MShare.Framework.Api.Exceptions;
 using MShare.Framework.Application.Actions;
-using MShare.Framework.WebApi.Exceptions;
 using MShare.Songs.Api.Queries.Dtos.V1;
 using MShare.Songs.Api.Queries.V1;
 using MShare.Songs.Api.V1.Queries;

@@ -3,7 +3,6 @@ using AutoMapper;
 using MediatR;
 using MShare.Framework.Application;
 using MShare.Framework.Application.Context;
-using MShare.Framework.WebApi.Exceptions;
 using MShare.Songs.Abstractions;
 using MShare.Songs.Api.Queries.Dtos.V1;
 using MShare.Songs.Api.Queries.V1;

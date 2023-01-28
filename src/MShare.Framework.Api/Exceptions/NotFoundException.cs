@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace MShare.Framework.WebApi.Exceptions
+namespace MShare.Framework.Api.Exceptions
 {
     public class NotFoundException : ApiException
     {

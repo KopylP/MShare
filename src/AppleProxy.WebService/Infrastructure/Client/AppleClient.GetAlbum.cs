@@ -2,8 +2,8 @@
 using AppleProxy.WebService.Infrastructure.Client.Models;
 using Flurl;
 using Flurl.Http;
+using MShare.Framework.Api.Exceptions;
 using MShare.Framework.Types.Addresses;
-using MShare.Framework.WebApi.Exceptions;
 using Proxy.Api;
 
 namespace AppleProxy.WebService.Infrastructure.Client

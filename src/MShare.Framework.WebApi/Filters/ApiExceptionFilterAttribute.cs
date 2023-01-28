@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using MShare.Framework.WebApi.Exceptions;
+using MShare.Framework.Api.Exceptions;
 
 namespace MShare.Framework.WebApi.Filters
 {

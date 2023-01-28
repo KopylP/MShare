@@ -88,12 +88,9 @@
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.25.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MShare.Framework.Types\MShare.Framework.Types.csproj" />
-    <ProjectReference Include="..\..\MShare.Framework.Api\MShare.Framework.Api.csproj" />
     <ProjectReference Include="..\MShare.Framework.Api\MShare.Framework.Api.csproj" />
     <ProjectReference Include="..\MShare.Framework.Application\MShare.Framework.Application.csproj" />
     <ProjectReference Include="..\MShare.Framework\MShare.Framework.csproj" />
     <ProjectReference Include="..\MShare.Framework.Domain\MShare.Framework.Domain.csproj" />
-    <ProjectReference Include="..\MShare.Framework.WebApi\MShare.Framework.WebApi.csproj" />
   </ItemGroup>
 </Project>

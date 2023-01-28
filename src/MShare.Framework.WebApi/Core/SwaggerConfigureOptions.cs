@@ -1,15 +1,19 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace MShare.Songs.WebApi.Core
-{
-	public class SwaggerConfigureOptions : IConfigureOptions<SwaggerGenOptions>
+namespace MShare.Framework.WebApi.Core
+{ 
+    public class SwaggerConfigureOptions : IConfigureOptions<SwaggerGenOptions>
     {
         private readonly IApiVersionDescriptionProvider _provider;
+        private readonly SwaggerConfigurationTitle _title;
 
-        public SwaggerConfigureOptions(IApiVersionDescriptionProvider provider) => _provider = provider;
+        public SwaggerConfigureOptions(IApiVersionDescriptionProvider provider, SwaggerConfigurationTitle title)
+            => (_provider, _title) = (provider, title);
 
         public void Configure(SwaggerGenOptions options)
         {
@@ -17,7 +21,7 @@ namespace MShare.Songs.WebApi.Core
             {
                 options.SwaggerDoc(desc.GroupName, new Microsoft.OpenApi.Models.OpenApiInfo
                 {
-                    Title = "Songs API",
+                    Title = _title.Title,
                     Version = desc.ApiVersion.ToString(),
                 });
             }

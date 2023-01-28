@@ -44,3 +44,10 @@ services:
     volumes:
       - ~/Volumes/mshare.database:/var/lib/postgresql/data
 
+  mshare.userprofiles.webapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5004
+      - MSHARE_USER_PROFILES_ConnectionStrings__DefaultConnection=Host=mshare.database;Port=5432;Database=mshare_user_profiles;Username=root;Password=76G34dZgLmbhVuCYCXz7
+    ports:
+      - "81:5004"

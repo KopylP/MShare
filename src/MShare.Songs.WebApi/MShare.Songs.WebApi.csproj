@@ -30,7 +30,6 @@
 
   <ItemGroup>
     <None Remove="Controllers\" />
-    <None Remove="Core\" />
     <None Remove="Microsoft.AspNetCore.Mvc.Versioning" />
     <None Remove="MediatR" />
     <None Remove="Controllers\V1\" />
@@ -42,7 +41,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Core\" />
     <Folder Include="Controllers\V1\" />
     <Folder Include="Filters\" />
     <Folder Include="Resourses\" />

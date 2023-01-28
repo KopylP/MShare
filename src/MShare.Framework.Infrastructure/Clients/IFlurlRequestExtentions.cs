@@ -4,10 +4,10 @@ using Flurl.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MShare.Framework.Api.Exceptions;
 using MShare.Framework.Infrastructure.AccessToken;
 using MShare.Framework.Types;
 using MShare.Framework.Types.Variations;
-using MShare.Framework.WebApi.Exceptions;
 using Polly;
 
 namespace Flurl.Http
