@@ -5,6 +5,9 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - APPLE_PROXY_URLS=http://+:5001
+      - APPLE_PROXY_Apple__Token__Secret=$APPLE_PROXY_Apple__Token__Secret
+      - APPLE_PROXY_Apple__Token__KeyId=$APPLE_PROXY_Apple__Token__KeyId
+      - APPLE_PROXY_Apple__Token__Issuer=$APPLE_PROXY_Apple__Token__Issuer
     ports:
       - "5001:5001"
     volumes:
@@ -15,6 +18,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - SPOTIFY_PROXY_URLS=http://+:5002
+      - SPOTIFY_PROXY_SpotifyAuthCredentials=$SPOTIFY_PROXY_SpotifyAuthCredentials
     ports:
       - "5002:5002"
     volumes:
