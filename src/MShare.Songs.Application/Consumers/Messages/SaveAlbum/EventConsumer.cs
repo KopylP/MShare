@@ -12,7 +12,7 @@ using MShare.Songs.Api.Commands.V1;
 
 namespace MShare.Songs.Application.Consumers.Messages.SaveAlbum
 {
-	public class EventConsumer : IIntegrationEventConsumer<UnsavedAlbumRequestedEvent>, IConsumer<UnsavedAlbumRequestedEvent>
+	public class EventConsumer : IIntegrationEventConsumer<UnsavedAlbumRequestedEvent>
     {
         private readonly IConsumerContextExecutor _executor;
         private readonly IMapper _mapper;

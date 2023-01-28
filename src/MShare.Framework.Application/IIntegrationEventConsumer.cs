@@ -1,5 +1,4 @@
-﻿using System;
-using MassTransit;
+﻿using MassTransit;
 using MShare.Framework.Api;
 
 namespace MShare.Framework.Application
