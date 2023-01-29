@@ -16,15 +16,13 @@ As development continues, the project will gain more functionality and become mo
 
 # Micro service architecture
 
-The MShare project utilizes a microservice architecture to organize its various components. The microservices are designed to work together to provide a cohesive system, while also being independently deployable and maintainable. The project currently contains five microservices: AppleProxy, SpotifyProxy, Songs, UserProfile, and Identity.
+The MShare project utilizes a microservice architecture to organize its various components. The microservices are designed to work together to provide a cohesive system, while also being independently deployable and maintainable. The project currently contains four microservices: AppleProxy, SpotifyProxy, Songs and Identity.
 
 The AppleProxy and SpotifyProxy microservices are designed to handle communication between the project and the respective music streaming service APIs (Apple Music and Spotify). These services act as intermediaries between the project and the APIs, allowing for easier management of API calls and hiding implementation details from the other microservices. They also expose an identical REST API for communication with the Songs microservice.
 
 The Songs microservice is responsible for implementing the logic for sharing music between different streaming services. It communicates with the proxy services (AppleProxy and SpotifyProxy) to retrieve information about songs, albums, and artists.
 
-The UserProfile microservice manages user profiles.
-
-The Identity microservice is responsible for user identification and the creation of JSON Web Tokens (JWT) for authentication. It uses Apple identification for this.
+The Identity microservice is responsible for manages user profiles and user identification and the creation of JSON Web Tokens (JWT) for authentication. It uses Apple identification for this.
 
 In future, we are planning to add a Statistic microservice that will store statistics about shared songs, albums, and artists, allowing for better tracking and analysis of user interactions with the system.
 
