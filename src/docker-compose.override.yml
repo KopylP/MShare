@@ -5,9 +5,9 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - APPLE_PROXY_URLS=http://+:5001
-      - APPLE_PROXY_Apple__Token__Secret=$APPLE_PROXY_Apple__Token__Secret
-      - APPLE_PROXY_Apple__Token__KeyId=$APPLE_PROXY_Apple__Token__KeyId
-      - APPLE_PROXY_Apple__Token__Issuer=$APPLE_PROXY_Apple__Token__Issuer
+      - APPLE_PROXY_Apple__Token__Secret=$MSHARE_Apple__Token__Secret
+      - APPLE_PROXY_Apple__Token__KeyId=$MSHARE_Apple__Token__KeyId
+      - APPLE_PROXY_Apple__Token__Issuer=$MSHARE_Apple__Token__Issuer
     ports:
       - "5001:5001"
     volumes:
@@ -43,3 +43,16 @@ services:
       - "5433:5432"
     volumes:
       - ~/Volumes/mshare.database:/var/lib/postgresql/data
+
+  mshare.identity.webapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - IDENTITY_Apple__Token__Secret=$MSHARE_Apple__Token__Secret
+      - IDENTITY_Apple__Token__KeyId=$MSHARE_Apple__Token__KeyId
+      - IDENTITY_Apple__Token__Issuer=$MSHARE_Apple__Token__Issuer
+    ports:
+      - "81:80"
+    volumes:
+      - ~/.aspnet/https:/root/.aspnet/https:ro
+      - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
