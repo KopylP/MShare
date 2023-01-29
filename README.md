@@ -41,10 +41,14 @@ The MShare project utilizes the following technology stack and approach ***(for 
 1. To run the MShare project, you need to have `Docker` and `Docker Compose` installed on your computer. 
 2. After installation, you need to set up **system environment variables** to configure the project:
 
-- `SPOTIFY_PROXY_SpotifyAuthCredentials`: Spotify basic token for accessing the Spotify API
+- `SPOTIFY_PROXY_SpotifyAuthCredentials`: Spotify client credentials for accessing the Spotify API
 - `MSHARE_Apple__Token__KeyId`: Apple authentication key for a p8 certificate
 - `MSHARE_Apple__Token__Issuer`: Apple Team Id
 - `MSHARE_Apple__Token__Secret`: Private key from an Apple p8 certificate
+
+*To get client credentials for Spotify API, you need to create a Spotify Developer account, then create a new project and obtain your client ID and client secret. These two pieces of information are used as client credentials in OAuth 2.0 authentication process to access Spotify API endpoints.*
+
+*A p8 certificate for the Apple Music API can be obtained through the Apple Developer Account by creating a new key in the "Certificates, Identifiers & Profiles" section and enabling the "Apple Music API." The generated certificate, along with the Key ID, can then be downloaded for use.*
 
 3. Navigate to the `"src"` folder of the MShare project.
 4. Run the command: `docker-compose up`.
