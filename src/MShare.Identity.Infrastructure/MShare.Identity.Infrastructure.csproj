@@ -7,14 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MShare.Framework.Infrastructure\MShare.Framework.Infrastructure.csproj" />
-    <ProjectReference Include="..\MShare.Framework.System\MShare.Framework.System.csproj" />
-    <ProjectReference Include="..\MShare.UserProfiles.Application\MShare.UserProfiles.Application.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <None Remove="Persistence\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Persistence\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MShare.UserProfiles.Application\MShare.Identity.Application.csproj" />
+    <ProjectReference Include="..\MShare.Framework.Infrastructure\MShare.Framework.Infrastructure.csproj" />
+    <ProjectReference Include="..\MShare.Identity.Application\MShare.Identity.Application.csproj" />
   </ItemGroup>
 </Project>

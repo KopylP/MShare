@@ -1,4 +1,4 @@
-﻿namespace MShare.UserProfiles.Application
+﻿namespace MShare.Identity.Infrastructure
 {
 	public interface IAssemblyMarker
 	{

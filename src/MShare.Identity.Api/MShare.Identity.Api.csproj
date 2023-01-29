@@ -6,4 +6,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MShare.Framework.Api\MShare.Framework.Api.csproj" />
+  </ItemGroup>
 </Project>

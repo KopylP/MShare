@@ -2,11 +2,11 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MShare.Framework.Infrastructure.Service;
-using MShare.UserProfiles.Infrastructure.Persistence;
+using MShare.Identity.Infrastructure.Persistence;
 using MShare.Framework.Infrastructure.Persistance;
 using MShare.Framework.Infrastructure.SqlClient;
 
-namespace MShare.UserProfiles.Infrastructure
+namespace MShare.Identity.Infrastructure
 {
     using ApplicationAssemblyMarker = Application.IAssemblyMarker;
 
@@ -18,7 +18,7 @@ namespace MShare.UserProfiles.Infrastructure
                 .AddMediatR(typeof(ApplicationAssemblyMarker))
                 .RegisterFilters(typeof(ApplicationAssemblyMarker))
                 .RegisterRequestContexts(typeof(ApplicationAssemblyMarker))
-                .AddMessaging(opt => opt.SelfUri = "user-profiles", typeof(ApplicationAssemblyMarker))
+                .AddMessaging(opt => opt.SelfUri = "identity", typeof(ApplicationAssemblyMarker))
                     .AddIntegrationBus()
                     .ServiceModuleBuilder
                 .AddPostgres<ApplicationContext>()

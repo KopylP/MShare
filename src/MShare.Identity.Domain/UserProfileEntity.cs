@@ -1,7 +1,7 @@
 ﻿using System;
 using MShare.Framework.Exceptions;
 
-namespace MShare.UserProfiles.Domain
+namespace MShare.Identity.Domain
 {
 	public class UserProfileEntity
 	{

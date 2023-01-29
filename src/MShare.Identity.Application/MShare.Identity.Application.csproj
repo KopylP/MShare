@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MShare.Identity.Domain\MShare.Identity.Domain.csproj" />
+    <ProjectReference Include="..\MShare.Identity.Api\MShare.Identity.Api.csproj" />
+  </ItemGroup>
+</Project>

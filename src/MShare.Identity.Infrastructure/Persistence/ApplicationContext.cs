@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 
-namespace MShare.UserProfiles.Infrastructure.Persistence
+namespace MShare.Identity.Infrastructure.Persistence
 {
     public class ApplicationContext : DbContext
     {

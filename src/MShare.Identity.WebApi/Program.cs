@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MShare.Framework.WebApi.Core;
-using MShare.UserProfiles.Infrastructure;
+using MShare.Identity.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 var apiVersion = new ApiVersion(1, 0);
 
 new Bootstrapper(builder)
-    .InitConfiguration("MSHARE_USER_PROFILES_")
+    .InitConfiguration("MSHARE_IDENTITY_")
     .InitModule(UserProfilesModule.Service)
-    .InitApiVersioning(apiVersion, "User Profiles API")
+    .InitApiVersioning(apiVersion, "Identity API")
     .UseSwagger()
     .MapControllers()
     .UseLocalization()

@@ -54,15 +54,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MShare.Framework.System", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MShare.Songs.Resources", "MShare.Songs.Resources\MShare.Songs.Resources.csproj", "{3C97C365-5F8E-4BC8-867A-DECE8D4A93E7}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserProfiles", "UserProfiles", "{2E1DC3A7-65DD-4144-AECE-8955C0C4388F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{2E1DC3A7-65DD-4144-AECE-8955C0C4388F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MShare.UserProfiles.Domain", "MShare.UserProfiles.Domain\MShare.UserProfiles.Domain.csproj", "{79DD2D45-50A0-4B1A-95E5-13AEDF3CFECC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MShare.Identity.Domain", "MShare.Identity.Domain\MShare.Identity.Domain.csproj", "{79DD2D45-50A0-4B1A-95E5-13AEDF3CFECC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MShare.UserProfiles.Infrastructure", "MShare.UserProfiles.Infrastructure\MShare.UserProfiles.Infrastructure.csproj", "{A4BBD8C0-C9BE-4D35-A07C-BFC901270F32}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MShare.Identity.Infrastructure", "MShare.Identity.Infrastructure\MShare.Identity.Infrastructure.csproj", "{A4BBD8C0-C9BE-4D35-A07C-BFC901270F32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MShare.UserProfiles.Application", "MShare.UserProfiles.Application\MShare.UserProfiles.Application.csproj", "{5145B192-D89B-41F4-9EFE-C3B57A9853A9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MShare.Identity.WebApi", "MShare.Identity.WebApi\MShare.Identity.WebApi.csproj", "{4C3F8431-FD47-418D-9587-1277FFB57A48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MShare.UserProfiles.WebApi", "MShare.UserProfiles.WebApi\MShare.UserProfiles.WebApi.csproj", "{4C3F8431-FD47-418D-9587-1277FFB57A48}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MShare.Identity.Application", "MShare.Identity.Application\MShare.Identity.Application.csproj", "{A469A3B3-FBDB-4021-B319-C3F05BA9587F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MShare.Identity.Api", "MShare.Identity.Api\MShare.Identity.Api.csproj", "{042BC0B1-D3B8-4B46-8722-2241F7BECA5D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -161,14 +163,18 @@ Global
 		{A4BBD8C0-C9BE-4D35-A07C-BFC901270F32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4BBD8C0-C9BE-4D35-A07C-BFC901270F32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4BBD8C0-C9BE-4D35-A07C-BFC901270F32}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5145B192-D89B-41F4-9EFE-C3B57A9853A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5145B192-D89B-41F4-9EFE-C3B57A9853A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5145B192-D89B-41F4-9EFE-C3B57A9853A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5145B192-D89B-41F4-9EFE-C3B57A9853A9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4C3F8431-FD47-418D-9587-1277FFB57A48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4C3F8431-FD47-418D-9587-1277FFB57A48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C3F8431-FD47-418D-9587-1277FFB57A48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C3F8431-FD47-418D-9587-1277FFB57A48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A469A3B3-FBDB-4021-B319-C3F05BA9587F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A469A3B3-FBDB-4021-B319-C3F05BA9587F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A469A3B3-FBDB-4021-B319-C3F05BA9587F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A469A3B3-FBDB-4021-B319-C3F05BA9587F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{042BC0B1-D3B8-4B46-8722-2241F7BECA5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{042BC0B1-D3B8-4B46-8722-2241F7BECA5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{042BC0B1-D3B8-4B46-8722-2241F7BECA5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{042BC0B1-D3B8-4B46-8722-2241F7BECA5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{3D796E3A-8B48-4050-9F08-8ED320208E30} = {E4F3D00D-0B7B-4250-8EE2-4EB67DCBB521}
@@ -192,7 +198,8 @@ Global
 		{3C97C365-5F8E-4BC8-867A-DECE8D4A93E7} = {6225C4D9-3BB1-4CFB-B134-E6BA6E74B362}
 		{79DD2D45-50A0-4B1A-95E5-13AEDF3CFECC} = {2E1DC3A7-65DD-4144-AECE-8955C0C4388F}
 		{A4BBD8C0-C9BE-4D35-A07C-BFC901270F32} = {2E1DC3A7-65DD-4144-AECE-8955C0C4388F}
-		{5145B192-D89B-41F4-9EFE-C3B57A9853A9} = {2E1DC3A7-65DD-4144-AECE-8955C0C4388F}
 		{4C3F8431-FD47-418D-9587-1277FFB57A48} = {2E1DC3A7-65DD-4144-AECE-8955C0C4388F}
+		{A469A3B3-FBDB-4021-B319-C3F05BA9587F} = {2E1DC3A7-65DD-4144-AECE-8955C0C4388F}
+		{042BC0B1-D3B8-4B46-8722-2241F7BECA5D} = {2E1DC3A7-65DD-4144-AECE-8955C0C4388F}
 	EndGlobalSection
 EndGlobal

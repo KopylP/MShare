@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Mail;
 
-namespace MShare.UserProfiles.Domain
+namespace MShare.Identity.Domain
 {
 	public record Email
 	{

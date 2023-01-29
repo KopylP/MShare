@@ -17,10 +17,16 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MShare.UserProfiles.Infrastructure\MShare.UserProfiles.Infrastructure.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\MShare.Identity.Infrastructure\MShare.Identity.Infrastructure.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
     <ProjectReference Include="..\MShare.Framework.WebApi\MShare.Framework.WebApi.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
-    <ProjectReference Include="..\MShare.UserProfiles.Infrastructure\MShare.UserProfiles.Infrastructure.csproj">
+    <ProjectReference Include="..\MShare.Identity.Api\MShare.Identity.Api.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
   </ItemGroup>
