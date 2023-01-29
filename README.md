@@ -37,3 +37,25 @@ The MShare project utilizes the following technology stack and approach ***(for 
 - **Domain-Driven Design (DDD)**
 - **Command-Query Responsibility Segregation (CQRS)**
 
+## How to run project
+1. To run the MShare project, you need to have `Docker` and `Docker Compose` installed on your computer. 
+2. After installation, you need to set up **system environment variables** to configure the project:
+
+- `SPOTIFY_PROXY_SpotifyAuthCredentials`: Spotify basic token for accessing the Spotify API
+- `MSHARE_Apple__Token__KeyId`: Apple authentication key for a p8 certificate
+- `MSHARE_Apple__Token__Issuer`: Apple Team Id
+- `MSHARE_Apple__Token__Secret`: Private key from an Apple p8 certificate
+
+3. Navigate to the `"src"` folder of the MShare project.
+4. Run the command: `docker-compose up`.
+
+This will start the Docker containers for all the microservices defined in the Docker Compose file. The microservices will start, connect to the required services and databases, and be ready to handle requests.
+
+## MShare Project Endpoints with Swagger Documentation 
+MShare currently has the following endpoints:
+- `AppleProxy:` <http://localhost:5001/swagger>
+- `SpotifyProxy:` <http://localhost:5002/swagger>
+- `Songs API:` <http://localhost:80/swagger>
+- `Identity API:` <http://localhost:81/swagger>
+
+
