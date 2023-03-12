@@ -5,6 +5,10 @@ services:
     build:
       context: .
       dockerfile: MShare.Songs.WebApi/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - mshare.dbmigrator
+        #condition: service_completed_successfully
 
   appleproxy:
     container_name: appleproxy
@@ -12,20 +16,30 @@ services:
       context: .
       dockerfile: AppleProxy.WebService/Dockerfile
     restart: unless-stopped
-    depends_on:
-      - mshare.database
 
   spotifyproxy:
     build:
       context: .
       dockerfile: SpotifyProxy.WebService/Dockerfile
+    restart: unless-stopped
 
   mshare.database:
     image: postgres:14.5
     restart: always
 
-
   mshare.identity.webapi:
     build:
       context: .
       dockerfile: MShare.Identity.WebApi/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - mshare.dbmigrator
+        #condition: service_completed_successfully
+
+  mshare.dbmigrator:
+    build:
+      context: .
+      dockerfile: MShare.DbMigrator/Dockerfile
+    depends_on:
+      - mshare.database
+

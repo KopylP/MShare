@@ -56,3 +56,7 @@ services:
     volumes:
       - ~/.aspnet/https:/root/.aspnet/https:ro
       - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+
+  mshare.dbmigrator:
+    environment:
+      - MSHARE_DB_ConnectionStrings__DefaultConnection=Host=mshare.database;Port=5432;Database=mshare_songs;Username=root;Password=76G34dZgLmbhVuCYCXz7

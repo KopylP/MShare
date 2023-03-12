@@ -28,4 +28,4 @@ RUN dotnet publish "MShare.Identity.WebApi.csproj" -c Release -o /app/publish /p
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "MShare.Identity.WebApi.dll"]
+ENTRYPOINT ["sleep", "60", "&&", "dotnet", "MShare.Identity.WebApi.dll"]
