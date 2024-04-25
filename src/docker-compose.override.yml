@@ -28,10 +28,13 @@ services:
   mshare.songs.webapi:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - MSHARE_SONGS_URLS=http://+:5003
+      - MSHARE_SONGS_URLS=http://+:5003;https://+5004
       - MSHARE_SONGS_ConnectionStrings__DefaultConnection=Host=mshare.database;Port=5432;Database=mshare_songs;Username=root;Password=76G34dZgLmbhVuCYCXz7
     ports:
       - "80:5003"
+      - "443:5004"
+    volumes:
+      - ~/Volumes/mshare.webapi/certs:/app/publish/certs
 
   mshare.database:
     environment:

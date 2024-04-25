@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Versioning;
@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using MShare.Framework.Infrastructure.Localization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using LettuceEncrypt;
 
 namespace MShare.Framework.WebApi.Core
 {
@@ -65,6 +66,13 @@ namespace MShare.Framework.WebApi.Core
         public Bootstrapper InitModule(ServiceModule module)
         {
             module.Register(_builder.Configuration, _builder.Services);
+            return this;
+        }
+
+        public Bootstrapper AddEncryption()
+        {
+            _builder.Services.AddLettuceEncrypt()
+                .PersistDataToDirectory(new DirectoryInfo("/app/publish/certs"), "password"); // TO DO: Move password to safe place
             return this;
         }
 
@@ -123,6 +131,8 @@ namespace MShare.Framework.WebApi.Core
                 }
             }
         });
+
+        public Bootstrapper UseHttpsRedirection() => Use(app => app.UseHttpsRedirection());
 
         public void Start()
         {
