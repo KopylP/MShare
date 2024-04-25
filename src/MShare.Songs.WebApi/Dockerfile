@@ -30,4 +30,4 @@ RUN dotnet publish "MShare.Songs.WebApi.csproj" -c Release -o /app/publish /p:Us
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["sleep", "60", "&&", "dotnet", "MShare.Songs.WebApi.dll"]
+ENTRYPOINT ["sh", "-c", "sleep 60 && dotnet MShare.Songs.WebApi.dll"]
