@@ -71,8 +71,7 @@ namespace MShare.Framework.WebApi.Core
 
         public Bootstrapper AddEncryption()
         {
-            _builder.Services.AddLettuceEncrypt()
-                .PersistDataToDirectory(new DirectoryInfo("/app/publish/certs"), "password"); // TO DO: Move password to safe place
+            _builder.Services.AddLettuceEncrypt();
             return this;
         }
 
