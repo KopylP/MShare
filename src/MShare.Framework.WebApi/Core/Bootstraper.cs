@@ -132,6 +132,10 @@ namespace MShare.Framework.WebApi.Core
         });
 
         public Bootstrapper UseHttpsRedirection() => Use(app => app.UseHttpsRedirection());
+        public Bootstrapper UseStaticFiles() => Use(app => 
+        {
+            app.UseStaticFiles();
+        });
 
         public void Start()
         {
